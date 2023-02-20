@@ -161,6 +161,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Weidner\Goutte\GoutteServiceProvider::class, // [1] This will register the Package in the laravel echo system
+
 
         /*
          * Package Service Providers...
@@ -229,6 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Goutte' => Weidner\Goutte\GoutteFacade::class, // [2] It will register as an alias for the Goutte facade
+
 
     ],
 
