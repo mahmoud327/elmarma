@@ -13,7 +13,7 @@ class PostService
 
         $post= Post::create($data);
         if(file($data['image'])){
-            $post->image = $this->uploadImage('uploads/posts/', $data['image']);
+            $post->image = $this->uploadFile('uploads/posts/', $data['image']);
             $post->save();
         }
 

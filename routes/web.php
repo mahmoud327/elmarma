@@ -18,7 +18,7 @@ use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::redirect('/', 'login-page');
+Route::redirect('/', 'admin/login-page');
 
 Auth::routes();
 

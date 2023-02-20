@@ -58,7 +58,7 @@ class PostController extends Controller
 
         $post->update($request->all());
         if ($request->image) {
-            $post->image = $this->uploadImage('uploads/posts', $request->image);
+            $post->image = $this->uploadFile('uploads/posts', $request->image);
             $post->save();
         }
         return back()->with('status', "add successfully");
