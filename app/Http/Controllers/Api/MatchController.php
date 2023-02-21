@@ -139,7 +139,8 @@ class MatchController extends Controller
 
 
             $all_tournaments[$index]['tournament_name'] = $node->text();
-       
+            $all_tournaments[$index]['tournament_id'] = (integer)$node->attr('value');
+
 
             $index++;
 
