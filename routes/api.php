@@ -24,5 +24,6 @@ Route::group(['prefix' => 'v1','middleware' => 'lang'],function ()
 {
     Route::apiResource('posts', PostController::class);
     Route::get('matches',[MatchController::class,'index']);
+    Route::get('all-matches',[MatchController::class,'allMatch']);
     Route::apiResource('categories', CatgoryController::class);
 });

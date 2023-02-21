@@ -28,41 +28,102 @@ class MatchController extends Controller
     {
 
         $client = new Client();
+
         $data = $client->request('GET', 'https://www.yallakora.com/match-center');
-        $index=0;
-        $matches=[];
-        $data->filter('.matchesHpCntnr ul li')->each(function ($node) use(&$matches,&$index) {
+        $index = 0;
+        $matches = [];
+        $data->filter('.matchesHpCntnr ul li')->each(function ($node) use (&$matches, &$index) {
 
 
-           $node->filter('a .tourName')->each(function($node) use(&$matches,&$index){
-            //   dd($node->text());
-            $matches[$index]['championship_type']=$node->text();
+            $node->filter('a .tourName')->each(function ($node) use (&$matches, &$index) {
+                //   dd($node->text());
+                $matches[$index]['championship_type'] = $node->text();
+            });
+            $node->filter('a .teamA')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['first_team'] = $node->text();
+            });
+            $node->filter('a .teamB img')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['first_image'] = $node->attr('src');
+            });
 
-           });
-           $node->filter('a .teamA')->each(function($node) use(&$matches,&$index){
-              $matches[$index]['first_team']=$node->text();
-           });
-           $node->filter('a .teamB img')->each(function($node) use(&$matches,&$index){
-            $matches[$index]['first_image']=$node->attr('src');
+            $node->filter('a .teamB')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['second_team'] = $node->text();
+            });
 
-           });
+            $node->filter('a .teamB img')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['second_image'] = $node->attr('src');
+            });
 
-           $node->filter('a .teamB')->each(function($node) use(&$matches,&$index){
-              $matches[$index]['second_team']=$node->text();
-           });
-
-           $node->filter('a .teamB img')->each(function($node) use(&$matches,&$index){
-            $matches[$index]['second_image']=$node->attr('src');
-
-           });
-
-           $index++;
+            $index++;
         });
 
 
-     return sendJsonResponse($matches,'matches');
+        return sendJsonResponse($matches, 'matches');
+    }
+    public function allMatch()
+    {
+
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/match-center');
+        $index = 0;
+        $matches = [];
+        $data->filter('.matchCard')->each(function ($node) use (&$matches, &$index) {
 
 
+            $node->filter('ul li .leftCol a')->each(function ($node) use (&$matches, &$index) {
+
+
+               $matches[$index]['id'] ='https://www.yallakora.com/'.$node->attr('href');
+
+            });
+
+            $node->filter('.tourTitle  img')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['championship_type_img'] = $node->attr('src');
+            });
+            $node->filter('.tourTitle h2 ')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['championship_type'] = $node->text();
+            });
+            $node->filter('ul li a .allData .channel')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['channel_broadcasting_match'] = $node->text();
+            });
+            $node->filter('ul li a .allData .topData .date')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['date'] = $node->text();
+            });
+            $node->filter('ul li a .allData .topData .matchStatus span')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['match_status'] = $node->text();
+            });
+
+            $node->filter('ul li a .teamA img')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['first_image'] = $node->attr('src');
+            });
+            $node->filter('ul li a .teamA p')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['first_team'] = $node->text();
+            });
+
+            $node->filter('ul li a .teamB img')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['second_image'] =  $node->attr('src');
+            });
+            $node->filter('ul li a .teamB P')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['second_team'] = $node->text();
+            });
+
+            $node->filter('ul li a .MResult .time')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['game_time'] = $node->text();
+            });
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($matches, 'matches');
     }
 
     /**
@@ -71,30 +132,7 @@ class MatchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
 
-        $post = $this->postService->createPost($request->all());
-        return sendJsonResponse([], 'post add sucessfully');
 
-    }
-
-    public function update(Request $request, Post $post)
-    {
-
-        $post->update($request->all());
-        if ($request->image) {
-            $post->image = $this->uploadFile('uploads/posts', $request->image);
-            $post->save();
-        }
-        return back()->with('status', "add successfully");
-    }
-
-    public function destroy(post $post)
-    {
-        $post = $this->postService->deletePost($post);
-
-        return back()->with('status', "deleted successfully");
-    }
 
 }
