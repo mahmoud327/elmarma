@@ -126,6 +126,32 @@ class MatchController extends Controller
         return sendJsonResponse($matches, 'matches');
     }
 
+
+    public function allTournament()
+    {
+
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/match-center');
+        $index = 0;
+        $all_tournaments = [];
+        $data->filter('.matchesCenter .filter option')->each(function ($node) use (&$all_tournaments, &$index) {
+
+
+            $all_tournaments[$index]['tournament_name'] = $node->text();
+       
+
+            $index++;
+
+        });
+
+
+        return sendJsonResponse($all_tournaments, 'all_tournaments');
+    }
+
+
+
+
     /**
      * Store a newly created resource in storage.
      *
