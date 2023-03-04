@@ -38,4 +38,13 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof ModelNotFoundException) {
+            return sendJsonError('data dont found');
+        }
+
+        return parent::render($request, $exception);
+    }
 }
