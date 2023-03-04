@@ -35,8 +35,17 @@ class PostController extends Controller
             ->with('category')
             ->paginate(10);
 
-            return JsonResponse::json('ok', ['data' => PostResource::collection($posts)]);
+        return JsonResponse::json('ok', ['data' => PostResource::collection($posts)]);
+    }
+    public function show($id)
+    {
 
+        $post = Post::query()
+            ->active()
+            ->with('category')
+            ->findorfail($id);
+
+        return JsonResponse::json('ok', ['data' => PostResource::make($post)]);
     }
 
     /**
@@ -45,30 +54,4 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
-        $post = $this->postService->createPost($request->all());
-        return sendJsonResponse([], 'post add sucessfully');
-
-    }
-
-    public function update(Request $request, Post $post)
-    {
-
-        $post->update($request->all());
-        if ($request->image) {
-            $post->image = $this->uploadFile('uploads/posts', $request->image);
-            $post->save();
-        }
-        return back()->with('status', "add successfully");
-    }
-
-    public function destroy(post $post)
-    {
-        $post = $this->postService->deletePost($post);
-
-        return back()->with('status', "deleted successfully");
-    }
-
 }
