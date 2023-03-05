@@ -32,6 +32,9 @@ class PostController extends Controller
 
         $posts = Post::latest()
             ->active()
+            ->when(request()->category_id,function($q){
+                $q->whereCategoryId(request()->category_id);
+            })
             ->with('category')
             ->paginate(10);
 
