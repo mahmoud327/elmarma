@@ -100,6 +100,9 @@ class MatchController extends Controller
 
                 $matches[$index]['first_image'] = $node->attr('src');
             });
+            $node->filter('ul li a .teamCntnr .MResult > .score')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['first_result'] =(integer) $node->text();
+            });
             $node->filter('ul li a .teamA p')->each(function ($node) use (&$matches, &$index) {
 
                 $matches[$index]['first_team'] = $node->text();
@@ -110,6 +113,12 @@ class MatchController extends Controller
             });
             $node->filter('ul li a .teamB P')->each(function ($node) use (&$matches, &$index) {
                 $matches[$index]['second_team'] = $node->text();
+            });
+
+
+
+            $node->filter('ul li a .teamCntnr .MResult:nth-last-child(2) ')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['second_result'] =(integer) $node->text();
             });
 
             $node->filter('ul li a .MResult .time')->each(function ($node) use (&$matches, &$index) {
