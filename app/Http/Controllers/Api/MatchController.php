@@ -71,11 +71,9 @@ class MatchController extends Controller
         $data->filter('.matchCard')->each(function ($node) use (&$matches, &$index) {
 
 
-            $node->filter('ul li .leftCol a')->each(function ($node) use (&$matches, &$index) {
+            $node->filter('ul li a')->each(function ($node) use (&$matches, &$index) {
 
-
-               $matches[$index]['id'] ='https://www.yallakora.com/'.$node->attr('href');
-
+                $matches[$index]['id'] = $node->attr('href');
             });
 
             $node->filter('.tourTitle  img')->each(function ($node) use (&$matches, &$index) {
@@ -127,6 +125,95 @@ class MatchController extends Controller
     }
 
 
+    public function show($id,$slug1,$slug2,$slug3,$slug4)
+    {
+        $param=$id .'/'.$slug1.'/'.$slug2.'/'.$slug3.'/'.$slug4;
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/' .$param);
+        $index = 0;
+        $match = [];
+
+        $data->filter('.mtchDtlsRslt ul li ')->each(function ($node) use (&$match, &$index) {
+
+
+            $node->filter('.tourNameBtn p')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_number'] =$node->text();
+
+
+            });
+            $node->filter('.tourNameBtn .date')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_date'] =$node->text();
+
+
+            });
+            $node->filter('.tourNameBtn .time')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_time'] =$node->text();
+
+
+            });
+            $node->filter('.matchScoreInfo .teamA a img')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_img'] =$node->attr('src');
+
+
+            });
+            $node->filter('.matchScoreInfo .teamA a p ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_team'] =$node->text();
+
+
+            });
+
+            $node->filter('.matchScoreInfo .teamB img ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['second_img'] =$node->attr('src');
+
+
+            });
+            $node->filter('.teamB p ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['second_team'] =$node->text();
+
+
+            });
+            $node->filter('.matchDetInfo .icon-channel  span')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['channel'] =$node->text();
+
+
+            });
+            $node->filter('.matchDetInfo .icon-refree  span')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['refree'] =$node->text();
+
+
+            });
+            $index++;
+
+
+        });
+
+        // $data->filter('.cnts')->each(function ($node) use (&$match, &$index) {
+
+
+        //     $node->filter('.statsDiv ul li')->each(function ($node) use (&$match, &$index) {
+
+        //         dd('ff');
+        //         $match[$index]['first_team_win'] =$node->text();
+
+
+        //     });
+        //     // $node->filter('.teamB')->each(function ($node) use (&$match, &$index) {
+        //     //     $match[$index]['second_team_win'] =$node->text();
+
+
+        //     // });
+
+        //     $index++;
+
+
+        // });
+
+        return sendJsonResponse($match[0], 'match');
+
+    }
+
+
     public function allTournament()
     {
 
@@ -139,16 +226,17 @@ class MatchController extends Controller
 
 
             $all_tournaments[$index]['tournament_name'] = $node->text();
-            $all_tournaments[$index]['tournament_id'] = (integer)$node->attr('value');
+            $all_tournaments[$index]['tournament_id'] = (int)$node->attr('value');
 
 
             $index++;
-
         });
 
 
         return sendJsonResponse($all_tournaments, 'all_tournaments');
     }
+
+
 
 
 
@@ -159,7 +247,4 @@ class MatchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
-
-
 }
