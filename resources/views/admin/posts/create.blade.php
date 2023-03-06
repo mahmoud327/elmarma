@@ -67,7 +67,7 @@
                                             parent-post
                                         </option>
 
-                                        <option value="parent-post">
+                                        <option value="child-post">
                                             child-post
                                         </option>
 
