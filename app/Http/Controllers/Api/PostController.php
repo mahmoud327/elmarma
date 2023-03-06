@@ -35,6 +35,9 @@ class PostController extends Controller
             ->when(request()->category_id,function($q){
                 $q->whereCategoryId(request()->category_id);
             })
+            ->when(request()->type,function($q){
+                $q->whereType(request()->type);
+            })
             ->with('category')
             ->paginate(10);
 

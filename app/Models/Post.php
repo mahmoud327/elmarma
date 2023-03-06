@@ -24,7 +24,8 @@ class Post extends Model
        'title',
        'des',
        'category_id',
-       'image'
+       'image',
+       'type'
     ];
 
 

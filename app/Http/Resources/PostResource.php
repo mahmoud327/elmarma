@@ -14,6 +14,7 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'desc' => $this->desc,
             'image' => $this->image_path,
+            'type'=>$this->type
             'created_at' => date('Y-m-d', strtotime($this->created_at)),
             'category'=>CategoryResource::make($this->whenLoaded('category'))
 

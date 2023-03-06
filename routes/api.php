@@ -21,9 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
+
     Route::apiResource('posts', PostController::class);
     Route::get('matches', [MatchController::class, 'index']);
-    Route::get('match/{id}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'show']);
+    Route::get('match/{id}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'show'])->middleware('cors');
     Route::get('all-matches', [MatchController::class, 'allMatch']);
     Route::get('all-tournaments', [MatchController::class, 'allTournament']);
     Route::apiResource('categories', CatgoryController::class);

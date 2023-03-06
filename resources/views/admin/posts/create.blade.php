@@ -58,8 +58,25 @@
                                 <input type="text" class="form-control required" name="en[title]"placeholder="text ">
                             </div>
                             <div class="control-group form-group">
+                                <label class="form-label">select type post</label >
+                                <select class="form-control" name="type" required>
+                                        <option value="normal">
+                                            normal-post
+                                        </option>
+                                        <option value="parent-post">
+                                            parent-post
+                                        </option>
+
+                                        <option value="parent-post">
+                                            child-post
+                                        </option>
+
+
+                                </select>
+                            </div>
+                            <div class="control-group form-group">
                                 <label class="form-label">select category</label>
-                                <select class="form-control" name="category_id">
+                                <select class="form-control" name="category_id" required >
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">
                                             {{ $category->title }}
@@ -71,16 +88,16 @@
                             </div>
                             <div class="control-group form-group mb-0">
                                 <label class="form-label">desc english</label>
-                                <textarea type="text" class="form-control required" name="en[desc]" placeholder="Address">
+                                <textarea type="text" class="form-control required" name="en[desc]" placeholder="desc" required>
                                             </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
                                 <label class="form-label">desc arabic</label>
-                                <textarea type="text" class="form-control required"  name="ar[desc]"placeholder="Address">
+                                <textarea type="text" class="form-control required"  name="ar[desc]"placeholder="desc" required>
                                   </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
-                                <input type="file" class="form-control required"  name="image" placeholder="Address">
+                                <input type="file" class="form-control required"  required name="image" placeholder="Address">
                             </div>
 
                             <button type="submit" class="btn btn-info" >save</button>

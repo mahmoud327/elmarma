@@ -132,6 +132,7 @@
                                 <th class="border-bottom-0">#</th>
                                 <th class="border-bottom-0">Image</th>
                                 <th class="border-bottom-0">title</th>
+                                <th class="border-bottom-0">type</th>
                                 <th class="border-bottom-0">category</th>
                                 <th class="border-bottom-0">action</th>
                             </tr>
@@ -144,6 +145,7 @@
                                         <img src="{{$post->image_path}}" height="50px" width="60px">
                                     </td>
                                     <td>{{ $post->title }}</td>
+                                    <td>{{ $post->type }}</td>
                                     <td>{{optional( $post->category)->title }}</td>
                                      <td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-toggle="modal" href="#exampleModal2{{$post->id}}" title="edit">
