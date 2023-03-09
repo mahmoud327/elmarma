@@ -1,0 +1,192 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
+
+use App\Traits\ImageTrait;
+use ArinaSystems\JsonResponse\Facades\JsonResponse;
+
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Goutte\Client;
+use SimpleXMLElement;
+
+class MatchVideoController extends Controller
+{
+
+
+    use ImageTrait;
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // public function index()
+    // {
+
+    //     $client = new Client();
+
+    //     $data = $client->request('GET', 'https://www.filgoal.com/');
+    //     $index = 0;
+    //     $teams = [];
+    //     $data->filter('.row .champ_grid')->each(function ($node) use (&$teams, &$index) {
+    //         dd('dd');
+
+    //         $node->filter('ul li')->each(function ($node) use (&$teams, &$index) {
+
+    //       $node->filter('a')->each(function ($node) use (&$teams, &$index) {
+
+    //             $teams[$index]['id'] = $node->attr('href');
+    //             $teams[$index]['tema_name'] = $node->text();
+    //         });
+
+
+
+    //         });
+
+    //         $index++;
+    //     });
+
+
+    //     return sendJsonResponse($teams, 'matches');
+    // }
+    public function index()
+    {
+
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/');
+
+
+
+        $index = 0;
+        $matches = [];
+        $data->filter('.pattern2 ul li')->each(function ($node) use (&$matches, &$index) {
+
+
+
+            $node->filter('.link')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['id'] = $node->attr('href');
+            });
+            $node->filter('.link .imageCntnr img')->each(function ($node) use (&$matches, &$index) {
+
+                $matches[$index]['img'] = $node->attr('data-src');
+            });
+
+
+
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($matches, 'matches');
+    }
+
+
+    public function show($id, $slug1, $slug2, $slug3, $slug4)
+    {
+        $param = $id . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $param);
+        $index = 0;
+        $match = [];
+
+        $data->filter('.mtchDtlsRslt ul li ')->each(function ($node) use (&$match, &$index) {
+
+
+            $node->filter('.tourNameBtn p')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_number'] = $node->text();
+            });
+            $node->filter('.tourNameBtn .date')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_date'] = $node->text();
+            });
+            $node->filter('.tourNameBtn .time')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_time'] = $node->text();
+            });
+            $node->filter('.matchScoreInfo .teamA a img')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_img'] = $node->attr('src');
+            });
+            $node->filter('.matchScoreInfo .teamA a p ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_team'] = $node->text();
+            });
+
+            $node->filter('.matchScoreInfo .teamB img ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['second_img'] = $node->attr('src');
+            });
+            $node->filter('.teamB p ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['second_team'] = $node->text();
+            });
+            $node->filter('.matchDetInfo .icon-channel  span')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['channel'] = $node->text();
+            });
+            $node->filter('.matchDetInfo .icon-refree  span')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['refree'] = $node->text();
+            });
+            $index++;
+        });
+
+        // $data->filter('.cnts')->each(function ($node) use (&$match, &$index) {
+
+
+        //     $node->filter('.statsDiv ul li')->each(function ($node) use (&$match, &$index) {
+
+        //         dd('ff');
+        //         $match[$index]['first_team_win'] =$node->text();
+
+
+        //     });
+        //     // $node->filter('.teamB')->each(function ($node) use (&$match, &$index) {
+        //     //     $match[$index]['second_team_win'] =$node->text();
+
+
+        //     // });
+
+        //     $index++;
+
+
+        // });
+
+        return sendJsonResponse($match[0], 'match');
+    }
+
+
+    public function allTournament()
+    {
+
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/match-center');
+        $index = 0;
+        $all_tournaments = [];
+        $data->filter('.matchesCenter .filter option')->each(function ($node) use (&$all_tournaments, &$index) {
+
+
+            $all_tournaments[$index]['tournament_name'] = $node->text();
+            $all_tournaments[$index]['tournament_id'] = (int)$node->attr('value');
+
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($all_tournaments, 'all_tournaments');
+    }
+
+
+
+
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+}
