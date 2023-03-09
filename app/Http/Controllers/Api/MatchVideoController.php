@@ -63,18 +63,19 @@ class MatchVideoController extends Controller
 
 
         $index = 0;
-        $matches = [];
-        $data->filter('.pattern2 ul li')->each(function ($node) use (&$matches, &$index) {
+        $videos = [];
+        $data->filter('.pattern2 ul li')->each(function ($node) use (&$videos, &$index) {
 
 
 
-            $node->filter('.link')->each(function ($node) use (&$matches, &$index) {
+            $node->filter('.link')->each(function ($node) use (&$videos, &$index) {
 
-                $matches[$index]['id'] = $node->attr('href');
+                $videos[$index]['id'] = $node->attr('href');
+                $videos[$index]['title'] = $node->attr('title');
             });
-            $node->filter('.link .imageCntnr img')->each(function ($node) use (&$matches, &$index) {
+            $node->filter('.link .imageCntnr img')->each(function ($node) use (&$videos, &$index) {
 
-                $matches[$index]['img'] = $node->attr('data-src');
+                $videos[$index]['image'] = $node->attr('data-src');
             });
 
 
@@ -84,99 +85,12 @@ class MatchVideoController extends Controller
         });
 
 
-        return sendJsonResponse($matches, 'matches');
+        return sendJsonResponse($videos, 'videos');
     }
 
 
-    public function show($id, $slug1, $slug2, $slug3, $slug4)
-    {
-        $param = $id . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
-        $client = new Client();
-
-        $data = $client->request('GET', 'https://www.yallakora.com/' . $param);
-        $index = 0;
-        $match = [];
-
-        $data->filter('.mtchDtlsRslt ul li ')->each(function ($node) use (&$match, &$index) {
 
 
-            $node->filter('.tourNameBtn p')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['championship_number'] = $node->text();
-            });
-            $node->filter('.tourNameBtn .date')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['championship_date'] = $node->text();
-            });
-            $node->filter('.tourNameBtn .time')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['championship_time'] = $node->text();
-            });
-            $node->filter('.matchScoreInfo .teamA a img')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['first_img'] = $node->attr('src');
-            });
-            $node->filter('.matchScoreInfo .teamA a p ')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['first_team'] = $node->text();
-            });
-
-            $node->filter('.matchScoreInfo .teamB img ')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['second_img'] = $node->attr('src');
-            });
-            $node->filter('.teamB p ')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['second_team'] = $node->text();
-            });
-            $node->filter('.matchDetInfo .icon-channel  span')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['channel'] = $node->text();
-            });
-            $node->filter('.matchDetInfo .icon-refree  span')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['refree'] = $node->text();
-            });
-            $index++;
-        });
-
-        // $data->filter('.cnts')->each(function ($node) use (&$match, &$index) {
-
-
-        //     $node->filter('.statsDiv ul li')->each(function ($node) use (&$match, &$index) {
-
-        //         dd('ff');
-        //         $match[$index]['first_team_win'] =$node->text();
-
-
-        //     });
-        //     // $node->filter('.teamB')->each(function ($node) use (&$match, &$index) {
-        //     //     $match[$index]['second_team_win'] =$node->text();
-
-
-        //     // });
-
-        //     $index++;
-
-
-        // });
-
-        return sendJsonResponse($match[0], 'match');
-    }
-
-
-    public function allTournament()
-    {
-
-        $client = new Client();
-
-        $data = $client->request('GET', 'https://www.yallakora.com/match-center');
-        $index = 0;
-        $all_tournaments = [];
-        $data->filter('.matchesCenter .filter option')->each(function ($node) use (&$all_tournaments, &$index) {
-
-
-            $all_tournaments[$index]['tournament_name'] = $node->text();
-            $all_tournaments[$index]['tournament_id'] = (int)$node->attr('value');
-
-
-            $index++;
-        });
-
-
-        return sendJsonResponse($all_tournaments, 'all_tournaments');
-    }
 
 
 
