@@ -31,5 +31,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('all-tournaments', [MatchController::class, 'allTournament']);
 
     Route::get('match-videos',[MatchVideoController::class,'index']);
+    Route::get('all-teams',[TeamController::class,'index']);
     Route::apiResource('categories', CatgoryController::class);
 });
