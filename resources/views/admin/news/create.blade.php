@@ -147,7 +147,7 @@
                                 <h4 class="form-section"><i class="ft-home"></i>رفع الصور</h4>
 
                                 <div id="dpz-multiple-files" class="dropzone dropzone-area">
-                                    <div class="dz-message">ؤفع صوره </div>
+                                    <div class="dz-message">رفع صوره </div>
                                 </div>
 
                             </div>
