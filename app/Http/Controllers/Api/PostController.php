@@ -38,7 +38,7 @@ class PostController extends Controller
             ->when(request()->type, function ($q) {
                 $q->whereType(request()->type);
             })
-            ->with(['category','medias'])
+            ->with(['category', 'medias'])
             ->paginate(10);
 
         return JsonResponse::json('ok', ['data' => PostResource::collection($posts)]);
@@ -48,7 +48,7 @@ class PostController extends Controller
 
         $post = Post::query()
             ->active()
-            ->with(['category','medias'])
+            ->with(['category', 'medias'])
             ->findorfail($id);
 
         return JsonResponse::json('ok', ['data' => PostResource::make($post)]);

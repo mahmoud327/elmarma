@@ -89,6 +89,96 @@ class MatchVideoController extends Controller
     }
 
 
+    public function allVideo()
+    {
+
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/videos/%d9%81%d9%8a%d8%af%d9%8a%d9%88%d9%87%d8%a7%d8%aa');
+
+
+
+        $index = 0;
+        $videos = [];
+        $data->filter('.cnts ul li')->each(function ($node) use (&$videos, &$index) {
+
+
+
+            $node->filter('.link')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['id'] = $node->attr('href');
+                $videos[$index]['title'] = $node->attr('title');
+            });
+
+            $node->filter('.link .imageCntnr img')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['image'] = $node->attr('src');
+            });
+            $node->filter('.link .desc span')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['date'] = $node->text();
+            });
+            $node->filter('.link .desc p')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['desc'] = $node->text();
+            });
+
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($videos, 'videos');
+    }
+
+
+    public function detailsVideo($slug,$slug2,$slug3)
+    {
+
+         $parms=$slug .'/'. $slug2.'/'.$slug3;
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
+
+
+        $index = 0;
+        $videos = [];
+        $data->filter('.socialMargin')->each(function ($node) use (&$videos, &$index) {
+
+
+
+
+            $node->filter('h1')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['title'] = $node->text();
+            });
+
+            $node->filter('.time span:nth-last-child(2)')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['date'] = $node->text();
+            });
+            $node->filter('.time span')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['time'] = $node->text();
+            });
+            $node->filter('.videoCntnr iframe')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['video'] = $node->attr('src');
+            });
+            // $node->filter('.link .desc p')->each(function ($node) use (&$videos, &$index) {
+
+            //     $videos[$index]['desc'] = $node->text();
+            // });
+
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($videos, 'videos');
+    }
+
+
 
 
 
