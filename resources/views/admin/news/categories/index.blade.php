@@ -13,7 +13,7 @@
     <link href="{{URL::asset('assets/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
 
 @section('title')
-    posts - Page
+categoires - Page
 @stop
 
 @endsection
@@ -23,7 +23,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">Dashboard</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                posts Module</span>
+                categoires Module</span>
         </div>
     </div>
 </div>
@@ -121,7 +121,8 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
 
-                    <a class="btn btn-outline-primary" href="{{route('posts.create')}}">Add Post</a>
+                    <a class="modal-effect btn btn-outline-primary" data-effect="effect-scale"
+                        data-toggle="modal" href="#modaldemo8">Add Category</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -130,34 +131,26 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Image</th>
                                 <th class="border-bottom-0">title</th>
-                                <th class="border-bottom-0">type</th>
-                                <th class="border-bottom-0">category</th>
                                 <th class="border-bottom-0">action</th>
                             </tr>
                         </thead>
                         <tbody class="tr">
-                            @foreach ($posts as $post )
-                                <tr>
+                            @foreach ($categories as $category )
+                                <tr data-id="{{ $category->id }}">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <img src="{{$post->image_path}}" height="50px" width="60px">
-                                    </td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ $post->type }}</td>
-                                    <td>{{optional( $post->category)->title }}</td>
+                                    <td>{{ $category->title }}</td>
                                      <td>
-                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-toggle="modal" href="#exampleModal2{{$post->id}}" title="edit">
+                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-toggle="modal" href="#exampleModal2{{$category->id}}" title="edit">
                                             <i class="las la-pen"></i>
                                         </a>
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$post->id}} " title="delete">
+                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$category->id}} " title="delete">
                                             delete
                                         </a>
-                                        
                                     </td>
                                 </tr>
-                                @include('admin.posts.delete_modal' ,['post'=>$post])
+                                @include('admin.posts.categories.delete_modal' ,['category'=>$category])
+                                @include('admin.posts.categories.edit_modal',['category'=>$category])
                             @endforeach
                         </tbody>
                     </table>
@@ -174,6 +167,7 @@
 
     </div>
 
+    @include('admin.posts.categories.add_modal')
 
 
 </div>
@@ -207,7 +201,7 @@
 <!--Internal  Datepicker js -->
 <script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
 <!-- Internal Select2 js-->
-<script src="{{URL::asset('assets/plugins/select2/js/s2.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/rating/ratings.js')}}"></script>
 <!--Internal  Sweet-Alert js-->
 <script src="{{URL::asset('assets/plugins/sweet-alert/sweetalert.min.js')}}"></script>

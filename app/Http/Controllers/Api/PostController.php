@@ -32,13 +32,13 @@ class PostController extends Controller
 
         $posts = Post::latest()
             ->active()
-            ->when(request()->category_id,function($q){
+            ->when(request()->category_id, function ($q) {
                 $q->whereCategoryId(request()->category_id);
             })
-            ->when(request()->type,function($q){
+            ->when(request()->type, function ($q) {
                 $q->whereType(request()->type);
             })
-            ->with('category')
+            ->with(['category' . 'medias'])
             ->paginate(10);
 
         return JsonResponse::json('ok', ['data' => PostResource::collection($posts)]);
@@ -48,7 +48,7 @@ class PostController extends Controller
 
         $post = Post::query()
             ->active()
-            ->with('category')
+            ->with(['category' . 'medias'])
             ->findorfail($id);
 
         return JsonResponse::json('ok', ['data' => PostResource::make($post)]);

@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,13 +20,15 @@ use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
 Route::redirect('/', 'admin/login-page');
 
 Auth::routes();
 
-Route::group(['prefix' => LaravelLocalization::setLocale(),
-    'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ] ], function()
-{
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function () {
 
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
         Route::get('login-page', 'AuthController@loginPage')->name('admin.login.page');
@@ -33,10 +37,14 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),
 
         Route::group(['middleware' => ['admin']], function () {
             Route::get('home', 'HomeController@index')->name('admin.home');
-            Route::resource('posts',PostController::class);
-            Route::resource('categories',CategoryController::class);
 
+            Route::resource('posts', PostController::class);
+            Route::post('posts-image', [PostController::class,'uploadPostImage'])->name('posts.images.store');
 
+            Route::resource('news', NewController::class);
+            Route::post('news-image', [NewController::class,'uploadNewImage'])->name('news.images.store');
+
+            Route::resource('categories', CategoryController::class);
         });
     });
 });

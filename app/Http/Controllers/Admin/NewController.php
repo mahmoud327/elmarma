@@ -4,20 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Post;
-use App\Services\PostService;
+use App\Models\NewPage;
+use App\Services\newService;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class PostController extends Controller
+class NewController extends Controller
 {
-    private $postService;
 
-    public function __construct(PostService $postService)
-    {
-        $this->postService = $postService;
-    }
 
     use ImageTrait;
     /**
@@ -31,12 +26,12 @@ class PostController extends Controller
         $data = [
             'categories' => Category::latest()->get(),
 
-            'posts' => Post::latest()
+            'news' => NewPage::latest()
                 ->with('category')
                 ->paginate(10),
 
         ];
-        return view('admin.posts.index', $data);
+        return view('admin.news.index', $data);
     }
     public function create()
     {
@@ -44,10 +39,10 @@ class PostController extends Controller
         $data = [
             'categories' => Category::latest()->get(),
         ];
-        return view('admin.posts.create', $data);
+        return view('admin.news.create', $data);
     }
     /**
-     * Store a newly created resource in storage.
+     * Store a NewPagely created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -56,39 +51,53 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        $post= Post::create($data);
-        if($request->image){
-            $post->image = $this->uploadImage('uploads/posts/', $request->file('image'));
-            $post->save();
+        $new = NewPage::create($data);
+
+        if ($request->file('image')) {
+            $new->image = $this->uploadImage('uploads/news/', $request->file('image'));
+            $new->save();
         }
 
         if ($request->document) {
 
             foreach ($request->document as $file) {
-                $post->medias()->create([
+                $new->medias()->create([
                     'url' => $file
                 ]);
             }
         }
 
-
-        return redirect(route('posts.index'))->with('status', "add successfully");
+        return redirect(route('news.index'))->with('status', "add successfully");
     }
 
-
-
-    public function destroy(post $post)
+    public function update(Request $request, NewPage $news)
     {
-        $post->delete();
-        // $post = $this->postService->deletePost($post);
+
+        $news->update($request->all());
+        if ($request->image) {
+            $news->image = $this->uploadImage('uploads/newss/', $request->image);
+            $news->save();
+        }
+        return back()->with('status', "add successfully");
+    }
+
+    public function destroy(NewPage $new)
+    {
+        if (!is_null($new->image)) {
+
+            Storage::disk('news')->delete($new->image);
+        }
+        $new->delete();
+
+        // $new = $this->newService->deletenew($new);
 
         return back()->with('status', "deleted successfully");
     }
 
-    public function uploadPostImage(Request $request)
+    public function uploadNewImage(Request $request)
     {
         $file = $request->file('dzfile');
-        $filename = $this->uploadImage('uploads/posts', $file);
+        $filename = $this->uploadImage('uploads/news', $file);
 
         return response()->json([
             'name' => $filename,

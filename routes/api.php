@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\CatgoryController;
+use App\Http\Controllers\Api\leagueTournamentController;
 use App\Http\Controllers\Api\MatchController;
 use App\Http\Controllers\Api\MatchVideoController;
+use App\Http\Controllers\Api\NewController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\TeamController;
 use Illuminate\Http\Request;
@@ -32,5 +34,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     Route::get('match-videos',[MatchVideoController::class,'index']);
     Route::get('all-teams',[TeamController::class,'index']);
+    Route::get('leagues-tournaments',[leagueTournamentController::class,'index']);
     Route::apiResource('categories', CatgoryController::class);
+    Route::apiResource('news', NewController::class);
 });

@@ -31,3 +31,6 @@
 <!-- custom js -->
 <script src="{{URL::asset('assets/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('assets/plugins/side-menu/sidemenu.js')}}"></script>
+<script src="{{asset('assets/assets/admin/js/dropzone.min.js')}}"></script>
+@stack('script')
+

@@ -42,3 +42,4 @@
 <link href="{{URL::asset('assets/css-rtl/skin-modes.css')}}" rel="stylesheet">
 <link href="{{asset('assets/assets/admin/css/dropzone.min.css')}}" rel="stylesheet">
 @endif
+

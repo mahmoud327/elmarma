@@ -4,28 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class NewPage extends Model
 {
     use \Astrotomic\Translatable\Translatable;
 
 
-    protected $table = 'posts';
+    protected $table = 'news';
     protected $appends = [
         'image_path',
     ];
 
     public $timestamps = true;
-    protected $translationForeignKey = "post_id";
+    protected $translationForeignKey = "new_id";
     public $translatedAttributes = ['title', 'desc'];
-    public $translationModel = 'App\Models\Translation\Post';
+    public $translationModel = 'App\Models\Translation\NewPage';
 
 
     protected $fillable = [
-       'title',
-       'des',
-       'category_id',
-       'image',
-       'type'
+        'title',
+        'des',
+        'image',
+        'category_id'
+
     ];
 
 
@@ -36,14 +36,16 @@ class Post extends Model
      */
 
 
+    public function getImagePathAttribute()
+    {
+        return $this->image ? asset('uploads/news/' . $this->image) : asset('uploads/default.jpeg');
+    }
 
 
-     public function getImagePathAttribute()
-     {
-         return $this->image ? asset('uploads/posts/' . $this->image) : asset('uploads/default.jpeg');
-
-     }
-
+    public function scopeActive($q)
+    {
+        $q->where('active', 1);
+    }
 
     /*
      * ----------------------------------------------------------------- *
@@ -51,19 +53,12 @@ class Post extends Model
      * ----------------------------------------------------------------- *
      */
 
-
     public function category()
     {
-         return  $this->belongsTo('App\Models\Category','category_id');
+        return  $this->belongsTo('App\Models\Category', 'category_id');
     }
-
-
     public function medias()
     {
         return $this->morphMany('App\Models\Media', 'mediaable');
     }
-    public function scopeActive($q){
-     $q->where('active',1);
-    }
 }
-
