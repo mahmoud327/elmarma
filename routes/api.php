@@ -28,7 +28,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     Route::apiResource('posts', PostController::class);
     Route::get('matches', [MatchController::class, 'index']);
-    Route::get('match/{id}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'show'])->middleware('cors');
+    Route::get('details-match/{slug}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'show']);
     Route::get('all-matches', [MatchController::class, 'allMatch']);
     Route::get('all-tournaments', [MatchController::class, 'allTournament']);
 
