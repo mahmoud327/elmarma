@@ -11,6 +11,12 @@
     <link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
     <!--- Internal Sweet-Alert css-->
     <link href="{{URL::asset('assets/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
+    <style>
+        div.dataTables_wrapper div.dataTables_paginate {
+
+           display: none;
+        }
+    </style>
 
 @section('title')
     posts - Page

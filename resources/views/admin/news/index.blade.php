@@ -1,4 +1,5 @@
- @extends('admin.layouts.master')
+
+@extends('admin.layouts.master')
 @section('css')
     <!-- Internal Data table css -->
     <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -11,6 +12,12 @@
     <link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet">
     <!--- Internal Sweet-Alert css-->
     <link href="{{URL::asset('assets/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
+    <style>
+            div.dataTables_wrapper div.dataTables_paginate {
+
+display: none;
+}
+    </style>
 
 @section('title')
     news - Page
@@ -158,6 +165,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{$news->links()}}
                 </div>
 
             </div>
