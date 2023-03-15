@@ -163,6 +163,8 @@ class MatchVideoController extends Controller
             });
             $node->filter('.videoCntnr iframe')->each(function ($node) use (&$videos, &$index) {
 
+
+
                 $videos[$index]['video'] = $node->attr('src');
             });
             // $node->filter('.link .desc p')->each(function ($node) use (&$videos, &$index) {
