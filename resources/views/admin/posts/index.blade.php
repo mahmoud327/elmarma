@@ -154,13 +154,14 @@
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$post->id}} " title="delete">
                                             delete
                                         </a>
-                                        
+
                                     </td>
                                 </tr>
                                 @include('admin.posts.delete_modal' ,['post'=>$post])
                             @endforeach
                         </tbody>
                     </table>
+                    {{$posts->links()}}
                 </div>
 
             </div>

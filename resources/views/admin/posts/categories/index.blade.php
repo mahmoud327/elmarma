@@ -154,6 +154,7 @@ categoires - Page
                             @endforeach
                         </tbody>
                     </table>
+                    {{$categories->links()}}
                 </div>
 
             </div>
