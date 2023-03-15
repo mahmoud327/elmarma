@@ -25,14 +25,6 @@ class leagueTournamentController extends Controller
         $index = 0;
         $leagues = [];
 
-        // $data->filter('div.tourNameTtl')->each(function ($node) use (&$leagues, &$index) {
-        //         $leagues[$index]['type'] = 'dd';
-
-        //     // $node->filter('.tourNameTtl h2')->each(function ($node) use (&$leagues, &$index) {
-
-        //     // });
-
-        // });
 
 
         $data->filter('.tourListing .toursCntnr  .tourItem ul li')->each(function ($node) use (&$leagues, &$index) {
@@ -40,18 +32,51 @@ class leagueTournamentController extends Controller
 
             $node->filter('a')->each(function ($node) use (&$leagues, &$index) {
 
-                    $node->filter('a')->each(function ($node) use (&$leagues, &$index) {
-                        $leagues[$index]['id'] = $node->attr('href');
-                    });
+                $node->filter('a')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['id'] = $node->attr('href');
+                });
 
-                    $node->filter('a p')->each(function ($node) use (&$leagues, &$index) {
-                     $leagues[$index]['tournament_name'] = $node->text();
-                   });
+                $node->filter('a p')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['tournament_name'] = $node->text();
+                });
 
-                    $node->filter('.imgCntnr img')->each(function ($node) use (&$leagues, &$index) {
-                     $leagues[$index]['tournament_image'] = $node->attr('src');
-                   });
+                $node->filter('.imgCntnr img')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['tournament_image'] = $node->attr('src');
+                });
+            });
 
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($leagues, 'leagues');
+    }
+    public function show($slug, $slug2, $slug3, $slug4)
+    {
+        $client = new Client();
+        $parm = $slug . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
+
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $parm);
+
+
+        $index = 0;
+        $leagues = [];
+
+
+
+        $data->filter('.tourTeams .tourTeamsCntnr ul li')->each(function ($node) use (&$leagues, &$index) {
+
+
+            $node->filter('a p')->each(function ($node) use (&$leagues, &$index) {
+
+                    $leagues[$index]['name'] = $node->text();
+
+            });
+
+            $node->filter('a img')->each(function ($node) use (&$leagues, &$index) {
+
+                    $leagues[$index]['iamge'] = $node->attr('src');
 
             });
 

@@ -37,6 +37,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('details-video/{slug1}/{slug2}/{slug3}',[MatchVideoController::class,'detailsVideo']);
     Route::get('all-teams',[TeamController::class,'index']);
     Route::get('leagues-tournaments',[leagueTournamentController::class,'index']);
+    Route::get('details-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}',[leagueTournamentController::class,'show']);
     Route::apiResource('categories', CatgoryController::class);
     Route::apiResource('news', NewController::class);
 });
