@@ -180,6 +180,47 @@ class MatchVideoController extends Controller
         return sendJsonResponse($videos, 'videos');
     }
 
+    public function RelatedtVideo($slug,$slug2,$slug3)
+    {
+
+         $parms=$slug .'/'. $slug2.'/'.$slug3;
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
+
+
+        $index = 0;
+        $videos = [];
+        $data->filter('.subCat .cnts ul li')->each(function ($node) use (&$videos, &$index) {
+
+
+
+            $node->filter('.link')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['id'] = $node->attr('href');
+                $videos[$index]['title'] = $node->attr('title');
+            });
+
+            $node->filter('.link .imageCntnr img')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['image'] = $node->attr('src');
+            });
+            $node->filter('.link .desc span')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['date'] = $node->text();
+            });
+            // $node->filter('.link .desc p')->each(function ($node) use (&$videos, &$index) {
+
+            //     $videos[$index]['desc'] = $node->text();
+            // });
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($videos, 'videos');
+    }
+
 
 
 
