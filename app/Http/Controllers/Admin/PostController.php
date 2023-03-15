@@ -88,7 +88,7 @@ class PostController extends Controller
     public function uploadPostImage(Request $request)
     {
         $file = $request->file('dzfile');
-        $filename = $this->uploadImage('uploads/posts', $file);
+        $filename = $this->uploadImage('uploads/posts/', $file);
 
         return response()->json([
             'name' => $filename,
