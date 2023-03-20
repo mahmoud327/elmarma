@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\MatchController;
 use App\Http\Controllers\Api\MatchVideoController;
 use App\Http\Controllers\Api\NewController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\StatisticsLeagueTournamentController;
 use App\Http\Controllers\Api\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +38,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('related-videos/{slug1}/{slug2}/{slug3}',[MatchVideoController::class,'RelatedtVideo']);
     Route::get('details-video/{slug1}/{slug2}/{slug3}',[MatchVideoController::class,'detailsVideo']);
     Route::get('all-teams',[TeamController::class,'index']);
+
     Route::get('leagues-tournaments',[leagueTournamentController::class,'index']);
     Route::get('details-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}',[leagueTournamentController::class,'show']);
+    Route::get('stastics-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}',[StatisticsLeagueTournamentController::class,'show']);
+
+
     Route::apiResource('categories', CatgoryController::class);
+
     Route::apiResource('news', NewController::class);
 });
