@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\NewController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\StatisticsLeagueTournamentController;
 use App\Http\Controllers\Api\TeamController;
+use App\Http\Controllers\Api\TournamentNewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
