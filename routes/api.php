@@ -47,4 +47,5 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::apiResource('categories', CatgoryController::class);
 
     Route::apiResource('news', NewController::class);
+    Route::apiResource('tournament-news', TournamentNewController::class);
 });

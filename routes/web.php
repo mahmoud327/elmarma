@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\TournamentNewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use \Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -42,6 +43,8 @@ Route::group([
             Route::post('posts-image', [PostController::class,'uploadPostImage'])->name('posts.images.store');
 
             Route::resource('news', NewController::class);
+            Route::resource('tournament-news', TournamentNewController::class);
+            Route::post('tournament-image', [NewController::class,'uploadNewImage'])->name('tournament-news.images.store');
             Route::post('news-image', [NewController::class,'uploadNewImage'])->name('news.images.store');
 
             Route::resource('categories', CategoryController::class);

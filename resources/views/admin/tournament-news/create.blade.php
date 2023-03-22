@@ -97,18 +97,18 @@
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('news.store') }}" enctype="multipart/form-data" method="post">
+                <form action="{{ route('tournament-news.store') }}" enctype="multipart/form-data" method="post">
                     @csrf
                     <div id="wizard1">
                         <h3>news data</h3>
                         <section>
                             <div class="control-group form-group">
                                 <label class="form-label">title arabic</label>
-                                <input type="text" class="form-control required" name="ar[title]" required placeholder="Name">
+                                <input type="text" class="form-control required" name="ar[title]" placeholder="Name">
                             </div>
                             <div class="control-group form-group">
                                 <label class="form-label">title English</label>
-                                <input type="text" class="form-control required" name="en[title]"placeholder="text " required>
+                                <input type="text" class="form-control required" name="en[title]"placeholder="text ">
                             </div>
 
                             <div class="control-group form-group">
@@ -217,7 +217,7 @@
         headers: {
             'X-CSRF-TOKEN': "{{ csrf_token() }}"
         },
-        url: "{{ route('news.images.store') }}", // Set the url
+        url: "{{ route('tournament-news.images.store') }}", // Set the url
         success: function(file, response) {
             $('form').append('<input class="images" data-img="' + file.name +
                 '"  type="hidden" name="document[]" value="' + response.name + '">')
