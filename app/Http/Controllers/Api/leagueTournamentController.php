@@ -161,7 +161,7 @@ class leagueTournamentController extends Controller
                 $node->filter('.topData .date span')->each(function ($node) use (&$leagues, &$index) {
                     $leagues[$index]['game_time'] = $node->text();
                 });
-                $node->filter('.topData .date')->each(function ($node) use (&$leagues, &$index) {
+                $node->filter('.topData span')->each(function ($node) use (&$leagues, &$index) {
                     $leagues[$index]['date'] = $node->text();
                 });
                 $node->filter('.topData .matchStatus')->each(function ($node) use (&$leagues, &$index) {
