@@ -226,6 +226,12 @@ class leagueTournamentController extends Controller
                     $leagues[$index]['arrange_number'] = (int)$node->text();
                 });
 
+                $node->filter('.item .dtls')->each(function ($node) use (&$leagues, &$index) {
+
+                    $leagues[$index]['goal_numbers'] =(int) $node->text();
+                });
+
+
                 $node->filter('.player')->each(function ($node) use (&$leagues, &$index) {
 
                     $node->filter('.playerImg img')->each(function ($node) use (&$leagues, &$index) {
@@ -242,6 +248,7 @@ class leagueTournamentController extends Controller
                     $node->filter('.teamMob p')->each(function ($node) use (&$leagues, &$index) {
                         $leagues[$index]['team_name'] = $node->text();
                     });
+
 
                 });
                 // $node->filter('.topData .matchStatus')->each(function ($node) use (&$leagues, &$index) {
