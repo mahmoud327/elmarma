@@ -87,4 +87,149 @@ class leagueTournamentController extends Controller
 
         return sendJsonResponse($leagues, 'leagues');
     }
+
+
+
+    public function MatchResult($slug,$slug1,$slug2,$slug3)
+    {
+        $parms=$slug .'/'. $slug1.'/'.$slug2.'/'.$slug3;
+        $client = new Client();
+
+
+        $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
+
+
+        $index = 0;
+        $leagues = [];
+
+
+
+        $data->filter('.rightside .matchesList  ul li')->each(function ($node) use (&$leagues, &$index) {
+
+
+            $node->filter('.allData')->each(function ($node) use (&$leagues, &$index) {
+
+                $node->filter('.topData .date span')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['time'] = $node->text();
+                });
+                $node->filter('.topData .date')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['date'] = $node->text();
+                });
+                $node->filter('.topData .matchStatus')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['status'] = $node->text();
+                });
+
+                $node->filter('.teamA  p')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['first_team_name'] = $node->text();
+                });
+
+                $node->filter('.teamA img')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['first_team_img'] = $node->attr('src');
+                });
+
+
+
+
+                $node->filter('.teamB  p')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['second_team_name'] = $node->text();
+                });
+
+                $node->filter('.teamB img')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['second_team_img'] = $node->attr('src');
+                });
+
+
+                $node->filter('.MResult:nth-last-child(2)')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['score'] = $node->text();
+                });
+            });
+
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($leagues, 'result-matches');
+    }
+
+
+    public function Scorer($slug,$slug1,$slug2,$slug3)
+    {
+        $parms=$slug .'/'. $slug1.'/'.$slug2.'/'.$slug3;
+        $client = new Client();
+
+
+        $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
+
+
+        $index = 0;
+        $leagues = [];
+
+
+
+        $data->filter('.standingSection .wRow')->each(function ($node) use (&$leagues, &$index) {
+
+
+
+
+                $node->filter('.item .arrng')->each(function ($node) use (&$leagues, &$index) {
+
+                    $leagues[$index]['arrange_number'] = (int)$node->text();
+                });
+
+                $node->filter('.player')->each(function ($node) use (&$leagues, &$index) {
+
+                    $node->filter('.playerImg img')->each(function ($node) use (&$leagues, &$index) {
+                        $leagues[$index]['player_image'] = $node->attr('src');
+                    });
+
+                    $node->filter('.team.player a:first-of-type ')->each(function ($node) use (&$leagues, &$index) {
+                        $leagues[$index]['player_name'] = $node->attr('title');
+                    });
+
+                    $node->filter('.teamMob img')->each(function ($node) use (&$leagues, &$index) {
+                        $leagues[$index]['team_image'] = $node->attr('src');
+                    });
+                    $node->filter('.teamMob p')->each(function ($node) use (&$leagues, &$index) {
+                        $leagues[$index]['team_name'] = $node->text();
+                    });
+
+                });
+                // $node->filter('.topData .matchStatus')->each(function ($node) use (&$leagues, &$index) {
+                //     $leagues[$index]['status'] = $node->text();
+                // });
+
+                // $node->filter('.teamA  p')->each(function ($node) use (&$leagues, &$index) {
+                //     $leagues[$index]['first_team_name'] = $node->text();
+                // });
+
+                // $node->filter('.teamA img')->each(function ($node) use (&$leagues, &$index) {
+                //     $leagues[$index]['first_team_img'] = $node->attr('src');
+                // });
+
+
+
+
+                // $node->filter('.teamB  p')->each(function ($node) use (&$leagues, &$index) {
+                //     $leagues[$index]['second_team_name'] = $node->text();
+                // });
+
+                // $node->filter('.teamB img')->each(function ($node) use (&$leagues, &$index) {
+                //     $leagues[$index]['second_team_img'] = $node->attr('src');
+                // });
+
+
+                // $node->filter('.MResult:nth-last-child(2)')->each(function ($node) use (&$leagues, &$index) {
+                //     $leagues[$index]['score'] = $node->text();
+                // });
+
+
+            $index++;
+        });
+
+        // $chunkedData = array_chunk($leagues, 10);
+
+
+        return sendJsonResponse($leagues, 'result-matches');
+    }
 }
