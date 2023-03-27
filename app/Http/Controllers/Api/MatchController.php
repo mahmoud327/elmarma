@@ -89,7 +89,7 @@ class MatchController extends Controller
             });
             $node->filter('ul li a .allData .topData .date')->each(function ($node) use (&$matches, &$index) {
 
-                $matches[$index]['date'] = $node->text();
+                $matches[$index]['tour'] = $node->text();
             });
             $node->filter('ul li a .allData .topData .matchStatus span')->each(function ($node) use (&$matches, &$index) {
 
@@ -101,7 +101,7 @@ class MatchController extends Controller
                 $matches[$index]['first_image'] = $node->attr('src');
             });
             $node->filter('ul li a .teamCntnr .MResult > .score')->each(function ($node) use (&$matches, &$index) {
-                $matches[$index]['first_result'] =(integer) $node->text();
+                $matches[$index]['first_result'] = (int) $node->text();
             });
             $node->filter('ul li a .teamA p')->each(function ($node) use (&$matches, &$index) {
 
@@ -118,7 +118,7 @@ class MatchController extends Controller
 
 
             $node->filter('ul li a .teamCntnr .MResult:nth-last-child(2) ')->each(function ($node) use (&$matches, &$index) {
-                $matches[$index]['second_result'] =(integer) $node->text();
+                $matches[$index]['second_result'] = (int) $node->text();
             });
 
             $node->filter('ul li a .MResult .time')->each(function ($node) use (&$matches, &$index) {
@@ -134,12 +134,12 @@ class MatchController extends Controller
     }
 
 
-    public function show($id,$slug1,$slug2,$slug3,$slug4)
+    public function show($id, $slug1, $slug2, $slug3, $slug4)
     {
-        $param=$id .'/'.$slug1.'/'.$slug2.'/'.$slug3.'/'.$slug4;
+        $param = $id . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
         $client = new Client();
 
-        $data = $client->request('GET', 'https://www.yallakora.com/' .$param);
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $param);
         $index = 0;
         $match = [];
 
@@ -147,54 +147,34 @@ class MatchController extends Controller
 
 
             $node->filter('.tourNameBtn p')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['championship_number'] =$node->text();
-
-
+                $match[$index]['championship_number'] = $node->text();
             });
             $node->filter('.tourNameBtn .date')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['championship_date'] =$node->text();
-
-
+                $match[$index]['championship_date'] = $node->text();
             });
             $node->filter('.tourNameBtn .time')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['championship_time'] =$node->text();
-
-
+                $match[$index]['championship_time'] = $node->text();
             });
             $node->filter('.matchScoreInfo .teamA a img')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['first_img'] =$node->attr('src');
-
-
+                $match[$index]['first_img'] = $node->attr('src');
             });
             $node->filter('.matchScoreInfo .teamA a p ')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['first_team'] =$node->text();
-
-
+                $match[$index]['first_team'] = $node->text();
             });
 
             $node->filter('.matchScoreInfo .teamB img ')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['second_img'] =$node->attr('src');
-
-
+                $match[$index]['second_img'] = $node->attr('src');
             });
             $node->filter('.teamB p ')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['second_team'] =$node->text();
-
-
+                $match[$index]['second_team'] = $node->text();
             });
             $node->filter('.matchDetInfo .icon-channel  span')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['channel'] =$node->text();
-
-
+                $match[$index]['channel'] = $node->text();
             });
             $node->filter('.matchDetInfo .icon-refree  span')->each(function ($node) use (&$match, &$index) {
-                $match[$index]['refree'] =$node->text();
-
-
+                $match[$index]['refree'] = $node->text();
             });
             $index++;
-
-
         });
 
         // $data->filter('.cnts')->each(function ($node) use (&$match, &$index) {
@@ -219,7 +199,6 @@ class MatchController extends Controller
         // });
 
         return sendJsonResponse($match[0], 'match');
-
     }
 
 
