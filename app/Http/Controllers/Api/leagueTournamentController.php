@@ -159,32 +159,32 @@ class leagueTournamentController extends Controller
             $node->filter('.allData')->each(function ($node) use (&$leagues, &$index) {
 
                 $node->filter('.topData .date span')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['time'] = $node->text();
+                    $leagues[$index]['game_time'] = $node->text();
                 });
                 $node->filter('.topData .date')->each(function ($node) use (&$leagues, &$index) {
                     $leagues[$index]['date'] = $node->text();
                 });
                 $node->filter('.topData .matchStatus')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['status'] = $node->text();
+                    $leagues[$index]['match_status'] = $node->text();
                 });
 
                 $node->filter('.teamA  p')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['first_team_name'] = $node->text();
+                    $leagues[$index]['first_team'] = $node->text();
                 });
 
                 $node->filter('.teamA img')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['first_team_img'] = $node->attr('src');
+                    $leagues[$index]['first_image'] = $node->attr('src');
                 });
 
 
 
 
                 $node->filter('.teamB  p')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['second_team_name'] = $node->text();
+                    $leagues[$index]['second_team'] = $node->text();
                 });
 
                 $node->filter('.teamB img')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['second_team_img'] = $node->attr('src');
+                    $leagues[$index]['second_image'] = $node->attr('src');
                 });
 
 
