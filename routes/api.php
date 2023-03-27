@@ -48,7 +48,10 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
 
 
+    Route::get('leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}',[leagueTournamentController::class,'details']);
+
     Route::get('details-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}',[leagueTournamentController::class,'show']);
+
     Route::get('stastics-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}',[StatisticsLeagueTournamentController::class,'show']);
 
 

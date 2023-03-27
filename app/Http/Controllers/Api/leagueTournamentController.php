@@ -88,6 +88,55 @@ class leagueTournamentController extends Controller
         return sendJsonResponse($leagues, 'leagues');
     }
 
+    public function details($slug, $slug2, $slug3, $slug4)
+    {
+        $client = new Client();
+        $parm = $slug . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
+
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $parm);
+
+
+        $index = 0;
+        $leagues = [];
+
+
+
+        $data->filter('.spansorheader')->each(function ($node) use (&$leagues, &$index) {
+
+
+            $node->filter('.euroHeader .tourTtl .tourImg img')->each(function ($node) use (&$leagues, &$index) {
+
+                    $leagues[$index]['image'] = $node->attr('src');
+
+            });
+
+            $node->filter('.euroHeader .tourTtl h1')->each(function ($node) use (&$leagues, &$index) {
+
+                    $leagues[$index]['name'] = $node->text();
+
+            });
+            $node->filter('.tabs a:contains("نتائج المباريات")')->each(function ($node) use (&$leagues, &$index) {
+
+
+                    $leagues[$index]['id_result_matxh'] = $node->attr('href');
+
+            });
+
+            $node->filter('.tabs a:contains("الهدافون")')->each(function ($node) use (&$leagues, &$index) {
+
+
+                    $leagues[$index]['id_scorer'] = $node->attr('href');
+
+            });
+
+
+            $index++;
+        });
+
+
+        return sendJsonResponse($leagues, 'leagues');
+    }
+
 
 
     public function MatchResult($slug,$slug1,$slug2,$slug3)
