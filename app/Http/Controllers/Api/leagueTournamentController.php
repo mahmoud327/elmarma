@@ -134,7 +134,7 @@ class leagueTournamentController extends Controller
         });
 
 
-        return sendJsonResponse($leagues, 'leagues');
+        return sendJsonResponse($leagues[0], 'leagues');
     }
 
 
