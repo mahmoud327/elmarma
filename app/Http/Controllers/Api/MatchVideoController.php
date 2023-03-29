@@ -132,13 +132,13 @@ class MatchVideoController extends Controller
     }
 
 
-    public function detailsVideo($slug,$slug2,$slug3,$slug4=null,$slug5=null)
+    public function detailsVideo($slug, $slug2, $slug3, $slug4 = null, $slug5 = null)
     {
 
-         $parms=$slug .'/'. $slug2.'/'.$slug3.'/'.$slug4.'/'.$slug5;
+        $parms = $slug . '/' . $slug2 . '/' . $slug3 . '/' . $slug4 . '/' . $slug5;
         $client = new Client();
 
-        $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $parms);
 
 
         $index = 0;
@@ -180,13 +180,13 @@ class MatchVideoController extends Controller
         return sendJsonResponse($videos, 'videos');
     }
 
-    public function RelatedtVideo($slug,$slug2,$slug3)
+    public function RelatedtVideo($slug, $slug2, $slug3)
     {
 
-         $parms=$slug .'/'. $slug2.'/'.$slug3;
+        $parms = $slug . '/' . $slug2 . '/' . $slug3;
         $client = new Client();
 
-        $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $parms);
 
 
         $index = 0;
