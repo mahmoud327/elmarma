@@ -39,7 +39,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('match-videos', [MatchVideoController::class, 'index']);
     Route::get('all-videos', [MatchVideoController::class, 'allVideo']);
     Route::get('related-videos/{slug1}/{slug2}/{slug3}', [MatchVideoController::class, 'RelatedtVideo']);
-    Route::get('details-video/{slug1}/{slug2}/{slug3}', [MatchVideoController::class, 'detailsVideo']);
+    Route::get('details-video/{slug1}/{slug2}/{slug3}/{slug4?}/{slug5?}', [MatchVideoController::class, 'detailsVideo']);
     Route::get('all-teams', [TeamController::class, 'index']);
 
 
@@ -50,6 +50,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::group(['prefix' => 'leagues-tournaments'], function () {
 
         Route::get('videos/{slug}/{slug1}/{slug3}/{slug4}/{slug5?}', [leagueTournamentMediaController::class, 'index']);
+
         Route::get('groups/{slug}/{slug1}/{slug3}/{slug4}', [leagueTournamentGroupController::class, 'index']);
         // Route::get('related-videos/{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [leagueTournamentMediaController::class, 'relatedVideo']);
 

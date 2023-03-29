@@ -132,10 +132,10 @@ class MatchVideoController extends Controller
     }
 
 
-    public function detailsVideo($slug,$slug2,$slug3)
+    public function detailsVideo($slug,$slug2,$slug3,$slug4=null,$slug5=null)
     {
 
-         $parms=$slug .'/'. $slug2.'/'.$slug3;
+         $parms=$slug .'/'. $slug2.'/'.$slug3.'/'.$slug4.'/'.$slug5;
         $client = new Client();
 
         $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
