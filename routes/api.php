@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CatgoryController;
 use App\Http\Controllers\Api\leagueTournamentController;
+use App\Http\Controllers\Api\leagueTournamentGroupController;
 use App\Http\Controllers\Api\leagueTournamentMediaController;
 use App\Http\Controllers\Api\MatchController;
 use App\Http\Controllers\Api\MatchVideoController;
@@ -43,12 +44,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
 
     ////leagues-tournaments
-    Route::get('leagues-tournaments', [leagueTournamentMediaController::class, 'index']);
+    Route::get('leagues-tournaments', [leagueTournamentController::class, 'index']);
 
 
     Route::group(['prefix' => 'leagues-tournaments'], function () {
 
         Route::get('videos/{slug}/{slug1}/{slug3}/{slug4}/{slug5?}', [leagueTournamentMediaController::class, 'index']);
+        Route::get('groups/{slug}/{slug1}/{slug3}/{slug4}', [leagueTournamentGroupController::class, 'index']);
         // Route::get('related-videos/{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [leagueTournamentMediaController::class, 'relatedVideo']);
 
         Route::get('details-video/{slug}/{slug1}/{slug3}/{slug4}', [leagueTournamentMediaController::class, 'show']);

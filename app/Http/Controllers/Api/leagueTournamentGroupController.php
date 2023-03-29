@@ -10,13 +10,15 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Goutte\Client;
 
-class leagueTournamentMediaController extends Controller
+class leagueTournamentGroupController extends Controller
 {
 
 
-    public function index($slug, $slug1, $slug2, $slug3,$slug4=null)
+
+
+    public function index($slug, $slug1, $slug2, $slug3)
     {
-        $parms = $slug . '/' . $slug1 . '/' . $slug2 . '/' . $slug3.'/'.$slug4;
+        $parms = $slug . '/' . $slug1 . '/' . $slug2 . '/' . $slug3;
         $client = new Client();
 
         $data = $client->request('GET', 'https://www.yallakora.com/' . $parms);
@@ -27,26 +29,29 @@ class leagueTournamentMediaController extends Controller
 
 
 
-        $data->filter('.multimedia .cnts   ul li')->each(function ($node) use (&$leagues, &$index) {
+        $data->filter('.groupsCarousel .groupItem')->each(function ($node) use (&$leagues, &$index) {
 
 
 
-            $node->filter('.link')->each(function ($node) use (&$leagues, &$index) {
+            $node->filter('.groupTtl h3')->each(function ($node) use (&$leagues, &$index) {
 
-                $leagues[$index]['id'] = $node->attr('href');
+                $leagues[$index]['group_ttl'] = $node->text();
+
+            });
+            $node->filter('.table .wRow')->each(function ($node) use (&$leagues, &$index) {
+
+                $node->filter('.wRow')->each(function ($node) use (&$leagues, &$index) {
+
+                    $node->filter('.team')->each(function ($node) use (&$leagues, &$index) {
 
 
-                $node->filter('.imageCntnr img')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['image'] = $node->attr('src');
+                        $leagues[$index]['d'] ='f';
+
+                    });
+
                 });
 
-                $node->filter('.desc .time span')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['date'] = $node->text();
-                });
 
-                $node->filter('.desc p')->each(function ($node) use (&$leagues, &$index) {
-                    $leagues[$index]['title'] = $node->text();
-                });
             });
 
 
