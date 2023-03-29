@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CatgoryController;
 use App\Http\Controllers\Api\leagueTournamentController;
+use App\Http\Controllers\Api\leagueTournamentMediaController;
 use App\Http\Controllers\Api\MatchController;
 use App\Http\Controllers\Api\MatchVideoController;
 use App\Http\Controllers\Api\NewController;
@@ -34,25 +35,36 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('all-matches', [MatchController::class, 'allMatch']);
     Route::get('all-tournaments', [MatchController::class, 'allTournament']);
 
-    Route::get('match-videos',[MatchVideoController::class,'index']);
-    Route::get('all-videos',[MatchVideoController::class,'allVideo']);
-    Route::get('related-videos/{slug1}/{slug2}/{slug3}',[MatchVideoController::class,'RelatedtVideo']);
-    Route::get('details-video/{slug1}/{slug2}/{slug3}',[MatchVideoController::class,'detailsVideo']);
-    Route::get('all-teams',[TeamController::class,'index']);
+    Route::get('match-videos', [MatchVideoController::class, 'index']);
+    Route::get('all-videos', [MatchVideoController::class, 'allVideo']);
+    Route::get('related-videos/{slug1}/{slug2}/{slug3}', [MatchVideoController::class, 'RelatedtVideo']);
+    Route::get('details-video/{slug1}/{slug2}/{slug3}', [MatchVideoController::class, 'detailsVideo']);
+    Route::get('all-teams', [TeamController::class, 'index']);
 
 
     ////leagues-tournaments
-    Route::get('leagues-tournaments',[leagueTournamentController::class,'index']);
-    Route::get('match-results-tournaments/{slug}/{slug2}/{slug3}/{slug4}',[leagueTournamentController::class,'MatchResult']);
-    Route::get('scorers-tournaments/{slug}/{slug2}/{slug3}/{slug4}',[leagueTournamentController::class,'Scorer']);
+    Route::get('leagues-tournaments', [leagueTournamentMediaController::class, 'index']);
+
+
+    Route::group(['prefix' => 'leagues-tournaments'], function () {
+
+        Route::get('videos/{slug}/{slug1}/{slug3}/{slug4}/{slug5?}', [leagueTournamentMediaController::class, 'index']);
+        // Route::get('related-videos/{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [leagueTournamentMediaController::class, 'relatedVideo']);
+
+        Route::get('details-video/{slug}/{slug1}/{slug3}/{slug4}', [leagueTournamentMediaController::class, 'show']);
+    });
+
+
+    Route::get('match-results-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'MatchResult']);
+    Route::get('scorers-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'Scorer']);
 
 
 
-    Route::get('leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}',[leagueTournamentController::class,'details']);
+    Route::get('leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'details']);
 
-    Route::get('details-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}',[leagueTournamentController::class,'show']);
+    Route::get('details-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'show']);
 
-    Route::get('stastics-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}',[StatisticsLeagueTournamentController::class,'show']);
+    Route::get('stastics-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}', [StatisticsLeagueTournamentController::class, 'show']);
 
 
     Route::apiResource('categories', CatgoryController::class);
