@@ -2,30 +2,43 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+
+
+use Auth;
 
 class Admin extends Authenticatable
 {
-    use HasFactory;
+    use HasRoles, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
+    protected $table = 'admins';
+
+
     protected $fillable = [
         'name',
         'email',
         'password',
+         'phone',
+         'image',
+         'activate',
+        'created_at',
+        'roles_name'
     ];
 
+
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -33,19 +46,14 @@ class Admin extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'roles_name' => 'array',
+
     ];
 
-    public function setPasswordAttribute($password = '')
-    {
-        if (Hash::needsRehash($password)) {
-            $password = Hash::make($password);
-        }
-        $this->attributes['password'] = $password ?? '';
-    }
 }

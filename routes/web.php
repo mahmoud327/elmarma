@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TournamentNewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,8 +38,15 @@ Route::group([
         Route::post('login', 'AuthController@login')->name('admin.login');
         Route::get('logout', 'AuthController@logout')->name('admin.logout');
 
-        Route::group(['middleware' => ['admin']], function () {
+        Route::group(['middleware' => ['auth:admins']], function () {
             Route::get('home', 'HomeController@index')->name('admin.home');
+
+            //route-for-services
+            Route::resource('roles', RoleController::class);
+
+
+            //route-for-services
+            Route::resource('admins', AdminController::class);
 
             Route::resource('posts', PostController::class);
             Route::post('posts-image', [PostController::class,'uploadPostImage'])->name('posts.images.store');

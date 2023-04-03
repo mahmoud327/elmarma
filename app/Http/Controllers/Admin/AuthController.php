@@ -28,7 +28,7 @@ class AuthController extends Controller
             'password.min' => 'The password faild must be at leates 6 letter.',
         ]);
 
-        if (!Auth::guard('admin')->attempt($attr)) {
+        if (!Auth::guard('admins')->attempt($attr)) {
             return redirect()->route('admin.login.page')
                 ->withErrors(['errors' => 'The password is incorrect.']);
         }
