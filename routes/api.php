@@ -28,10 +28,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::apiResource('v1/posts', PostController::class)->middleware('lang');
-
 Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
+    Route::apiResource('posts', PostController::class);
     Route::get('matches', [MatchController::class, 'index']);
     Route::get('details-match/{slug}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'show']);
     Route::get('all-matches', [MatchController::class, 'allMatch']);
