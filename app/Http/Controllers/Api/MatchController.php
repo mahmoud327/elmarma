@@ -60,12 +60,13 @@ class MatchController extends Controller
 
         return sendJsonResponse($matches, 'matches');
     }
-    public function allMatch()
+    public function allMatch(Request $request)
     {
+        $parm_date='%D9%85%D8%B1%D9%83%D8%B2-%D8%A7%D9%84%D9%85%D8%A8%D8%A7%D8%B1%D9%8A%D8%A7%D8%AA?date='.$request->date;
 
         $client = new Client();
 
-        $data = $client->request('GET', 'https://www.yallakora.com/match-center');
+        $data = $client->request('GET', 'https://www.yallakora.com/match-center/'.$parm_date);
         $index = 0;
         $matches = [];
         $data->filter('.matchCard')->each(function ($node) use (&$matches, &$index) {
