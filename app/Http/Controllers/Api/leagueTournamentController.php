@@ -109,7 +109,6 @@ class leagueTournamentController extends Controller
 
         });
 
-        dd($video);
 
 
         $data->filter('.spansorheader')->each(function ($node) use (&$leagues, &$index) {
