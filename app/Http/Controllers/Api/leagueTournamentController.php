@@ -88,8 +88,9 @@ class leagueTournamentController extends Controller
         return sendJsonResponse($leagues, 'leagues');
     }
 
-    public function details($slug, $slug2, $slug3, $slug4)
+    public function details($slug, $slug2, $slug3, $slug4=null)
     {
+
         $client = new Client();
         $parm = $slug . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
 
@@ -98,10 +99,21 @@ class leagueTournamentController extends Controller
 
         $index = 0;
         $leagues = [];
+        $video = [];
 
+
+
+        $data->filter('iframe')->each(function ($node) use (&$video, &$index) {
+
+                $video[$index]['video'] = $node->attr('src');
+
+        });
+
+        dd($video);
 
 
         $data->filter('.spansorheader')->each(function ($node) use (&$leagues, &$index) {
+
 
 
             $node->filter('.euroHeader .tourTtl .tourImg img')->each(function ($node) use (&$leagues, &$index) {
@@ -130,11 +142,19 @@ class leagueTournamentController extends Controller
             });
 
 
+
+
             $index++;
         });
+        if($leagues){
+            $leagues=$leagues;
+        }
+        else{
+            $leagues=$video;
+        }
 
 
-        return sendJsonResponse($leagues[0], 'leagues');
+        return sendJsonResponse($leagues, 'leagues');
     }
 
 

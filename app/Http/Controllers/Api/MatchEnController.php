@@ -52,8 +52,8 @@ class MatchEnController extends Controller
                     $matches[$index]['first_team'] = $node->text();
                 });
 
-                $node->filter('.Fw\(600\)\!')->each(function ($node) use (&$matches, &$index) {
-                    $matches[$index]['seond_result'] = $node->text();
+                $node->filter('.D\(f\) .Fw\(600\)\!')->each(function ($node) use (&$matches, &$index) {
+                    $matches[$index]['first_result'] = $node->text();
                 });
 
 
@@ -69,8 +69,8 @@ class MatchEnController extends Controller
                 $matches[$index]['second_team'] = $node->text();
             });
 
-            $node->filter('.Fw\(700\)\!')->each(function ($node) use (&$matches, &$index) {
-                $matches[$index]['first_result'] = $node->text();
+            $node->filter('.YahooSans.Fw\(700\)\! ')->each(function ($node) use (&$matches, &$index) {
+                $matches[$index]['second_result'] = $node->text();
             });
 
 
