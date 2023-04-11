@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\leagueTournamentController;
 use App\Http\Controllers\Api\leagueTournamentGroupController;
 use App\Http\Controllers\Api\leagueTournamentMediaController;
 use App\Http\Controllers\Api\MatchController;
+use App\Http\Controllers\Api\MatchEnController;
 use App\Http\Controllers\Api\MatchVideoController;
 use App\Http\Controllers\Api\NewController;
 use App\Http\Controllers\Api\PostController;
@@ -34,6 +35,9 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('matches', [MatchController::class, 'index']);
     Route::get('details-match/{slug}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'show']);
     Route::get('all-matches', [MatchController::class, 'allMatch']);
+
+    Route::get('all-matches-en', [MatchEnController::class, 'index']);
+
     Route::get('all-tournaments', [MatchController::class, 'allTournament']);
 
     Route::get('match-videos', [MatchVideoController::class, 'index']);
