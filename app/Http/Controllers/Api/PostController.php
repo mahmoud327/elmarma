@@ -32,7 +32,7 @@ class PostController extends Controller
 
         $posts = Post::latest()
             ->active()
-            ->where('type',null)
+            ->where('type_post',null)
             ->when(request()->category_id, function ($q) {
                 $q->whereCategoryId(request()->category_id);
             })
