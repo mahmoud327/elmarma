@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\NewPage;
+use App\Models\Post;
 use App\Services\newService;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
@@ -26,8 +27,9 @@ class NewController extends Controller
         $data = [
             'categories' => Category::latest()->get(),
 
-            'news' => NewPage::latest()
+            'news' => Post::latest()
                 ->with('category')
+
                 ->paginate(10),
 
         ];
@@ -49,9 +51,11 @@ class NewController extends Controller
      */
     public function store(Request $request)
     {
+        $request['type_post'] = 'news';
         $data = $request->all();
 
-        $new = NewPage::create($data);
+
+        $new = Post::create($data);
 
         if ($request->file('image')) {
             $new->image = $this->uploadImage('uploads/news/', $request->file('image'));

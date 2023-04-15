@@ -31,7 +31,7 @@ class NewController extends Controller
     {
 
 
-        $news = NewPage::query()
+        $news = Post::query()
             ->with(['category', 'medias'])
 
             ->latest()

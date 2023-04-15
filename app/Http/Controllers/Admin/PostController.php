@@ -32,7 +32,9 @@ class PostController extends Controller
             'categories' => Category::latest()->get(),
 
             'posts' => Post::latest()
+                ->where('type_post', '!=', 'news')
                 ->with('category')
+
                 ->paginate(10),
 
         ];
@@ -56,8 +58,8 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        $post= Post::create($data);
-        if($request->image){
+        $post = Post::create($data);
+        if ($request->image) {
             $post->image = $this->uploadImage('uploads/posts/', $request->file('image'));
             $post->save();
         }

@@ -32,6 +32,7 @@ class PostController extends Controller
 
         $posts = Post::latest()
             ->active()
+            ->where('type_post','!=','news')
             ->when(request()->category_id, function ($q) {
                 $q->whereCategoryId(request()->category_id);
             })
@@ -58,6 +59,6 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http,\Response
      */
 }

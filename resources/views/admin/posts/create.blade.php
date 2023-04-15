@@ -106,32 +106,32 @@
                         <section>
                             <div class="control-group form-group">
                                 <label class="form-label">title arabic</label>
-                                <input type="text" class="form-control required"  name="ar[title]" placeholder="Name">
+                                <input type="text" class="form-control required" name="ar[title]" placeholder="Name">
                             </div>
                             <div class="control-group form-group">
                                 <label class="form-label">title English</label>
                                 <input type="text" class="form-control required" name="en[title]"placeholder="text ">
                             </div>
                             <div class="control-group form-group">
-                                <label class="form-label">select type post</label >
+                                <label class="form-label">select type post</label>
                                 <select class="form-control" name="type" required>
-                                        <option value="normal">
-                                            normal-post
-                                        </option>
-                                        <option value="parent-post">
-                                            parent-post
-                                        </option>
+                                    <option value="normal">
+                                        normal-post
+                                    </option>
+                                    <option value="parent-post">
+                                        parent-post
+                                    </option>
 
-                                        <option value="child-post">
-                                            child-post
-                                        </option>
+                                    <option value="child-post">
+                                        child-post
+                                    </option>
 
 
                                 </select>
                             </div>
                             <div class="control-group form-group">
                                 <label class="form-label">select category</label>
-                                <select class="form-control" name="category_id" required >
+                                <select class="form-control" name="category_id" required>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">
                                             {{ $category->title }}
@@ -149,30 +149,31 @@
                             </div>
                             <div class="control-group form-group mb-0">
                                 <label class="form-label">desc arabic</label>
-                                <textarea type="text" class="form-control required"  name="ar[desc]"placeholder="desc" required>
+                                <textarea type="text" class="form-control required" name="ar[desc]"placeholder="desc" required>
                                   </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
                                 <label>الصوره الاساسيه</label>
 
-                                <input type="file" class="form-control required"  required name="image" placeholder="image">
+                                <input type="file" class="form-control required" required name="image"
+                                    placeholder="image">
                             </div>
-                          <br>
-                          <br>
+                            <br>
+                            <br>
 
                             <div class="form-group col-md-7">
                                 <h4 class="form-section"><i class="ft-home"></i>رفع الصور</h4>
 
                                 <div id="dpz-multiple-files" class="dropzone dropzone-area">
-                                    <div class="dz-message"> رفع الصوره  </div>
+                                    <div class="dz-message"> رفع الصوره </div>
                                 </div>
 
                             </div>
-                            <button type="submit" class="btn btn-info" >save</button>
+                            <button type="submit" class="btn btn-info">save</button>
                         </section>
 
                     </div>
-                 </form>
+                </form>
             </div>
         </div>
     </div>
@@ -189,7 +190,6 @@
 @endsection
 
 @push('script')
-
 <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
 <!-- Internal Select2 js-->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -213,7 +213,7 @@
 
 <script src="{{ URL::asset('assets/plugins/treeview/treeview.js') }}"></script>
 
-<script src="{{asset('assets/assets/admin/js/dropzone.min.js')}}"></script>
+<script src="{{ asset('assets/assets/admin/js/dropzone.min.js') }}"></script>
 
 
 <script>
@@ -290,5 +290,4 @@
 
     }
 </script>
-
 @endpush
