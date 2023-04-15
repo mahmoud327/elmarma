@@ -71,6 +71,10 @@ class PostController extends Controller
                     'url' => $file
                 ]);
             }
+
+            $post->medias()->create([
+                'url' =>$post->image
+            ]);
         }
 
 

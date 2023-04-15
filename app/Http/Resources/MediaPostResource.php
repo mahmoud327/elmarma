@@ -13,7 +13,6 @@ class MediaPostResource extends JsonResource
             'id' => $this->id,
             'full_path' => asset('uploads/posts/'.$this->url),
 
-
         ];
 
     }
