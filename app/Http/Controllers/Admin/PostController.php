@@ -32,7 +32,7 @@ class PostController extends Controller
             'categories' => Category::latest()->get(),
 
             'posts' => Post::latest()
-                ->where('type_post', '!=', 'news')
+                ->where('type_post', '=', null)
                 ->with('category')
 
                 ->paginate(10),
