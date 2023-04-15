@@ -74,7 +74,7 @@ class NewController extends Controller
         return redirect(route('news.index'))->with('status', "add successfully");
     }
 
-    public function update(Request $request, NewPage $news)
+    public function update(Request $request, Post $news)
     {
 
         $news->update($request->all());
@@ -85,7 +85,7 @@ class NewController extends Controller
         return back()->with('status', "add successfully");
     }
 
-    public function destroy(NewPage $new)
+    public function destroy(Post $new)
     {
         if (!is_null($new->image)) {
 

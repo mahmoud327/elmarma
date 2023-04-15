@@ -42,7 +42,7 @@ class NewController extends Controller
     public function show($id)
     {
 
-        $new = NewPage::query()
+        $new = Post::query()
             ->with(['category', 'medias'])
             ->findOrfail($id);
 
