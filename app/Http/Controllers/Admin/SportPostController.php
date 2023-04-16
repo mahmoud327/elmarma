@@ -10,14 +10,9 @@ use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class PostController extends Controller
+class SportPostController extends Controller
 {
-    private $postService;
-
-    public function __construct(PostService $postService)
-    {
-        $this->postService = $postService;
-    }
+  
 
     use ImageTrait;
     /**
@@ -32,14 +27,13 @@ class PostController extends Controller
             'categories' => Category::latest()->get(),
 
             'posts' => Post::latest()
-                ->where('type_post', '=', null)
-                ->where('type','!=','sports-woman')
+                ->where('type','sports-woman')
                 ->with('category')
 
                 ->paginate(10),
 
         ];
-        return view('admin.posts.index', $data);
+        return view('admin.posts.sports-woman.index', $data);
     }
     public function create()
     {
@@ -47,7 +41,7 @@ class PostController extends Controller
         $data = [
             'categories' => Category::latest()->get(),
         ];
-        return view('admin.posts.create', $data);
+        return view('admin.posts.sports-woman.create', $data);
     }
     /**
      * Store a newly created resource in storage.
@@ -57,6 +51,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request['type']='sports-woman';
         $data = $request->all();
 
         $post = Post::create($data);
@@ -79,7 +74,7 @@ class PostController extends Controller
         }
 
 
-        return redirect(route('posts.index'))->with('status', "add successfully");
+        return redirect(route('sports-woman.index'))->with('status', "add successfully");
     }
 
 

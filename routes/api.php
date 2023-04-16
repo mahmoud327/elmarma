@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CatgoryController;
+use App\Http\Controllers\Api\LatestTransferController;
 use App\Http\Controllers\Api\leagueTournamentController;
 use App\Http\Controllers\Api\leagueTournamentGroupController;
 use App\Http\Controllers\Api\leagueTournamentMediaController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Api\MatchEnController;
 use App\Http\Controllers\Api\MatchVideoController;
 use App\Http\Controllers\Api\NewController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\SportPostController;
 use App\Http\Controllers\Api\StatisticsLeagueTournamentController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TournamentNewController;
@@ -32,6 +34,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     Route::apiResource('posts', PostController::class);
+    Route::apiResource('sports-woman', SportPostController::class);
+
     Route::get('matches', [MatchController::class, 'index']);
     Route::get('details-match/{slug}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'show']);
     Route::get('all-matches', [MatchController::class, 'allMatch']);
@@ -76,6 +80,12 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('details-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'show']);
 
     Route::get('stastics-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}', [StatisticsLeagueTournamentController::class, 'show']);
+
+
+
+    Route::get('latest-transfers/{id}',[LatestTransferController::class,'index']);
+    Route::get('latest-transfers-all-leagues',[LatestTransferController::class,'allLeague']);
+
 
 
     Route::apiResource('categories', CatgoryController::class);

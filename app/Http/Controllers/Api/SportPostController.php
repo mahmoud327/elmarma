@@ -12,14 +12,8 @@ use ArinaSystems\JsonResponse\Facades\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class PostController extends Controller
+class SportPostController extends Controller
 {
-    private $postService;
-
-    public function __construct(PostService $postService)
-    {
-        $this->postService = $postService;
-    }
 
     use ImageTrait;
     /**
@@ -32,15 +26,14 @@ class PostController extends Controller
 
         $posts = Post::latest()
             ->active()
-            ->where('type_post',null)
-            ->where('type','!=','sports-woman')
 
+            ->where('type', 'sports-woman')
             ->when(request()->category_id, function ($q) {
                 $q->whereCategoryId(request()->category_id);
             })
-            ->when(request()->type, function ($q) {
-                $q->whereType(request()->type);
-            })
+            // ->when(request()->type, function ($q) {
+            //     $q->whereType(request()->type);
+            // })
             ->with(['category', 'medias'])
             ->paginate(10);
 

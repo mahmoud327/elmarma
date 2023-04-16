@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SportPostController;
 use App\Http\Controllers\Admin\TournamentNewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ Route::group([
             Route::resource('admins', AdminController::class);
 
             Route::resource('posts', PostController::class);
+            Route::resource('sports-woman', SportPostController::class);
+
             Route::post('posts-image', [PostController::class,'uploadPostImage'])->name('posts.images.store');
 
             Route::resource('news', NewController::class);
