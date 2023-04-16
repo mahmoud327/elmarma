@@ -85,7 +85,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     Route::get('latest-transfers/{id}',[LatestTransferController::class,'index']);
     Route::get('important-latest-transfers/{id}',[LatestTransferController::class,'importantTransfer']);
-    
+
     Route::get('latest-transfers-all-leagues',[LatestTransferController::class,'allLeague']);
 
 
