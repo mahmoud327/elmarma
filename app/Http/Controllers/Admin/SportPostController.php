@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SportPostController extends Controller
 {
-  
+
 
     use ImageTrait;
     /**
@@ -27,7 +27,7 @@ class SportPostController extends Controller
             'categories' => Category::latest()->get(),
 
             'posts' => Post::latest()
-                ->where('type','sports-woman')
+                ->where('type_post','sports-woman')
                 ->with('category')
 
                 ->paginate(10),
@@ -51,7 +51,7 @@ class SportPostController extends Controller
      */
     public function store(Request $request)
     {
-        $request['type']='sports-woman';
+        $request['type_post']='sports-woman';
         $data = $request->all();
 
         $post = Post::create($data);

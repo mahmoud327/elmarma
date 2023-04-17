@@ -27,13 +27,13 @@ class SportPostController extends Controller
         $posts = Post::latest()
             ->active()
 
-            ->where('type', 'sports-woman')
+            ->where('type_post', 'sports-woman')
             ->when(request()->category_id, function ($q) {
                 $q->whereCategoryId(request()->category_id);
             })
-            // ->when(request()->type, function ($q) {
-            //     $q->whereType(request()->type);
-            // })
+            ->when(request()->type, function ($q) {
+                $q->whereType(request()->type);
+            })
             ->with(['category', 'medias'])
             ->paginate(10);
 
