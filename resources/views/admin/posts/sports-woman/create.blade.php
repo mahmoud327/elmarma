@@ -112,7 +112,7 @@
                                 <label class="form-label">title English</label>
                                 <input type="text" class="form-control required" name="en[title]"placeholder="text ">
                             </div>
-                            {{-- <div class="control-group form-group">
+                            <div class="control-group form-group">
                                 <label class="form-label">select type post</label>
                                 <select class="form-control" name="type" required>
                                     <option value="normal">
@@ -128,7 +128,7 @@
 
 
                                 </select>
-                            </div> --}}
+                            </div>
                             <div class="control-group form-group">
                                 <label class="form-label">select category</label>
                                 <select class="form-control" name="category_id" required>
