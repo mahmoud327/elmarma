@@ -150,6 +150,90 @@ class MatchController extends Controller
             $node->filter('.tourNameBtn p')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['championship_number'] = $node->text();
             });
+            $node->filter('.tourName .tourNameBtn a:first-child')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_name'] = $node->text();
+            });
+
+            $node->filter('.tourName .tourNameBtn a:first-child')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_name'] = $node->text();
+            });
+
+            $node->filter('.tourNameBtn .date')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_date'] = $node->text();
+            });
+            $node->filter('.tourNameBtn .time')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['championship_time'] = $node->text();
+            });
+            $node->filter('.matchScoreInfo .teamA a img')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_img'] = $node->attr('src');
+            });
+            $node->filter('.matchScoreInfo .teamA a p ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_team'] = $node->text();
+            });
+
+            $node->filter('.matchScoreInfo .teamB img ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['second_img'] = $node->attr('src');
+            });
+            $node->filter('.teamB p ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['second_team'] = $node->text();
+            });
+            $node->filter('.matchDetInfo .icon-stadium span:first-child')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['place'] = $node->text();
+            });
+            $node->filter('.matchDetInfo .icon-refree span:first-child')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['refree'] = $node->text();
+            });
+
+            $node->filter('.matchDetInfo .icon-channel  span')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['channel'] = $node->text();
+            });
+            $node->filter('.matchDetInfo .icon-refree  span')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['refree'] = $node->text();
+            });
+            $index++;
+        });
+
+        // $data->filter('.cnts')->each(function ($node) use (&$match, &$index) {
+
+
+        //     $node->filter('.statsDiv ul li')->each(function ($node) use (&$match, &$index) {
+
+        //         dd('ff');
+        //         $match[$index]['first_team_win'] =$node->text();
+
+
+        //     });
+        //     // $node->filter('.teamB')->each(function ($node) use (&$match, &$index) {
+        //     //     $match[$index]['second_team_win'] =$node->text();
+
+
+        //     // });
+
+        //     $index++;
+
+
+        // });
+
+        return sendJsonResponse($match[0], 'match');
+    }
+
+    public function statisticsMatch($id, $slug1, $slug2, $slug3, $slug4)
+    {
+
+        $param = $id . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
+
+        $client = new Client();
+
+        $data = $client->request('GET', 'https://www.yallakora.com/'.$param);
+        $index = 0;
+        $match = [];
+        $data->filter('.timeline .cnts')->each(function ($node) use (&$match, &$index) {
+
+
+
+            $node->filter('ul li ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_team_win'] = $node->text();
+            });
             $node->filter('.tourNameBtn .date')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['championship_date'] = $node->text();
             });
@@ -199,7 +283,7 @@ class MatchController extends Controller
 
         // });
 
-        return sendJsonResponse($match[0], 'match');
+        return sendJsonResponse($match, 'match');
     }
 
 
