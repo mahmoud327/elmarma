@@ -62,11 +62,11 @@ class MatchController extends Controller
     }
     public function allMatch(Request $request)
     {
-        $parm_date='%D9%85%D8%B1%D9%83%D8%B2-%D8%A7%D9%84%D9%85%D8%A8%D8%A7%D8%B1%D9%8A%D8%A7%D8%AA?date='.$request->date;
+        $parm_date = '%D9%85%D8%B1%D9%83%D8%B2-%D8%A7%D9%84%D9%85%D8%A8%D8%A7%D8%B1%D9%8A%D8%A7%D8%AA?date=' . $request->date;
 
         $client = new Client();
 
-        $data = $client->request('GET', 'https://www.yallakora.com/match-center/'.$parm_date);
+        $data = $client->request('GET', 'https://www.yallakora.com/match-center/' . $parm_date);
         $index = 0;
         $matches = [];
         $data->filter('.matchCard')->each(function ($node) use (&$matches, &$index) {
@@ -224,14 +224,16 @@ class MatchController extends Controller
 
         $client = new Client();
 
-        $data = $client->request('GET', 'https://www.yallakora.com/'.$param);
+        $data = $client->request('GET', 'https://www.yallakora.com/uefa/2783/match/87924/%D8%A8%D8%A7%D9%8A%D8%B1%D9%86-%D9%85%D9%8A%D9%88%D9%86%D9%8A%D8%AE-%D9%85%D8%A7%D9%86%D8%B4%D8%B3%D8%AA%D8%B1-%D8%B3%D9%8A%D8%AA%D9%8A-%D8%AF%D9%88%D8%B1%D9%8A-%D8%A3%D8%A8%D8%B7%D8%A7%D9%84-%D8%A3%D9%88%D8%B1%D9%88%D8%A8%D8%A7#matchesclip');
+
         $index = 0;
         $match = [];
-        $data->filter('.timeline .cnts')->each(function ($node) use (&$match, &$index) {
+        $data->filter('.EuroMatchDetails .matchDetailsTabs .timeline.headToHead')->each(function ($node) use (&$match, &$index) {
+            dd('dd');
 
 
+            $node->filter('.previousMatch')->each(function ($node) use (&$match, &$index) {
 
-            $node->filter('ul li ')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['first_team_win'] = $node->text();
             });
             $node->filter('.tourNameBtn .date')->each(function ($node) use (&$match, &$index) {

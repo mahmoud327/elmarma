@@ -25,7 +25,7 @@ class LatestTransferController extends Controller
 
 
 
-        $data->filter('.standing .wRow')->each(function ($node) use (&$leagues, &$index) {
+        $data->filter('.standing:not(.left) .table  .wRow')->each(function ($node) use (&$leagues, &$index) {
 
 
             // $node->filter('')->each(function ($node) use (&$leagues, &$index) {
