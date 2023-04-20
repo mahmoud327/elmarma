@@ -10,11 +10,11 @@ class Banner extends Model
 
 
     protected $table = 'banners';
-    protected $fillable =['image'];
+    protected $fillable =['image','type'];
 
     public $timestamps = true;
     protected $translationForeignKey = "banner_id";
-    public $translatedAttributes = ['title','desc','type'];
+    public $translatedAttributes = ['title','desc'];
     public $translationModel = 'App\Models\Translation\Banner';
 
 

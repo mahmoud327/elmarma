@@ -39,8 +39,6 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $banner = ModelsBanner::create($request->all());
-          $banner->type=$request->type;
-        $banner->save();
 
         if ($request->file('image')) {
             $this->uploadImage('uploads/banners', $request->image);
@@ -53,9 +51,6 @@ class BannerController extends Controller
     public function update(Request $request, ModelsBanner $banner)
     {
         $banner->update($request->except('image'));
-        $banner->type=$request->type;
-        $banner->save();
-
 
         if ($request->file('image')) {
             $this->uploadImage('uploads/banners', $request->image);
