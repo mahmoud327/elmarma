@@ -62,7 +62,7 @@ class BannerController extends Controller
         return back()->with('status', "add successfully");
     }
 
-    public function destroy(Banner $banner)
+    public function destroy(ModelsBanner $banner)
     {
         if (!is_null($banner->image)) {
             Storage::disk('banners')->delete($banner->image);
