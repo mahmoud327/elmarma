@@ -28,6 +28,9 @@ class BannerController extends Controller
     {
 
         $banners = Banner::latest()
+        ->when(request()->type, function ($q) {
+            $q->whereType(request()->type);
+        })
             ->paginate($request->paginate);
 
         return JsonResponse::json('ok', ['data' => BnnerResource::collection($banners)]);

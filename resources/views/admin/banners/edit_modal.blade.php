@@ -32,6 +32,23 @@
                             <div class="form-group">
                                 <textarea type="text" class="form-control" name="ar[desc]"  value="{{old('desc')}}"  placeholder=" desc arabic ">{{optional($banner->translate('ar'))->title}}</textarea>
                             </div>
+                            <div class="control-group form-group">
+                                <label class="form-label">select type post</label>
+                                <select class="form-control" name="type" required>
+                                    <option value="normal">
+                                        normal-post
+                                    </option>
+                                    <option value="parent-post">
+                                        parent-post
+                                    </option>
+
+                                    <option value="child-post">
+                                        child-post
+                                    </option>
+
+
+                                </select>
+                            </div>
 
                             <div class="form-group">
                                 <input type="file" class="form-control" name="image"    placeholder=" desc arabic ">

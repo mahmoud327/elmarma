@@ -14,7 +14,7 @@ class Banner extends Model
 
     public $timestamps = true;
     protected $translationForeignKey = "banner_id";
-    public $translatedAttributes = ['title','desc'];
+    public $translatedAttributes = ['title','desc','type'];
     public $translationModel = 'App\Models\Translation\Banner';
 
 
