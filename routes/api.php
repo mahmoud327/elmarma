@@ -38,7 +38,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     Route::get('matches', [MatchController::class, 'index']);
     Route::get('details-match/{slug}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'show']);
-    
+
     Route::get('statistics-match/{slug}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'statisticsMatch']);
 
 
@@ -83,7 +83,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     Route::get('details-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'show']);
 
-    Route::get('stastics-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}', [StatisticsLeagueTournamentController::class, 'show']);
+    Route::get('statistics-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}', [StatisticsLeagueTournamentController::class, 'show']);
 
 
 

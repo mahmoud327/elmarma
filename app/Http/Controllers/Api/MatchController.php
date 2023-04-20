@@ -220,15 +220,16 @@ class MatchController extends Controller
     public function statisticsMatch($id, $slug1, $slug2, $slug3, $slug4)
     {
 
+
         $param = $id . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
 
         $client = new Client();
 
-        $data = $client->request('GET', 'https://www.yallakora.com/uefa/2783/match/87924/%D8%A8%D8%A7%D9%8A%D8%B1%D9%86-%D9%85%D9%8A%D9%88%D9%86%D9%8A%D8%AE-%D9%85%D8%A7%D9%86%D8%B4%D8%B3%D8%AA%D8%B1-%D8%B3%D9%8A%D8%AA%D9%8A-%D8%AF%D9%88%D8%B1%D9%8A-%D8%A3%D8%A8%D8%B7%D8%A7%D9%84-%D8%A3%D9%88%D8%B1%D9%88%D8%A8%D8%A7#matchesclip');
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $param);
 
         $index = 0;
         $match = [];
-        $data->filter('.EuroMatchDetails .matchDetailsTabs .timeline.headToHead')->each(function ($node) use (&$match, &$index) {
+        $data->filter('.EuroMatchDetails .matchDetailsTabs .timeline.stats .cnts h3')->each(function ($node) use (&$match, &$index) {
             dd('dd');
 
 
