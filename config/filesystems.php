@@ -44,6 +44,11 @@ return [
             'root' => public_path('uploads/news'),
 
         ],
+        'banners' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/banners'),
+
+        ],
 
         'public' => [
             'driver' => 'local',

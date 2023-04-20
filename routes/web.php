@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\PostController;
@@ -50,6 +51,7 @@ Route::group([
             Route::resource('admins', AdminController::class);
 
             Route::resource('posts', PostController::class);
+            Route::resource('banners', BannerController ::class);
             Route::resource('sports-woman', SportPostController::class);
 
             Route::post('posts-image', [PostController::class,'uploadPostImage'])->name('posts.images.store');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\CatgoryController;
 use App\Http\Controllers\Api\LatestTransferController;
 use App\Http\Controllers\Api\leagueTournamentController;
@@ -97,5 +98,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::apiResource('categories', CatgoryController::class);
 
     Route::apiResource('news', NewController::class);
+    Route::apiResource('banners', BannerController::class);
+
     Route::apiResource('tournament-news', TournamentNewController::class);
 });
