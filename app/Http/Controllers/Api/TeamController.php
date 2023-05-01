@@ -30,6 +30,7 @@ class TeamController extends Controller
 
 
                 $teams[$index]['title'] = $node->attr('title');
+                $teams[$index]['id'] = $node->attr('href');
             });
             $node->filter('a img')->each(function ($node) use (&$teams, &$index) {
 

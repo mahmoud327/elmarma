@@ -88,11 +88,12 @@ class leagueTournamentController extends Controller
         return sendJsonResponse($leagues, 'leagues');
     }
 
-    public function details($slug, $slug2, $slug3, $slug4=null)
+    public function details($slug, $slug2, $slug3, $slug4=null,$slug5=null)
     {
 
+
         $client = new Client();
-        $parm = $slug . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
+        $parm = $slug . '/' . $slug2 . '/' . $slug3 . '/' . $slug4. '/' . $slug5;
 
         $data = $client->request('GET', 'https://www.yallakora.com/' . $parm);
 
@@ -158,9 +159,10 @@ class leagueTournamentController extends Controller
 
 
 
-    public function MatchResult($slug,$slug1,$slug2,$slug3)
+    public function MatchResult($slug,$slug1,$slug2,$slug3,$slug4=null)
     {
-        $parms=$slug .'/'. $slug1.'/'.$slug2.'/'.$slug3;
+        $parms=$slug .'/'. $slug1.'/'.$slug2.'/'.$slug3.'/'.$slug4;
+
         $client = new Client();
 
 
@@ -221,9 +223,9 @@ class leagueTournamentController extends Controller
     }
 
 
-    public function Scorer($slug,$slug1,$slug2,$slug3)
+    public function Scorer($slug,$slug1,$slug2,$slug3,$slug4=null)
     {
-        $parms=$slug .'/'. $slug1.'/'.$slug2.'/'.$slug3;
+        $parms=$slug .'/'. $slug1.'/'.$slug2.'/'.$slug3.'/'.$slug4;
         $client = new Client();
 
 

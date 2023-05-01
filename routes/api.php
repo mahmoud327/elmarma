@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\CatgoryController;
+use App\Http\Controllers\Api\ClubDetailController;
 use App\Http\Controllers\Api\LatestTransferController;
 use App\Http\Controllers\Api\leagueTournamentController;
 use App\Http\Controllers\Api\leagueTournamentGroupController;
@@ -75,12 +76,12 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     });
 
 
-    Route::get('match-results-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'MatchResult']);
-    Route::get('scorers-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'Scorer']);
+    Route::get('match-results-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}', [leagueTournamentController::class, 'MatchResult']);
+    Route::get('scorers-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}', [leagueTournamentController::class, 'scorer']);
 
 
 
-    Route::get('leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4?}', [leagueTournamentController::class, 'details']);
+    Route::get('leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4?}/{slug5?}', [leagueTournamentController::class, 'details']);
 
     Route::get('details-leagues-tournaments/{slug}/{slug2}/{slug3}/{slug4}', [leagueTournamentController::class, 'show']);
 
@@ -92,6 +93,23 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('important-latest-transfers/{id}', [LatestTransferController::class, 'importantTransfer']);
 
     Route::get('latest-transfers-all-leagues', [LatestTransferController::class, 'allLeague']);
+
+
+
+
+
+    Route::group(['prefix' => 'club-details'], function () {
+
+
+
+        Route::get('{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [ClubDetailController::class, 'details']);
+
+
+        Route::get('groups/{slug}/{slug1}/{slug3}/{slug4}', [leagueTournamentGroupController::class, 'index']);
+        // Route::get('related-videos/{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [leagueTournamentMediaController::class, 'relatedVideo']);
+
+        Route::get('tabs/{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [ClubDetailController::class, 'tabs']);
+    });
 
 
 
