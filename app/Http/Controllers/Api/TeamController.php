@@ -25,6 +25,8 @@ class TeamController extends Controller
 
         $index = 0;
         $teams = [];
+        
+
         $data->filter('.tourTeams .tourTeamsCntnr ul li')->each(function ($node) use (&$teams, &$index) {
             $node->filter('a')->each(function ($node) use (&$teams, &$index) {
 

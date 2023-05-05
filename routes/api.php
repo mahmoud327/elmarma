@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\SportPostController;
 use App\Http\Controllers\Api\StatisticsLeagueTournamentController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TournamentNewController;
+use  App\Http\Controllers\Api\GroupsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -119,4 +120,9 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::apiResource('banners', BannerController::class);
 
     Route::apiResource('tournament-news', TournamentNewController::class);
+
+
+
+        Route::get('/{param1}/{param2}/tour-hp/{param3}', [GroupsController::class, 'index']);
+        Route::get('/{param1}/{param2}/match/{param3}/{param4}', [MatchController::class, 'previousEncounter']);
 });

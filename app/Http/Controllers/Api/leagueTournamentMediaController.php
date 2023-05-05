@@ -14,9 +14,9 @@ class leagueTournamentMediaController extends Controller
 {
 
 
-    public function index($slug, $slug1, $slug2, $slug3,$slug4=null)
+    public function index($slug, $slug1, $slug2, $slug3, $slug4 = null)
     {
-        $parms = $slug . '/' . $slug1 . '/' . $slug2 . '/' . $slug3.'/'.$slug4;
+        $parms = $slug . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
         $client = new Client();
 
         $data = $client->request('GET', 'https://www.yallakora.com/' . $parms);
@@ -89,7 +89,4 @@ class leagueTournamentMediaController extends Controller
 
         return sendJsonResponse($leagues, 'leagues');
     }
-
-
-
 }

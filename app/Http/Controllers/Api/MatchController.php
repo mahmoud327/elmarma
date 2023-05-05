@@ -230,7 +230,7 @@ class MatchController extends Controller
         $index = 0;
         $match = [];
         $data->filter('.EuroMatchDetails .matchDetailsTabs .timeline.stats .cnts h3')->each(function ($node) use (&$match, &$index) {
-            dd('dd');
+
 
 
             $node->filter('.previousMatch')->each(function ($node) use (&$match, &$index) {
@@ -311,6 +311,67 @@ class MatchController extends Controller
 
         return sendJsonResponse($all_tournaments, 'all_tournaments');
     }
+
+
+
+    public function previousEncounter($param1, $param2, $param3, $param4)
+    {
+        $data = [];
+        $team_a = [];
+        $team_b = [];
+        $matches_history = [];
+        $matches_history2 = [];
+        $team_a_situation = [];
+        $team_b_situation = [];
+
+        $client = new Client();
+
+        $url2 = "https://www.yallakora.com/Match/GetTeamsHeadToHeadMatches?matchID=" . $param3;
+
+        $crawler = $client->request('POST', $url2);
+        $team_a['image'] = $crawler->filter('.team.teamA')->filter('img')->attr('src');
+        $team_b['image'] = $crawler->filter('.team.teamB')->filter('img')->attr('src');
+
+        $crawler->filter('li')->each(function ($node) use (&$team_a, &$team_b) {
+            $team_a[$node->filter('.desc')->text()] = $node->filter('.team.teamA')->text();
+            $team_b[$node->filter('.desc')->text()] = $node->filter('.team.teamB')->text();
+        });
+        $crawler->filter('.matchDtls')->each(function ($node) use (&$matches_history) {
+            $team_a = $node->filter('.teamresult.team1');
+            $team_b = $node->filter('.teamresult.team2');
+
+            $matches_history = [
+                'date' => $node->filter('.day')->text(),
+                'team_a' => $team_a->filter('.teamName')->text(),
+                'team_b' => $team_b->filter('.teamName')->text(),
+                'team_a_result' => $team_a->filter('span')->text(),
+                'team_b_result' => $team_b->filter('span')->text(),
+                'league_name' => $node->filter('.leagueName')->text(),
+            ];
+        });
+        $first = $crawler->filter('.wRow')->first();
+        $first->filter('.item.dtls')->each(function ($sub) use (&$team_a_situation) {
+            array_push($team_a_situation, $sub->text());
+
+        });
+        $last = $crawler->filter('.wRow')->last();
+        $last->filter('.item.dtls')->each(function ($sub) use (&$team_b_situation) {
+            array_push($team_b_situation, $sub->text());
+        });
+
+        $data = [
+            'previous_matches' => $crawler->filter('.statsDiv')->filter('h2')->text(),
+            'first_team' => $team_a,
+            'second_team' => $team_b,
+            'matches_history' => $matches_history,
+            'team_a_situation' => $team_a_situation,
+            'team_b_situation' => $team_b_situation,
+
+        ];
+        return response()->json($data);
+
+    }
+
 
 
 
