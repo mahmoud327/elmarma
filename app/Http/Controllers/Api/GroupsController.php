@@ -15,21 +15,32 @@ class GroupsController extends Controller
         $url="https://www.yallakora.com/".$param1."/".$param2."/tour-hp/".$param3."#TourListing";
         $crawler = GoutteFacade::request('GET',$url);
         $crawler->filter('.groupItem')->each(function ($node) use (&$data) {
-
+            array_push($data,
+            [
+                'group_name'=>$node->filter('.groupTtl')->text(),
+                'teams'=>[],
+            ]);
             $node->filter('.wRow')->each(function ($sub) use (&$data,$node) {
                $score=[];
             $sub->filter('.dtls')->each(function ($sub2) use (&$score) {
                 array_push($score, $sub2->text());
 
             });
-            $data[$node->filter('.groupTtl')->text()][$sub->filter('p')->text()]=[
+
+
+
+
+
+            array_push(  $data[array_key_last($data)]['teams'],[
+
+                'name'=>$sub->filter('p')->text(),
             'image'=>$sub->filter('img')->attr('src'),
                 'play'=>$score[0],
                 'win'=>$score[1],
                 'lose'=>$score[2],
                 'points'=>$score[3],
 
-            ];
+            ]);
 
           });
              });
