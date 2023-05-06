@@ -234,7 +234,7 @@ class MatchController extends Controller
 
         // });
 
-        return sendJsonResponse($match[0], 'match');
+        return sendJsonResponse($match, 'match');
     }
 
     public function statisticsMatch($id, $slug1, $slug2, $slug3, $slug4)
