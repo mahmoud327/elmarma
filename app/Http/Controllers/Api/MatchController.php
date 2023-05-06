@@ -164,6 +164,26 @@ class MatchController extends Controller
             $node->filter('.tourNameBtn .time')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['championship_time'] = $node->text();
             });
+
+
+            $node->filter('.result .a')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_result'] = $node->text();
+            });
+            $node->filter('.matchResult p')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['status'] = $node->text();
+            });
+            $node->filter('.goal  a span.playerName')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_player'] = $node->text();
+            });
+            $node->filter('.goal  a span.time')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_time'] = $node->text();
+            });
+
+            $node->filter('.result .b')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['second_result'] = $node->text();
+            });
+
+
             $node->filter('.matchScoreInfo .teamA a img')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['first_img'] = $node->attr('src');
             });
@@ -352,7 +372,6 @@ class MatchController extends Controller
         $first = $crawler->filter('.wRow')->first();
         $first->filter('.item.dtls')->each(function ($sub) use (&$team_a_situation) {
             array_push($team_a_situation, $sub->text());
-
         });
         $last = $crawler->filter('.wRow')->last();
         $last->filter('.item.dtls')->each(function ($sub) use (&$team_b_situation) {
@@ -369,7 +388,6 @@ class MatchController extends Controller
 
         ];
         return response()->json($data);
-
     }
 
 
