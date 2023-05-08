@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\StatisticsLeagueTournamentController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TournamentNewController;
 use  App\Http\Controllers\Api\GroupsController;
+use App\Http\Controllers\Api\TeamNewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -101,8 +102,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     Route::group(['prefix' => 'club-details'], function () {
 
-
-
         Route::get('{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [ClubDetailController::class, 'details']);
 
 
@@ -112,6 +111,10 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
         Route::get('tabs/{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [ClubDetailController::class, 'tabs']);
     });
 
+    Route::get('player-details/{slug}/{slug1}/{slug3}/{slug4}/{slug5}', [ClubDetailController::class, 'playerDetail']);
+
+
+
 
 
     Route::apiResource('categories', CatgoryController::class);
@@ -119,9 +122,10 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::apiResource('news', NewController::class);
     Route::apiResource('banners', BannerController::class);
 
+    Route::get('team-news/{param1}/{param2}/{param3}/{param4}/{param5}',[TeamNewController::class,'show']);
+    Route::get('team-videos/{param1}/{param2}/{param3}/{param4}/{param5}',[TeamNewController::class,'teamVideos']);
+
     Route::apiResource('tournament-news', TournamentNewController::class);
-
-
 
         Route::get('groups/{param1}/{param2}/tour-hp/{param3}', [GroupsController::class, 'index']);
         Route::get('previous-encounter/{param1}/{param2}/match/{param3}/{param4}', [MatchController::class, 'previousEncounter']);

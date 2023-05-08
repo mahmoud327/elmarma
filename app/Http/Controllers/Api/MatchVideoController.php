@@ -146,6 +146,12 @@ class MatchVideoController extends Controller
         $data->filter('.socialMargin')->each(function ($node) use (&$videos, &$index) {
 
 
+            $node->filter('.videoCntnr .twitter-tweet a')->each(function ($node) use (&$videos, &$index) {
+
+
+
+                $videos[$index]['video'] = $node->attr('href');
+            });
 
 
             $node->filter('h1')->each(function ($node) use (&$videos, &$index) {
@@ -166,6 +172,13 @@ class MatchVideoController extends Controller
 
 
                 $videos[$index]['video'] = $node->attr('src');
+            });
+
+            $node->filter('.imageCntnr img')->each(function ($node) use (&$videos, &$index) {
+
+
+
+                $videos[$index]['image'] = $node->attr('src');
             });
             // $node->filter('.link .desc p')->each(function ($node) use (&$videos, &$index) {
 
