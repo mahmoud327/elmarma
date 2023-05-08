@@ -243,6 +243,47 @@ class MatchController extends Controller
         return sendJsonResponse($match[0], 'match');
     }
 
+    public function matchCenter(Request $request)
+    {
+        $data = [];
+        $client = new Client();
+        $url = "https://www.yallakora.com/match-center/مركز-المباريات?date=" . $request->date . '#days';
+        $crawler = $client->request('GET', $url);
+        $crawler->filter('.matchCard.matchesList')->each(function ($node) use (&$data) {
+            array_push($data,
+                [
+                    'name' => $node->filter('h2')->text(),
+                    'matches' => [],
+                ]);
+            $node->filter('li')->each(function ($sub) use (&$data, $node) {
+
+                array_push($data[array_key_last($data)]['matches'], [
+
+                    'channel' => $sub->filter('.channel.icon-channel')->count() ? $sub->filter('.channel.icon-channel')->text() : null,
+
+                    'date' => $sub->filter('.date')->text(),
+                    'match_status' => $sub->filter('.matchStatus')->text(),
+                    'match_time' => $sub->filter('.time')->text(),
+                    'details' => $sub->filter('.leftCol')->filter('a')->text(),
+                    'team_a' => [
+                        'name' => $sub->filter('.teams.teamA')->filter('p')->text(),
+                        'image' => $sub->filter('.teams.teamA')->filter('img')->attr('src'),
+                        'score' => $sub->filter('.score')->filter('span')->first()->text(),
+                    ],
+                    'team_b' => [
+                        'name' => $sub->filter('.teams.teamB')->filter('p')->text(),
+                        'image' => $sub->filter('.teams.teamB')->filter('img')->attr('src'),
+                        'score' => $sub->filter('.score')->last()->text(),
+                    ],
+
+                ]);
+
+            });
+
+        });
+        return response()->json($data);
+    }
+
     public function statisticsMatch($id, $slug1, $slug2, $slug3, $slug4)
     {
 

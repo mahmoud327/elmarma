@@ -79,6 +79,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
 
     Route::get('match-results-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}', [leagueTournamentController::class, 'MatchResult']);
+    Route::get('match-center', [MatchController::class, 'matchCenter']);
+
     Route::get('scorers-tournaments/{slug}/{slug2}/{slug3}/{slug4}/{slug5?}', [leagueTournamentController::class, 'scorer']);
 
 
