@@ -264,7 +264,7 @@ class MatchController extends Controller
                     'date' => $sub->filter('.date')->text(),
                     'match_status' => $sub->filter('.matchStatus')->text(),
                     'match_time' => $sub->filter('.time')->text(),
-                    'details' => $sub->filter('.leftCol')->filter('a')->text(),
+                    'match_id' => $sub->filter('.leftCol')->filter('a')->attr('href'),
                     'team_a' => [
                         'name' => $sub->filter('.teams.teamA')->filter('p')->text(),
                         'image' => $sub->filter('.teams.teamA')->filter('img')->attr('src'),
