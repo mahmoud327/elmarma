@@ -267,13 +267,13 @@ class MatchController extends Controller
                     'details' => $sub->filter('.leftCol')->filter('a')->text(),
                     'team_a' => [
                         'name' => $sub->filter('.teams.teamA')->filter('p')->text(),
-                        'id' => $sub->filter('.teams.teamA')->filter('a')->attr('src'),
+                        'id' => $sub->filter('.teams.teamA')->filter('a')->attr('href'),
                         'image' => $sub->filter('.teams.teamA')->filter('img')->attr('src'),
                         'score' => $sub->filter('.score')->filter('span')->first()->text(),
                     ],
                     'team_b' => [
                         'name' => $sub->filter('.teams.teamB')->filter('p')->text(),
-                        'id' => $sub->filter('.teams.teamB')->filter('a')->attr('src'),
+                        'id' => $sub->filter('.teams.teamA')->filter('a')->attr('href'),
 
                         'image' => $sub->filter('.teams.teamB')->filter('img')->attr('src'),
                         'score' => $sub->filter('.score')->last()->text(),
