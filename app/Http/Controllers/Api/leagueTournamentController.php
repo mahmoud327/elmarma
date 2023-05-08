@@ -262,12 +262,18 @@ class leagueTournamentController extends Controller
                     $node->filter('.team.player a:first-of-type ')->each(function ($node) use (&$leagues, &$index) {
                         $leagues[$index]['player_name'] = $node->attr('title');
                     });
+                    $node->filter('.team.player a:first-of-type ')->each(function ($node) use (&$leagues, &$index) {
+                        $leagues[$index]['player_id'] = $node->attr('href');
+                    });
 
                     $node->filter('.teamMob img')->each(function ($node) use (&$leagues, &$index) {
                         $leagues[$index]['team_image'] = $node->attr('src');
                     });
                     $node->filter('.teamMob p')->each(function ($node) use (&$leagues, &$index) {
                         $leagues[$index]['team_name'] = $node->text();
+                    });
+                    $node->filter('.teamMob')->each(function ($node) use (&$leagues, &$index) {
+                        $leagues[$index]['team_id'] = $node->attr('href');
                     });
 
 

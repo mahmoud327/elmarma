@@ -73,6 +73,11 @@ class StatisticsLeagueTournamentController extends Controller
 
                 $leagues[$index]['name_scorer'] = $node->attr('title');
             });
+            $node->filter('.scorer > .label:contains("الهداف")  + .value  a ')->each(function ($node) use (&$leagues, &$index) {
+
+
+                $leagues[$index]['player_id'] = $node->attr('href');
+            });
             $node->filter('.scorer > .label:contains("الهداف")  + .value  a:nth-of-type(2) ')->each(function ($node) use (&$leagues, &$index) {
 
 
@@ -89,6 +94,13 @@ class StatisticsLeagueTournamentController extends Controller
                 // dd('dd');
 
                 $leagues[$index]['second_team_name'] = $node->attr('title');
+            });
+
+            $node->filter('.scorer > .label:contains("صانع الأهداف")  + .value  a:nth-of-type(2) ')->each(function ($node) use (&$leagues, &$index) {
+
+                // dd('dd');
+
+                $leagues[$index]['team_id'] = $node->attr('href');
             });
 
             $node->filter('.scorer > .label:contains("صانع الأهداف")  + .value  a img ')->each(function ($node) use (&$leagues, &$index) {

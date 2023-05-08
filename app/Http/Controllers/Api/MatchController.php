@@ -187,12 +187,18 @@ class MatchController extends Controller
             $node->filter('.matchScoreInfo .teamA a img')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['first_img'] = $node->attr('src');
             });
+            $node->filter('.matchScoreInfo .teamA a')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['first_id'] = $node->attr('href');
+            });
             $node->filter('.matchScoreInfo .teamA a p ')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['first_team'] = $node->text();
             });
 
             $node->filter('.matchScoreInfo .teamB img ')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['second_img'] = $node->attr('src');
+            });
+            $node->filter('.matchScoreInfo .teamB a ')->each(function ($node) use (&$match, &$index) {
+                $match[$index]['second_id'] = $node->attr('href');
             });
             $node->filter('.teamB p ')->each(function ($node) use (&$match, &$index) {
                 $match[$index]['second_team'] = $node->text();
