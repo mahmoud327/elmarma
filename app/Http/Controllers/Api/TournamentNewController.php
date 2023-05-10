@@ -33,7 +33,15 @@ class TournamentNewController extends Controller
 
 
         $news = TournamentNew::query()
+            ->when(request()->title, function ($q) {
+
+                $q->whereHas('category', function ($q) {
+                    $q->where('title', 'like', '%' . request()->title . '%');
+                });
+            })
+
             ->with(['category', 'medias'])
+
 
             ->latest()
             ->paginate(10);
