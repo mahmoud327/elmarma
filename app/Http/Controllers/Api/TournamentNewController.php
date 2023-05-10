@@ -36,7 +36,7 @@ class TournamentNewController extends Controller
             ->when(request()->title, function ($q) {
 
                 $q->whereHas('category', function ($q) {
-                    $q->where('title',request()->title);
+                    $q->whereTranslation('title',request()->title);
                 });
             })
 
