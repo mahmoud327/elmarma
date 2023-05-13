@@ -132,6 +132,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     Route::apiResource('tournament-news', TournamentNewController::class);
 
-        Route::get('groups/{param1}/{param2}/tour-hp/{param3}', [GroupsController::class, 'index']);
+        Route::get('groups/{param1}/{param2}/{param3}/{param4}/{param5?}', [GroupsController::class, 'index']);
         Route::get('previous-encounter/{param1}/{param2}/match/{param3}/{param4}', [MatchController::class, 'previousEncounter']);
 });

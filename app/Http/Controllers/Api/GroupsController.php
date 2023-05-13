@@ -8,11 +8,13 @@ use Weidner\Goutte\GoutteFacade;
 
 class GroupsController extends Controller
 {
-    public function index($param1, $param2,$param3)
+    public function index($param1, $param2,$param3,$param4,$param5=null)
     {
         $data=[];
 
-        $url="https://www.yallakora.com/".$param1."/".$param2."/tour-hp/".$param3."#TourListing";
+        $url="https://www.yallakora.com/".$param1."/".$param2."/".$param3."/".$param4."/".$param5;
+
+
         $crawler = GoutteFacade::request('GET',$url);
         $crawler->filter('.groupItem')->each(function ($node) use (&$data) {
             array_push($data,
@@ -46,7 +48,7 @@ class GroupsController extends Controller
              });
 
 
-    return response()->json($data);
+             return sendJsonResponse($data,'data');
 
 
     }
