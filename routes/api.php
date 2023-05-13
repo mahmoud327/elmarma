@@ -61,6 +61,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     ////leagues-tournaments
     Route::get('leagues-tournaments', [leagueTournamentController::class, 'index']);
+    Route::get('leagues-en-tournaments',[leagueTournamentController::class, 'indexEn']);
+
 
 
     Route::group(['prefix' => 'leagues-tournaments'], function () {

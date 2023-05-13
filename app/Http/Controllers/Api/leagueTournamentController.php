@@ -9,6 +9,8 @@ use ArinaSystems\JsonResponse\Facades\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Goutte\Client;
+use GuzzleHttp\Client as Guzzle;
+
 
 class leagueTournamentController extends Controller
 {
@@ -52,6 +54,33 @@ class leagueTournamentController extends Controller
 
         return sendJsonResponse($leagues, 'leagues');
     }
+
+    public function indexEn()
+    {
+
+        $client = new Guzzle();
+
+        $response = $client->request('GET', 'https://v3.football.api-sports.io/leagues', [
+            'headers' => [
+                'x-rapidapi-host' => 'v3.football.api-sports.io',
+                'x-rapidapi-key' => '9d64c24ad60a3704069c5df2644a0848',
+            ],
+        ]);
+
+        $data = json_decode($response->getBody(), true);
+
+        $filteredData = [];
+        foreach ($data['response'] as $item) {
+            $filteredData[] = [
+                'id' => $item['league']['id'],
+                'tournament_name' => $item['league']['name'],
+                'tournament_image' => $item['league']['logo'],
+            ];
+        }
+        return $filteredData;
+
+    }
+
     public function show($slug, $slug2, $slug3, $slug4)
     {
         $client = new Client();
