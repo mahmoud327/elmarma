@@ -69,10 +69,10 @@ class MatchController extends Controller
         $data = $client->request('GET', 'https://www.yallakora.com/match-center/' . $parm_date);
         $index = 0;
         $matches = [];
-        $data->filter('.matchCard')->each(function ($node) use (&$matches, &$index) {
+        $data->filter('.matchCard ')->each(function ($node) use (&$matches, &$index) {
 
 
-            $node->filter('ul li a')->each(function ($node) use (&$matches, &$index) {
+            $node->filter('.tourTitle')->each(function ($node) use (&$matches, &$index) {
 
                 $matches[$index]['id'] = $node->attr('href');
             });
