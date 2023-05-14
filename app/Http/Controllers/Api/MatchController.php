@@ -72,7 +72,7 @@ class MatchController extends Controller
         $data->filter('.matchCard ')->each(function ($node) use (&$matches, &$index) {
 
 
-            $node->filter('.tourTitle')->each(function ($node) use (&$matches, &$index) {
+            $node->filter('ul li a')->each(function ($node) use (&$matches, &$index) {
 
                 $matches[$index]['id'] = $node->attr('href');
             });
