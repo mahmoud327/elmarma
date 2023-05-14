@@ -214,7 +214,7 @@ LatestTransferController extends Controller
     }
 
 
-    public function latestNew(Request $request, $param1, $param2, $param4)
+    public function latestNew(Request $request)
 
     {
         $param = 'https://www.yallakora.com/transfer/news/%d8%a3%d8%ae%d8%a8%d8%a7%d8%b1-%d8%a7%d9%84%d8%a3%d9%86%d8%aa%d9%82%d8%a7%d9%84%d8%a7%d8%aa/' . $request->id;
