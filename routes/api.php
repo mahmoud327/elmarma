@@ -103,8 +103,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::get('latest-transfers-all-leagues', [LatestTransferController::class, 'allLeague']);
 
 
-    Route::group(['prefix' => 'latest-transfers'], function () {
-        Route::get('{id}', [LatestTransferController::class, 'index']);
+    Route::get('latest-transfers/{id}', [LatestTransferController::class, 'index']);
+    Route::group(['prefix' => 'latest-transfer'], function () {
 
         Route::get('latest-news', [LatestTransferController::class, 'latestNew']);
         Route::get('home-top', [LatestTransferController::class, 'homeTop']);
