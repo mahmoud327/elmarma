@@ -72,7 +72,7 @@ class MatchController extends Controller
         $data->filter('.matchCard ')->each(function ($node) use (&$matches, &$index) {
 
 
-            $node->filter('.tourTitle')->each(function ($node) use (&$matches, &$index) {
+            $node->filter('ul li a:contains("التفاصيل") ' )->each(function ($node) use (&$matches, &$index) {
 
                 $matches[$index]['id'] = $node->attr('href');
             });
@@ -135,7 +135,7 @@ class MatchController extends Controller
     }
 
 
-    public function show($id, $slug1, $slug2, $slug3, $slug4=null)
+    public function show($id, $slug1, $slug2, $slug3, $slug4)
     {
         $param = $id . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
         $client = new Client();
@@ -264,7 +264,7 @@ class MatchController extends Controller
                     'date' => $sub->filter('.date')->text(),
                     'match_status' => $sub->filter('.matchStatus')->text(),
                     'match_time' => $sub->filter('.time')->text(),
-                    'match_id' => $sub->filter('.leftCol .button:last-child')->attr('href'),
+                    'match_id' => $sub->filter('.leftCol')->filter('a')->attr('href'),
                     'team_a' => [
                         'name' => $sub->filter('.teams.teamA')->filter('p')->text(),
                         'image' => $sub->filter('.teams.teamA')->filter('img')->attr('src'),
