@@ -556,7 +556,7 @@ LatestTransferController extends Controller
 
                     $leagues[$index]['time'] = $node->text();
                 });
-                $node->filter('.desc  h3')->each(function ($node) use (&$leagues, &$index) {
+                $node->filter('.desc  p')->each(function ($node) use (&$leagues, &$index) {
 
 
                     $leagues[$index]['title'] = $node->text();

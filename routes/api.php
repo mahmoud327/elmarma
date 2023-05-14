@@ -62,7 +62,9 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
     ////leagues-tournaments
     Route::get('leagues-tournaments', [leagueTournamentController::class, 'index']);
-    Route::get('leagues-en-tournaments',[leagueTournamentController::class, 'indexEn']);
+    Route::get('leagues-en-tournaments', [leagueTournamentController::class, 'indexEn']);
+
+    Route::get('tournaments/{id}/teams', [leagueTournamentController::class, 'teams']);
 
 
 
@@ -112,7 +114,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
         Route::get('important-topics', [LatestTransferController::class, 'importantTopic']);
         Route::get('read-more-news', [LatestTransferController::class, 'readMoreNew']);
-
     });
 
 
@@ -139,11 +140,11 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
     Route::apiResource('news', NewController::class);
     Route::apiResource('banners', BannerController::class);
 
-    Route::get('team-news/{param1}/{param2}/{param3}/{param4}/{param5}',[TeamNewController::class,'show']);
-    Route::get('team-videos/{param1}/{param2}/{param3}/{param4}/{param5}',[TeamNewController::class,'teamVideos']);
+    Route::get('team-news/{param1}/{param2}/{param3}/{param4}/{param5}', [TeamNewController::class, 'show']);
+    Route::get('team-videos/{param1}/{param2}/{param3}/{param4}/{param5}', [TeamNewController::class, 'teamVideos']);
 
     Route::apiResource('tournament-news', TournamentNewController::class);
 
-        Route::get('groups/{param1}/{param2}/{param3}/{param4}/{param5?}', [GroupsController::class, 'index']);
-        Route::get('previous-encounter/{param1}/{param2}/match/{param3}/{param4}', [MatchController::class, 'previousEncounter']);
+    Route::get('groups/{param1}/{param2}/{param3}/{param4}/{param5?}', [GroupsController::class, 'index']);
+    Route::get('previous-encounter/{param1}/{param2}/match/{param3}/{param4}', [MatchController::class, 'previousEncounter']);
 });

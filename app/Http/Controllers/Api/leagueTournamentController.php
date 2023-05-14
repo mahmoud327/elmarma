@@ -54,7 +54,6 @@ class leagueTournamentController extends Controller
 
         return sendJsonResponse($leagues, 'leagues');
     }
-
     public function indexEn()
     {
 
@@ -68,17 +67,53 @@ class leagueTournamentController extends Controller
         ]);
 
         $data = json_decode($response->getBody(), true);
+        //get today year
+        $currentYear = date('Y');
 
         $filteredData = [];
         foreach ($data['response'] as $item) {
-            $filteredData[] = [
-                'id' => $item['league']['id'],
-                'tournament_name' => $item['league']['name'],
-                'tournament_image' => $item['league']['logo'],
-            ];
+            $yearExists = false;
+
+            foreach ($item['seasons'] as $year) {
+                if ($year['year'] == $currentYear) {
+                    $yearExists = true;
+                    break;
+                }
+            }
+            if ($yearExists) {
+                $filteredData[] = [
+                    'id' => $item['league']['id'],
+                    'tournament_name' => $item['league']['name'],
+                    'tournament_image' => $item['league']['logo'],
+                    'type' => $item['league']['type'],
+                ];
+            }
         }
         return $filteredData;
+    }
 
+    public function teams($gournment)
+    {
+        $client = new Guzzle();
+        $currentYear = date('Y');
+
+        $response = $client->request('GET', 'https://v3.football.api-sports.io/teams?league=' . $gournment . '&season=' . $currentYear, [
+            'headers' => [
+                'x-rapidapi-host' => 'v3.football.api-sports.io',
+                'x-rapidapi-key' => '9d64c24ad60a3704069c5df2644a0848',
+            ],
+        ]);
+        $data = json_decode($response->getBody(), true);
+        $filteredData = [];
+
+        foreach ($data['response'] as $item) {
+            $filteredData[] = [
+                'id' => $item['team']['id'],
+                'title' => $item['team']['name'],
+                'image' => $item['team']['logo'],
+            ];
+        }
+        return response()->json(['success' => true, 'data' => $filteredData]);
     }
 
     public function show($slug, $slug2, $slug3, $slug4)
@@ -99,14 +134,12 @@ class leagueTournamentController extends Controller
 
             $node->filter('a p')->each(function ($node) use (&$leagues, &$index) {
 
-                    $leagues[$index]['name'] = $node->text();
-
+                $leagues[$index]['name'] = $node->text();
             });
 
             $node->filter('a img')->each(function ($node) use (&$leagues, &$index) {
 
-                    $leagues[$index]['iamge'] = $node->attr('src');
-
+                $leagues[$index]['iamge'] = $node->attr('src');
             });
 
 
@@ -117,12 +150,12 @@ class leagueTournamentController extends Controller
         return sendJsonResponse($leagues, 'leagues');
     }
 
-    public function details($slug, $slug2, $slug3, $slug4=null,$slug5=null)
+    public function details($slug, $slug2, $slug3, $slug4 = null, $slug5 = null)
     {
 
 
         $client = new Client();
-        $parm = $slug . '/' . $slug2 . '/' . $slug3 . '/' . $slug4. '/' . $slug5;
+        $parm = $slug . '/' . $slug2 . '/' . $slug3 . '/' . $slug4 . '/' . $slug5;
 
         $data = $client->request('GET', 'https://www.yallakora.com/' . $parm);
 
@@ -135,8 +168,7 @@ class leagueTournamentController extends Controller
 
         $data->filter('iframe')->each(function ($node) use (&$video, &$index) {
 
-                $video[$index]['video'] = $node->attr('src');
-
+            $video[$index]['video'] = $node->attr('src');
         });
 
 
@@ -147,27 +179,23 @@ class leagueTournamentController extends Controller
 
             $node->filter('.euroHeader .tourTtl .tourImg img')->each(function ($node) use (&$leagues, &$index) {
 
-                    $leagues[$index]['image'] = $node->attr('src');
-
+                $leagues[$index]['image'] = $node->attr('src');
             });
 
             $node->filter('.euroHeader .tourTtl h1')->each(function ($node) use (&$leagues, &$index) {
 
-                    $leagues[$index]['name'] = $node->text();
-
+                $leagues[$index]['name'] = $node->text();
             });
             $node->filter('.tabs a:contains("نتائج المباريات")')->each(function ($node) use (&$leagues, &$index) {
 
 
-                    $leagues[$index]['id_result_matxh'] = $node->attr('href');
-
+                $leagues[$index]['id_result_matxh'] = $node->attr('href');
             });
 
             $node->filter('.tabs a:contains("الهدافون")')->each(function ($node) use (&$leagues, &$index) {
 
 
-                    $leagues[$index]['id_scorer'] = $node->attr('href');
-
+                $leagues[$index]['id_scorer'] = $node->attr('href');
             });
 
 
@@ -175,11 +203,10 @@ class leagueTournamentController extends Controller
 
             $index++;
         });
-        if($leagues){
-            $leagues=$leagues;
-        }
-        else{
-            $leagues=$video;
+        if ($leagues) {
+            $leagues = $leagues;
+        } else {
+            $leagues = $video;
         }
 
 
@@ -188,14 +215,14 @@ class leagueTournamentController extends Controller
 
 
 
-    public function MatchResult($slug,$slug1,$slug2,$slug3,$slug4=null)
+    public function MatchResult($slug, $slug1, $slug2, $slug3, $slug4 = null)
     {
-        $parms=$slug .'/'. $slug1.'/'.$slug2.'/'.$slug3.'/'.$slug4;
+        $parms = $slug . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
 
         $client = new Client();
 
 
-        $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $parms);
 
 
         $index = 0;
@@ -252,13 +279,13 @@ class leagueTournamentController extends Controller
     }
 
 
-    public function Scorer($slug,$slug1,$slug2,$slug3,$slug4=null)
+    public function Scorer($slug, $slug1, $slug2, $slug3, $slug4 = null)
     {
-        $parms=$slug .'/'. $slug1.'/'.$slug2.'/'.$slug3.'/'.$slug4;
+        $parms = $slug . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
         $client = new Client();
 
 
-        $data = $client->request('GET', 'https://www.yallakora.com/'.$parms);
+        $data = $client->request('GET', 'https://www.yallakora.com/' . $parms);
 
 
         $index = 0;
@@ -271,69 +298,67 @@ class leagueTournamentController extends Controller
 
 
 
-                $node->filter('.item .arrng')->each(function ($node) use (&$leagues, &$index) {
+            $node->filter('.item .arrng')->each(function ($node) use (&$leagues, &$index) {
 
-                    $leagues[$index]['arrange_number'] = (int)$node->text();
+                $leagues[$index]['arrange_number'] = (int)$node->text();
+            });
+
+            $node->filter('.item .dtls')->each(function ($node) use (&$leagues, &$index) {
+
+                $leagues[$index]['goal_numbers'] = (int) $node->text();
+            });
+
+
+            $node->filter('.player')->each(function ($node) use (&$leagues, &$index) {
+
+                $node->filter('.playerImg img')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['player_image'] = $node->attr('src');
                 });
 
-                $node->filter('.item .dtls')->each(function ($node) use (&$leagues, &$index) {
-
-                    $leagues[$index]['goal_numbers'] =(int) $node->text();
+                $node->filter('.team.player a:first-of-type ')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['player_name'] = $node->attr('title');
+                });
+                $node->filter('.team.player a:first-of-type ')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['player_id'] = $node->attr('href');
                 });
 
-
-                $node->filter('.player')->each(function ($node) use (&$leagues, &$index) {
-
-                    $node->filter('.playerImg img')->each(function ($node) use (&$leagues, &$index) {
-                        $leagues[$index]['player_image'] = $node->attr('src');
-                    });
-
-                    $node->filter('.team.player a:first-of-type ')->each(function ($node) use (&$leagues, &$index) {
-                        $leagues[$index]['player_name'] = $node->attr('title');
-                    });
-                    $node->filter('.team.player a:first-of-type ')->each(function ($node) use (&$leagues, &$index) {
-                        $leagues[$index]['player_id'] = $node->attr('href');
-                    });
-
-                    $node->filter('.teamMob img')->each(function ($node) use (&$leagues, &$index) {
-                        $leagues[$index]['team_image'] = $node->attr('src');
-                    });
-                    $node->filter('.teamMob p')->each(function ($node) use (&$leagues, &$index) {
-                        $leagues[$index]['team_name'] = $node->text();
-                    });
-                    $node->filter('.teamMob')->each(function ($node) use (&$leagues, &$index) {
-                        $leagues[$index]['team_id'] = $node->attr('href');
-                    });
-
-
+                $node->filter('.teamMob img')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['team_image'] = $node->attr('src');
                 });
-                // $node->filter('.topData .matchStatus')->each(function ($node) use (&$leagues, &$index) {
-                //     $leagues[$index]['status'] = $node->text();
-                // });
+                $node->filter('.teamMob p')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['team_name'] = $node->text();
+                });
+                $node->filter('.teamMob')->each(function ($node) use (&$leagues, &$index) {
+                    $leagues[$index]['team_id'] = $node->attr('href');
+                });
+            });
+            // $node->filter('.topData .matchStatus')->each(function ($node) use (&$leagues, &$index) {
+            //     $leagues[$index]['status'] = $node->text();
+            // });
 
-                // $node->filter('.teamA  p')->each(function ($node) use (&$leagues, &$index) {
-                //     $leagues[$index]['first_team_name'] = $node->text();
-                // });
+            // $node->filter('.teamA  p')->each(function ($node) use (&$leagues, &$index) {
+            //     $leagues[$index]['first_team_name'] = $node->text();
+            // });
 
-                // $node->filter('.teamA img')->each(function ($node) use (&$leagues, &$index) {
-                //     $leagues[$index]['first_team_img'] = $node->attr('src');
-                // });
-
-
-
-
-                // $node->filter('.teamB  p')->each(function ($node) use (&$leagues, &$index) {
-                //     $leagues[$index]['second_team_name'] = $node->text();
-                // });
-
-                // $node->filter('.teamB img')->each(function ($node) use (&$leagues, &$index) {
-                //     $leagues[$index]['second_team_img'] = $node->attr('src');
-                // });
+            // $node->filter('.teamA img')->each(function ($node) use (&$leagues, &$index) {
+            //     $leagues[$index]['first_team_img'] = $node->attr('src');
+            // });
 
 
-                // $node->filter('.MResult:nth-last-child(2)')->each(function ($node) use (&$leagues, &$index) {
-                //     $leagues[$index]['score'] = $node->text();
-                // });
+
+
+            // $node->filter('.teamB  p')->each(function ($node) use (&$leagues, &$index) {
+            //     $leagues[$index]['second_team_name'] = $node->text();
+            // });
+
+            // $node->filter('.teamB img')->each(function ($node) use (&$leagues, &$index) {
+            //     $leagues[$index]['second_team_img'] = $node->attr('src');
+            // });
+
+
+            // $node->filter('.MResult:nth-last-child(2)')->each(function ($node) use (&$leagues, &$index) {
+            //     $leagues[$index]['score'] = $node->text();
+            // });
 
 
             $index++;
