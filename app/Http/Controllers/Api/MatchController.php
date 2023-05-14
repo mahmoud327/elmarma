@@ -135,7 +135,7 @@ class MatchController extends Controller
     }
 
 
-    public function show($id, $slug1, $slug2, $slug3, $slug4)
+    public function show($id, $slug1, $slug2, $slug3, $slug4=null)
     {
         $param = $id . '/' . $slug1 . '/' . $slug2 . '/' . $slug3 . '/' . $slug4;
         $client = new Client();
