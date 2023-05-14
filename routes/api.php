@@ -108,10 +108,10 @@ Route::group(['prefix' => 'v1', 'middleware' => ['cors', 'lang']], function () {
 
         Route::get('latest-news', [LatestTransferController::class, 'latestNew']);
         Route::get('home-top', [LatestTransferController::class, 'homeTop']);
-        Route::get('home-bottom/{param1}/{param2}/{param4}', [LatestTransferController::class, 'homeBottom']);
+        Route::get('home-bottom', [LatestTransferController::class, 'homeBottom']);
 
-        Route::get('important-topics/{param1}/{param2}/{param4}', [LatestTransferController::class, 'importantTopic']);
-        Route::get('read-more-news/{param1}/{param2}/{param4}', [LatestTransferController::class, 'readMoreNew']);
+        Route::get('important-topics', [LatestTransferController::class, 'importantTopic']);
+        Route::get('read-more-news', [LatestTransferController::class, 'readMoreNew']);
 
     });
 
