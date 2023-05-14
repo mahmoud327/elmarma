@@ -173,6 +173,12 @@ class MatchVideoController extends Controller
 
                 $videos[$index]['video'] = $node->attr('src');
             });
+            $node->filter('.ArticleDetails p:first-of-type')->each(function ($node) use (&$videos, &$index) {
+
+
+
+                $videos[$index]['content'] = $node->text();
+            });
 
             $node->filter('.imageCntnr img')->each(function ($node) use (&$videos, &$index) {
 
