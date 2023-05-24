@@ -132,7 +132,8 @@ class MatchController extends Controller
         });
 
 
-        return response()->json($matches);
+        return sendJsonResponse($matches, 'match');
+
     }
 
 
@@ -294,6 +295,8 @@ class MatchController extends Controller
 
         });
         return response()->json($data);
+        return sendJsonResponse($data, 'match');
+
 
     }
 
