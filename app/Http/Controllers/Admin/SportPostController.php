@@ -43,6 +43,15 @@ class SportPostController extends Controller
         ];
         return view('admin.posts.sports-woman.create', $data);
     }
+    public function edit($id)
+    {
+
+        $data = [
+            'categories' => Category::latest()->get(),
+            'new' => Post::find($id)
+        ];
+        return view('admin.posts.sports-woman.create', $data);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -97,4 +106,28 @@ class SportPostController extends Controller
             'original_name' => $file->getClientOriginalName(),
         ]);
     }
+    public function update(Request $request,$id)
+    {
+        $new=Post::find($id);
+
+        $new->update($request->all());
+        if ($request->file('image')) {
+            $new->image = $this->uploadImage('uploads/posts/', $request->image);
+            $new->save();
+        }
+
+        if ($request->document) {
+
+            foreach ($request->document as $file) {
+                $new->medias()->create([
+                    'url' => $file
+                ]);
+            }
+        }
+
+
+        return back()->with('status', "add successfully");
+    }
+
+
 }

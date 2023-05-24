@@ -128,7 +128,7 @@ display: none;
         <div class="card mg-b-20">
             <div class="card-header pb-0">
 
-                    <a class="btn btn-outline-primary" href="{{route('tournament-news.create')}}">Add news</a>
+                    <a class="btn btn-outline-primary" href="{{route('tournament-news.create')}}">@lang('lang.tournament-news')</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -153,7 +153,7 @@ display: none;
                                     <td>{{ $new->title }}</td>
                                     <td>{{ optional($new->category)->title }}</td>
                                      <td>
-                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-toggle="modal" href="#exampleModal2{{$new->id}}" title="edit">
+                                        <a href="{{route('tournament-news.edit',$new->id)}}"class="btn btn-sm btn-info"  title="edit">
                                             <i class="las la-pen"></i>
                                         </a>
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$new->id}} " title="delete">

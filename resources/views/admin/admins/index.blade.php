@@ -123,7 +123,7 @@
                 <div class="">
                     @can('admin-create')
                         <a class="btn btn-outline-primary"
-                        href="{{route('admins.create')}}">Add Admin </a>
+                        href="{{route('admins.create')}}">@lang('lang.add admin') </a>
                     @endcan
 
                  </div>
@@ -153,7 +153,7 @@
                                     <td>{{ $admin->name }}</td>
                                     <td>{{ $admin->email }}</td>
                                     <td>
-                                        
+
 
                                         @can('admin-edit')
 

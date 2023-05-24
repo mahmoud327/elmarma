@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Goutte\Client;
 
-class
-LatestTransferController extends Controller
+class LatestTransferController extends Controller
 {
 
 

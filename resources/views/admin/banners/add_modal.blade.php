@@ -26,7 +26,7 @@
                                 </div>
 
                                 <div class="control-group form-group">
-                                    <label class="form-label">select type post</label>
+                                    <label class="form-label">@lang('lang.select type post')</label>
                                     <select class="form-control" name="type" required>
                                         <option value="normal">
                                             normal-post

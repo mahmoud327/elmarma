@@ -127,7 +127,7 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
 
-                    <a class="btn btn-outline-primary" href="{{route('posts.create')}}">Add Post</a>
+                    <a class="btn btn-outline-primary" href="{{route('posts.create')}}">@lang('lang.add post')</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -154,7 +154,7 @@
                                     <td>{{ $post->type }}</td>
                                     <td>{{optional( $post->category)->title }}</td>
                                      <td>
-                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-toggle="modal" href="#exampleModal2{{$post->id}}" title="edit">
+                                        <a href="{{route('posts.edit',$post->id)}}"class="btn btn-sm btn-info"  title="edit">
                                             <i class="las la-pen"></i>
                                         </a>
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$post->id}} " title="delete">

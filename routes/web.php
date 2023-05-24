@@ -57,6 +57,8 @@ Route::group([
             Route::post('posts-image', [PostController::class,'uploadPostImage'])->name('posts.images.store');
 
             Route::resource('news', NewController::class);
+            Route::get('news/delete/image', [NewController::class, 'deleteFile']);
+
             Route::resource('tournament-news', TournamentNewController::class);
             Route::post('tournament-image', [NewController::class,'uploadNewImage'])->name('tournament-news.images.store');
             Route::post('news-image', [NewController::class,'uploadNewImage'])->name('news.images.store');

@@ -49,6 +49,38 @@ class PostController extends Controller
         ];
         return view('admin.posts.create', $data);
     }
+
+    public function update(Request $request,$id)
+    {
+        $new=Post::find($id);
+
+        $new->update($request->all());
+        if ($request->file('image')) {
+            $new->image = $this->uploadImage('uploads/news/', $request->image);
+            $new->save();
+        }
+
+        if ($request->document) {
+
+            foreach ($request->document as $file) {
+                $new->medias()->create([
+                    'url' => $file
+                ]);
+            }
+        }
+
+
+        return back()->with('status', "add successfully");
+    }
+    public function edit($id)
+    {
+
+        $data = [
+            'categories' => Category::latest()->get(),
+            'new' => Post::find($id)
+        ];
+        return view('admin.posts.create', $data);
+    }
     /**
      * Store a newly created resource in storage.
      *

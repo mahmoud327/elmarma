@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
 
 
-
-
-
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @if (App::getLocale() == 'en')
         <!--Internal  treeview -->
@@ -21,7 +18,6 @@
         <!--Internal  treeview -->
         <link href="{{ URL::asset('assets/plugins/treeview/treeview-rtl.css') }}" rel="stylesheet" type="text/css" />
     @endif
-
     <style>
         .SumoSelect>.CaptionCont {
             width: 60%;
@@ -75,8 +71,10 @@
         }
     </style>
 
+
+
 @section('title')
-    Add post
+    Add news
 @stop
 
 
@@ -86,8 +84,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">@lang('lang.sports-woman')</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                @lang('lang.add new sports-woman')</span>
+            <h4 class="content-title mb-0 my-auto">@lang('lang.news')</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                </span>
         </div>
     </div>
 </div>
@@ -99,41 +97,25 @@
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('sports-woman.store') }}" enctype="multipart/form-data" method="post">
+                <form action="{{ route('news.update',$new->id) }}" enctype="multipart/form-data" method="post">
+                    @method('put')
                     @csrf
                     <div id="wizard1">
-                        {{-- <h3>post data</h3> --}}
                         <section>
                             <div class="control-group form-group">
                                 <label class="form-label">@lang('lang.title arabic')</label>
-                                <input type="text" class="form-control required" name="ar[title]" placeholder="Name">
+                                <input type="text" class="form-control required" name="ar[title]"  value="{{ $new->translate('ar')->title }}"required placeholder="Name">
                             </div>
                             <div class="control-group form-group">
                                 <label class="form-label">@lang('lang.title English')</label>
-                                <input type="text" class="form-control required" name="en[title]"placeholder="text ">
+                                <input type="text" class="form-control required" name="en[title]"placeholder="text " value="{{ $new->translate('en')->title }}" required>
                             </div>
-                            <div class="control-group form-group">
-                                <label class="form-label">@lang('lang.select type post')</label>
-                                <select class="form-control" name="type" required>
-                                    <option value="normal">
-                                        normal-post
-                                    </option>
-                                    <option value="parent-post">
-                                        parent-post
-                                    </option>
 
-                                    <option value="child-post">
-                                        child-post
-                                    </option>
-
-
-                                </select>
-                            </div>
                             <div class="control-group form-group">
                                 <label class="form-label">@lang('lang.select category')</label>
                                 <select class="form-control" name="category_id" required>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">
+                                        <option value="{{ $category->id }}" @if($category->id ==$new->category_id) selected @endif>
                                             {{ $category->title }}
                                         </option>
                                     @endforeach
@@ -145,17 +127,21 @@
                             <div class="control-group form-group mb-0">
                                 <label class="form-label">@lang('lang.desc english')</label>
                                 <textarea type="text" class="form-control required" name="en[desc]" placeholder="desc" required>
-                                            </textarea>
+                                 {{ $new->translate('en')->desc }}
+                                  </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
                                 <label class="form-label">@lang('lang.desc arabic')</label>
                                 <textarea type="text" class="form-control required" name="ar[desc]"placeholder="desc" required>
+                                    {{ $new->translate('ar')->desc }}
+
                                   </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
-                                <label> @lang('lang.main image')</label>
+                                <label>@lang('lang.main image')</label>
 
-                                <input type="file" class="form-control required" required name="image"
+
+                                <input type="file" class="form-control required"  name="image"
                                     placeholder="image">
                             </div>
                             <br>
@@ -165,11 +151,13 @@
                                 <h4 class="form-section"><i class="ft-home"></i> @lang('lang.upload image')</h4>
 
                                 <div id="dpz-multiple-files" class="dropzone dropzone-area">
-                                    <div class="dz-message">  @lang('lang.upload image') </div>
+                                    <div class="dz-message"> @lang('lang.upload image') </div>
                                 </div>
 
                             </div>
-                            <button type="submit" class="btn btn-info">save</button>
+
+
+                            <button type="submit" class="btn btn-info">@lang('lang.save')</button>
                         </section>
 
                     </div>
@@ -212,11 +200,8 @@
 <script src="{{ URL::asset('assets/plugins/telephoneinput/inttelephoneinput.js') }}"></script>
 
 <script src="{{ URL::asset('assets/plugins/treeview/treeview.js') }}"></script>
-
-<script src="{{ asset('assets/assets/admin/js/dropzone.min.js') }}"></script>
-
-
 <script>
+    var file_name = '';
     var uploadedDocumentMap = {}
     Dropzone.options.dpzMultipleFiles = {
         paramName: "dzfile", // The name that will be used to transfer the file
@@ -260,7 +245,7 @@
 
             $.ajax({
 
-                url: "{{ URL::to('admin/product/delete/image') }}",
+                url: "{{ URL::to('admin/news/delete/image') }}",
                 type: "GET",
                 dataType: "json",
                 data: {
@@ -274,19 +259,30 @@
                 void 0;
         },
         // previewsContainer: "#dpz-btn-select-files", // Define the container to display the previews
-        init: function() {
-            @if (isset($event) && $event->document)
-                var files =
-                    {!! json_encode($event->document) !!}
-                for (var i in files) {
-                    var file = files[i]
-                    this.options.addedfile.call(this, file)
-                    file.previewElement.classList.add('dz-complete')
-                    $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                }
-            @endif
-        }
+        init: function(
 
+        ) {
+
+            @foreach ($new->medias()->get() as $file)
+
+                var mock = {
+                    name: '{{ $file->url }}',
+                    id: '{{ $file->id }}'
+                };
+                this.emit('addedfile', mock);
+                this.options.thumbnail.call(this, mock,
+                    '{{ asset('uploads/posts/'.$file->url) }}');
+            @endforeach
+            this.on('sending', function(file, xhr, formData) {
+                formData.append('id', '');
+                file.id = '';
+            });
+
+            this.on('success', function(file, response) {
+                file.id = response.id;
+            });
+
+        }
 
     }
 </script>

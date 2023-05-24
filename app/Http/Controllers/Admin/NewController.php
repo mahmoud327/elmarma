@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Media;
 use App\Models\NewPage;
 use App\Models\Post;
 use App\Services\newService;
@@ -74,14 +75,38 @@ class NewController extends Controller
         return redirect(route('news.index'))->with('status', "add successfully");
     }
 
-    public function update(Request $request, Post $news)
+    public function edit($id)
     {
 
-        $news->update($request->all());
-        if ($request->image) {
-            $news->image = $this->uploadImage('uploads/newss/', $request->image);
-            $news->save();
+        $data = [
+            'categories' => Category::latest()->get(),
+            'new' => Post::find($id)
+
+
+        ];
+        return view('admin.news.edit', $data);
+    }
+
+    public function update(Request $request,$id)
+    {
+        $new=Post::find($id);
+
+        $new->update($request->all());
+        if ($request->file('image')) {
+            $new->image = $this->uploadImage('uploads/news/', $request->image);
+            $new->save();
         }
+
+        if ($request->document) {
+
+            foreach ($request->document as $file) {
+                $new->medias()->create([
+                    'url' => $file
+                ]);
+            }
+        }
+
+
         return back()->with('status', "add successfully");
     }
 
@@ -108,4 +133,22 @@ class NewController extends Controller
             'original_name' => $file->getClientOriginalName(),
         ]);
     }
+
+
+    public function deleteFile(Request $request)
+    {
+        $media = Media::where('id', $request->id)->first();
+
+        if ($media) {
+
+            $media->delete();
+        } else {
+
+            dd('dd');
+            // \Storage::disk('s3')->delete($media->path);
+
+        }
+
+        return 'sucess';
+    } /////////approve post//////////////////////////////////
 }

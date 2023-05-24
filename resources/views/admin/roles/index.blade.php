@@ -50,7 +50,7 @@
                 <div class="card-header pb-0">
                     @can('role-create')
                         <a href="{{ route('roles.create') }}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-                                class="fas fa-plus"></i>&nbsp;Add roles</a>
+                                class="fas fa-plus"></i>&nbsp;@lang('lang.add role')</a>
                     @endcan
 
                     <br>

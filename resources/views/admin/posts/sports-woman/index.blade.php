@@ -29,7 +29,7 @@
     <div class="my-auto">
         <div class="d-flex">
             <h4 class="content-title mb-0 my-auto">Dashboard</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                posts Module</span>
+                 </span>
         </div>
     </div>
 </div>
@@ -127,7 +127,7 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
 
-                    <a class="btn btn-outline-primary" href="{{route('sports-woman.create')}}">Add Post sports-woman</a>
+                    <a class="btn btn-outline-primary" href="{{route('sports-woman.create')}}">@lang('lang.add new sports-woman')</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -154,7 +154,7 @@
                                     <td>{{ $post->type }}</td>
                                     <td>{{optional( $post->category)->title }}</td>
                                      <td>
-                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-toggle="modal" href="#exampleModal2{{$post->id}}" title="edit">
+                                        <a href="{{route('sports-woman.edit',$post->id)}}"class="btn btn-sm btn-info"  title="edit">
                                             <i class="las la-pen"></i>
                                         </a>
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$post->id}} " title="delete">

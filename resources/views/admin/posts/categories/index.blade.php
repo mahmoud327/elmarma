@@ -128,7 +128,7 @@
              <div class="card-header pb-0">
 
                  <a class="modal-effect btn btn-outline-primary" data-effect="effect-scale" data-toggle="modal"
-                     href="#modaldemo8">Add Category</a>
+                     href="#modaldemo8">@lang('lang.add category')</a>
              </div>
              <div class="card-body">
                  <div class="table-responsive">

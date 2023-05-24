@@ -84,8 +84,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">newss</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                add news</span>
+            <h4 class="content-title mb-0 my-auto">@lang('lang.news')</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                </span>
         </div>
     </div>
 </div>
@@ -100,19 +100,18 @@
                 <form action="{{ route('news.store') }}" enctype="multipart/form-data" method="post">
                     @csrf
                     <div id="wizard1">
-                        <h3>news data</h3>
                         <section>
                             <div class="control-group form-group">
-                                <label class="form-label">title arabic</label>
+                                <label class="form-label">@lang('lang.title arabic')</label>
                                 <input type="text" class="form-control required" name="ar[title]" required placeholder="Name">
                             </div>
                             <div class="control-group form-group">
-                                <label class="form-label">title English</label>
+                                <label class="form-label">@lang('lang.title English')</label>
                                 <input type="text" class="form-control required" name="en[title]"placeholder="text " required>
                             </div>
 
                             <div class="control-group form-group">
-                                <label class="form-label">select category</label>
+                                <label class="form-label">@lang('lang.select category')</label>
                                 <select class="form-control" name="category_id" required>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">
@@ -125,17 +124,17 @@
                             </div>
 
                             <div class="control-group form-group mb-0">
-                                <label class="form-label">desc english</label>
+                                <label class="form-label">@lang('lang.desc english')</label>
                                 <textarea type="text" class="form-control required" name="en[desc]" placeholder="desc" required>
                                             </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
-                                <label class="form-label">desc arabic</label>
+                                <label class="form-label">@lang('lang.desc arabic')</label>
                                 <textarea type="text" class="form-control required" name="ar[desc]"placeholder="desc" required>
                                   </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
-                                <label>main-image</label>
+                                <label>@lang('lang.main image')</label>
 
                                 <input type="file" class="form-control required" required name="image"
                                     placeholder="image">
@@ -144,16 +143,16 @@
                             <br>
 
                             <div class="form-group col-md-7">
-                                <h4 class="form-section"><i class="ft-home"></i>رفع الصور</h4>
+                                <h4 class="form-section"><i class="ft-home"></i> @lang('lang.upload image')</h4>
 
                                 <div id="dpz-multiple-files" class="dropzone dropzone-area">
-                                    <div class="dz-message">رفع صوره </div>
+                                    <div class="dz-message"> @lang('lang.upload image') </div>
                                 </div>
 
                             </div>
 
 
-                            <button type="submit" class="btn btn-info">save</button>
+                            <button type="submit" class="btn btn-info">@lang('lang.save')</button>
                         </section>
 
                     </div>
