@@ -32,7 +32,7 @@ class AuthController extends Controller
             return redirect()->route('admin.login.page')
                 ->withErrors(['errors' => 'The password is incorrect.']);
         }
-        return redirect()->route('admin.home');
+        return redirect()->route('categories.index');
     }
 
     public function logout()
