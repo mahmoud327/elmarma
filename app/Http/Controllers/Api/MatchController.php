@@ -69,13 +69,14 @@ class MatchController extends Controller
         $data = $client->request('GET', 'https://www.yallakora.com/match-center/' . $parm_date);
         $index = 0;
         $matches = [];
-        $data->filter('.matchCard ')->each(function ($node) use (&$matches, &$index) {
+        $data->filter('.matchCard.matchesList ')->each(function ($node) use (&$matches, &$index) {
 
+            $node->filter('ul li'  )->each(function ($node) use (&$matches, &$index) {
 
-            $node->filter('ul li a:contains("التفاصيل") ' )->each(function ($node) use (&$matches, &$index) {
-
-                $matches[$index]['id'] = $node->attr('href');
+                $matches[$index]['id'] = $node->filter('a')->attr('href');
             });
+
+
 
             $node->filter('.tourTitle  img')->each(function ($node) use (&$matches, &$index) {
 
@@ -131,7 +132,7 @@ class MatchController extends Controller
         });
 
 
-        return sendJsonResponse($matches, 'matches');
+        return response()->json($matches);
     }
 
 
@@ -253,19 +254,29 @@ class MatchController extends Controller
             array_push($data,
                 [
                     'name' => $node->filter('h2')->text(),
+
                     'matches' => [],
                 ]);
             $node->filter('li')->each(function ($sub) use (&$data, $node) {
+                //get first a tag
 
                 array_push($data[array_key_last($data)]['matches'], [
 
                     'channel' => $sub->filter('.channel.icon-channel')->count() ? $sub->filter('.channel.icon-channel')->text() : null,
-
+                    'match_id'=> $sub->attr('livescorematchid'),
                     'date' => $sub->filter('.date')->text(),
                     'match_status' => $sub->filter('.matchStatus')->text(),
                     'match_time' => $sub->filter('.time')->text(),
-
-                    'match_id' => $sub->filter('.leftCol')->filter('a:contains("التفاصيل")')->count() ? $sub->filter('.leftCol')->filter('a:contains("التفاصيل")')->attr('href'):null,
+                    'details' => $sub->filter('.leftCol')->filter('a')->text(),
+                    'id'=>$sub->filter('a')->attr('href'),
+                    'param1'=>
+                    $sub->filter('a')->attr('href') ? explode('/', $sub->filter('a')->attr('href'))[1] : null,
+                    'param2'=>
+                    $sub->filter('a')->attr('href') ? explode('/', $sub->filter('a')->attr('href'))[2] : null,
+                    'param3'=>
+                    $sub->filter('a')->attr('href') ? explode('/', $sub->filter('a')->attr('href'))[4] : null,
+                    'param4'=>
+                    $sub->filter('a')->attr('href') ? explode('/', $sub->filter('a')->attr('href'))[5] : null,
                     'team_a' => [
                         'name' => $sub->filter('.teams.teamA')->filter('p')->text(),
                         'image' => $sub->filter('.teams.teamA')->filter('img')->attr('src'),
@@ -283,6 +294,7 @@ class MatchController extends Controller
 
         });
         return response()->json($data);
+
     }
 
     public function statisticsMatch($id, $slug1, $slug2, $slug3, $slug4)
