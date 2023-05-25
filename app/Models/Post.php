@@ -21,12 +21,12 @@ class Post extends Model
 
 
     protected $fillable = [
-       'title',
-       'des',
-       'type',
-       'category_id',
-       'image',
-       'type_post'
+        'title',
+        'des',
+        'type',
+        'category_id',
+        'image',
+        'type_post'
     ];
 
 
@@ -39,11 +39,10 @@ class Post extends Model
 
 
 
-     public function getImagePathAttribute()
-     {
-         return $this->image ? asset('uploads/posts/' . $this->image) : asset('uploads/default.jpeg');
-
-     }
+    public function getImagePathAttribute()
+    {
+        return $this->image ? asset('uploads/posts/' . $this->image) : asset('uploads/default.jpeg');
+    }
 
 
     /*
@@ -55,16 +54,22 @@ class Post extends Model
 
     public function category()
     {
-         return  $this->belongsTo('App\Models\Category','category_id');
+        return  $this->belongsTo('App\Models\Category', 'category_id');
     }
+    public function scopeSearch($q, $search)
+    {
 
+        return $q->whereHas('category', function ($q) use ($search) {
+            $q->whereTranslationLike('title', '%' . $search . '%');
+        });
+    }
 
     public function medias()
     {
         return $this->morphMany('App\Models\Media', 'mediaable');
     }
-    public function scopeActive($q){
-     $q->where('active',1);
+    public function scopeActive($q)
+    {
+        $q->where('active', 1);
     }
 }
-

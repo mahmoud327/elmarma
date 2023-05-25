@@ -32,12 +32,18 @@ class PostController extends Controller
 
         $posts = Post::latest()
             ->active()
-            ->where('type_post',null)
-            ->where('type','!=','sports-woman')
+            ->where('type_post', null)
+            ->where('type', '!=', 'sports-woman')
 
             ->when(request()->category_id, function ($q) {
                 $q->whereCategoryId(request()->category_id);
             })
+
+            ->when(request()->title, function ($q) {
+                $q->search(request()->title);
+            })
+
+            
             ->when(request()->type, function ($q) {
                 $q->whereType(request()->type);
             })
