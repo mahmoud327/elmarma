@@ -157,7 +157,7 @@ display: none;
                                             <i class="las la-pen"></i>
                                         </a>
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$new->id}} " title="delete">
-                                            delete
+                                            @lang('lang.delete')
                                         </a>
                                     </td>
                                 </tr>
