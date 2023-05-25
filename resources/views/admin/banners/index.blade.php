@@ -159,7 +159,7 @@
                                          </a>
                                          <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                              data-toggle="modal" href="#modaldemo9{{ $banner->id }} " title="delete">
-                                             delete
+                                             @lang('lang.delete')
                                          </a>
                                      </td>
                                  </tr>
