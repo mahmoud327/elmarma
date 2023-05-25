@@ -18,8 +18,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">role</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    roles</span>
+                <h4 class="content-title mb-0 my-auto">@lang('lang.dashboard')</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    @lang('lang.roles')</span>
             </div>
         </div>
 
@@ -79,7 +79,7 @@
                                     <th><input name="select_all" id="delete_all" type="checkbox"
                                             onclick="CheckAll('box1', this)" /></th>
                                     <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">name </th>
+                                    <th class="border-bottom-0">@lang('lang.name') </th>
 
                                     <th class="border-bottom-0">{{ trans('lang.action') }}</th>
 

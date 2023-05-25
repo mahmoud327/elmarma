@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
         if(!Admin::count()) {
             Admin::create([
                 'name' => 'Super Admin',
-                'email' => 'superadmin@mqa.com',
+                'email' => 'superadmin@mqa.comsuperadmin@mqa.com',
                 'password' => '12345678',
             ]);
         }

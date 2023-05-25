@@ -34,16 +34,19 @@ return [
 
     'tournament-news' => 'tournament-news',
 
+    'delete' => 'delete',
+
+    'dashboard' => 'dashboard',
 
     'news' => 'news',
-    'add new '=>'add new',
-    'title arabic'=>'title arabic',
-    'title English'=>'title English',
-    'select category'=>'select category',
-    'desc english'=>'desc english',
-    'desc arabic'=>'desc arabic',
-    'main image'=>'main image',
-    'upload image'=>'upload image',
+    'add new ' => 'add new',
+    'title arabic' => 'title arabic',
+    'title English' => 'title English',
+    'select category' => 'select category',
+    'desc english' => 'desc english',
+    'desc arabic' => 'desc arabic',
+    'main image' => 'main image',
+    'upload image' => 'upload image',
 
     'banners' => 'banners',
     'add banner' => 'add banner',

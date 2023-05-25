@@ -45,6 +45,10 @@ return [
     'main image'=>'الصوره الاساسيه',
     'upload image'=>'رفع صوره ',
 
+    'delete'=>'حذف',
+
+    'dashboard' => 'لوحة التحكم',
+
     'banners' => 'الاعلانات',
     'add banner' => 'اضافة اعلان',
     'select type post' => 'اختار نوع البوست',
