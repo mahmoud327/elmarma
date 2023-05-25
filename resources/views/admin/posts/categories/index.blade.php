@@ -137,8 +137,8 @@
                          <thead>
                              <tr>
                                  <th class="border-bottom-0">#</th>
-                                 <th class="border-bottom-0">title</th>
-                                 <th class="border-bottom-0">action</th>
+                                 <th class="border-bottom-0">@lang('lang.title')</th>
+                                 <th class="border-bottom-0">@lang('lang.action')</th>
                              </tr>
                          </thead>
                          <tbody class="tr">

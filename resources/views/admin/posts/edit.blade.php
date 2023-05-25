@@ -104,11 +104,11 @@
                         <section>
                             <div class="control-group form-group">
                                 <label class="form-label">@lang('lang.title arabic')</label>
-                                <input type="text" class="form-control required" name="ar[title]"  value="{{ $new->translate('ar')->title }}"required placeholder="Name">
+                                <input type="text" class="form-control required" name="ar[title]"  value="{{ optional($new->translate('ar'))->title }}"required placeholder="Name">
                             </div>
                             <div class="control-group form-group">
                                 <label class="form-label">@lang('lang.title English')</label>
-                                <input type="text" class="form-control required" name="en[title]"placeholder="text " value="{{ $new->translate('en')->title }}" required>
+                                <input type="text" class="form-control required" name="en[title]"placeholder="text " value="{{optional($new->translate('en'))->title }}" required>
                             </div>
 
                             <div class="control-group form-group">

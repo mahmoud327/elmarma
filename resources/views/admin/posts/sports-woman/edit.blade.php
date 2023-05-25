@@ -104,11 +104,11 @@
                         <section>
                             <div class="control-group form-group">
                                 <label class="form-label">@lang('lang.title arabic')</label>
-                                <input type="text" class="form-control required" name="ar[title]"  value="{{ $new->translate('ar')->title }}"required placeholder="Name">
+                                <input type="text" class="form-control required" name="ar[title]"  value="{{ optional($new->translate('ar'))->title }}"required placeholder="Name">
                             </div>
                             <div class="control-group form-group">
                                 <label class="form-label">@lang('lang.title English')</label>
-                                <input type="text" class="form-control required" name="en[title]"placeholder="text " value="{{ $new->translate('en')->title }}" required>
+                                <input type="text" class="form-control required" name="en[title]"placeholder="text " value="{{optional($new->translate('en'))->title }}" required>
                             </div>
 
                             <div class="control-group form-group">
@@ -127,13 +127,13 @@
                             <div class="control-group form-group mb-0">
                                 <label class="form-label">@lang('lang.desc english')</label>
                                 <textarea type="text" class="form-control required" name="en[desc]" placeholder="desc" required>
-                                 {{ $new->translate('en')->desc }}
+                                 {{ optional($new->translate('en'))->desc }}
                                   </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
                                 <label class="form-label">@lang('lang.desc arabic')</label>
                                 <textarea type="text" class="form-control required" name="ar[desc]"placeholder="desc" required>
-                                    {{ $new->translate('ar')->desc }}
+                                    {{ optional($new->translate('ar'))->desc }}
 
                                   </textarea>
                             </div>
@@ -221,7 +221,7 @@
         headers: {
             'X-CSRF-TOKEN': "{{ csrf_token() }}"
         },
-        url: "{{ route('sports-woman.images.store') }}", // Set the url
+        url: "{{ route('posts.images.store') }}", // Set the url
         success: function(file, response) {
             $('form').append('<input class="images" data-img="' + file.name +
                 '"  type="hidden" name="document[]" value="' + response.name + '">')

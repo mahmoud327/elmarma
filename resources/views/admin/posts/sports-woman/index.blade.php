@@ -136,11 +136,11 @@
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
-                                <th class="border-bottom-0">Image</th>
-                                <th class="border-bottom-0">title</th>
-                                <th class="border-bottom-0">type</th>
-                                <th class="border-bottom-0">category</th>
-                                <th class="border-bottom-0">action</th>
+                                <th class="border-bottom-0">@lang('lang.main image')</th>
+                                <th class="border-bottom-0">@lang('lang.title')</th>
+                                <th class="border-bottom-0">@lang('lang.type post')</th>
+                                <th class="border-bottom-0">@lang('lang.category')</th>
+                                <th class="border-bottom-0">@lang('lang.action')</th>
                             </tr>
                         </thead>
                         <tbody class="tr">

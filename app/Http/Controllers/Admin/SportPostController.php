@@ -27,7 +27,7 @@ class SportPostController extends Controller
             'categories' => Category::latest()->get(),
 
             'posts' => Post::latest()
-                ->where('type_post','sports-woman')
+                ->where('type_post', 'sports-woman')
                 ->with('category')
 
                 ->paginate(10),
@@ -50,7 +50,7 @@ class SportPostController extends Controller
             'categories' => Category::latest()->get(),
             'new' => Post::find($id)
         ];
-        return view('admin.posts.sports-woman.create', $data);
+        return view('admin.posts.sports-woman.edit', $data);
     }
     /**
      * Store a newly created resource in storage.
@@ -60,7 +60,7 @@ class SportPostController extends Controller
      */
     public function store(Request $request)
     {
-        $request['type_post']='sports-woman';
+        $request['type_post'] = 'sports-woman';
         $data = $request->all();
 
         $post = Post::create($data);
@@ -78,7 +78,7 @@ class SportPostController extends Controller
             }
 
             $post->medias()->create([
-                'url' =>$post->image
+                'url' => $post->image
             ]);
         }
 
@@ -106,9 +106,9 @@ class SportPostController extends Controller
             'original_name' => $file->getClientOriginalName(),
         ]);
     }
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $new=Post::find($id);
+        $new = Post::find($id);
 
         $new->update($request->all());
         if ($request->file('image')) {
@@ -126,8 +126,6 @@ class SportPostController extends Controller
         }
 
 
-        return back()->with('status', "add successfully");
+        return redirect(route('sports-woman.index'))->with('status', "add successfully");
     }
-
-
 }

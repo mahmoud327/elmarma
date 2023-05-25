@@ -16,6 +16,12 @@ return [
 
 
 
+    'category' => 'category',
+    'title' => 'title',
+
+    'type post' => 'type post',
+
+
 
 
 

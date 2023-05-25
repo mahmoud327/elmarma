@@ -79,7 +79,7 @@ class PostController extends Controller
             'categories' => Category::latest()->get(),
             'new' => Post::find($id)
         ];
-        return view('admin.posts.create', $data);
+        return view('admin.posts.edit', $data);
     }
     /**
      * Store a newly created resource in storage.

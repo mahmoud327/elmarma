@@ -16,10 +16,10 @@
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left"></i></a>
                 <a class="close-toggle" href="#"><i class="header-icons fe fe-x"></i></a>
             </div>
-            <div class="main-header-center mr-3 d-sm-none d-md-none d-lg-block">
+            {{-- <div class="main-header-center mr-3 d-sm-none d-md-none d-lg-block">
                 <input class="form-control" placeholder="Search for anything..." type="search"> <button
                     class="btn"><i class="fas fa-search d-none d-md-block"></i></button>
-            </div>
+            </div> --}}
         </div>
         <div class="main-header-right">
             <ul class="nav">
@@ -37,7 +37,7 @@
                             @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
                                     class="dropdown-item d-flex " lang="{{ $localeCode }}">
-                           
+
                                     <div class="d-flex">
                                         <span class="mt-2"> {{ $properties['native'] }}
                                         </span>
@@ -70,7 +70,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="dropdown nav-item main-header-message ">
+                {{-- <div class="dropdown nav-item main-header-message ">
                     <a class="new nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -160,8 +160,8 @@
                             <a href="text-center">VIEW ALL</a>
                         </div>
                     </div>
-                </div>
-                <div class="dropdown nav-item main-header-notification">
+                </div> --}}
+                {{-- <div class="dropdown nav-item main-header-notification">
                     <a class="new nav-link" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -258,7 +258,7 @@
                             <a href="">VIEW ALL</a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="nav-item full-screen fullscreen-button">
                     <a class="new nav-link full-screen-link" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                             class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -278,20 +278,20 @@
                                 <div class="main-img-user"><img alt=""
                                         src="{{ URL::asset('assets/img/faces/6.jpg') }}" class=""></div>
                                 <div class="mr-3 my-auto">
-                                    <h6>Petey Cruiser</h6><span>Premium Member</span>
+                                    <h6></h6><span>{{ auth()->user()->name }}</span>
                                 </div>
                             </div>
                         </div>
-                        <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
+                        {{-- <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
                         <a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
                         <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
                         <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
-                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
+                        <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a> --}}
                         <a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="bx bx-log-out"></i>
                             Sign Out</a>
                     </div>
                 </div>
-                <div class="dropdown main-header-message right-toggle">
+                {{-- <div class="dropdown main-header-message right-toggle">
                     <a class="nav-link pr-0" data-toggle="sidebar-left" data-target=".sidebar-left">
                         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -301,7 +301,7 @@
                             <line x1="3" y1="18" x2="21" y2="18"></line>
                         </svg>
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
