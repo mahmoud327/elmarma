@@ -199,7 +199,7 @@ class MatchVideoController extends Controller
         return sendJsonResponse($videos, 'videos');
     }
 
-    public function RelatedtVideo($slug, $slug2, $slug3,$slug4,$slug5)
+    public function RelatedtVideo($slug, $slug2, $slug3,$slug4=null,$slug5=null)
     {
 
         $parms = $slug . '/' . $slug2 . '/' . $slug3. '/' . $slug4. '/' . $slug5;
