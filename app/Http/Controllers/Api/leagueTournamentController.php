@@ -138,8 +138,7 @@ class leagueTournamentController extends Controller
             });
 
             $node->filter('a ')->each(function ($node) use (&$leagues, &$index) {
-
-                $teams[$index]['id'] = $node->attr('href');
+                $leagues[$index]['id'] = $node->attr('href');
             });
 
             $node->filter('a img')->each(function ($node) use (&$leagues, &$index) {
