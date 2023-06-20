@@ -86,8 +86,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">posts</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
-                add post</span>
+            <h4 class="content-title mb-0 my-auto">@lang('lang.posts')</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> /
+                @lang('lang.add post')</span>
         </div>
     </div>
 </div>
@@ -102,7 +102,6 @@
                 <form action="{{ route('posts.store') }}" enctype="multipart/form-data" method="post">
                     @csrf
                     <div id="wizard1">
-                        <h3>post data</h3>
                         <section>
                             <div class="control-group form-group">
                                 <label class="form-label">@lang('lang.title arabic')</label>
