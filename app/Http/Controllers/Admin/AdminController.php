@@ -75,6 +75,12 @@ class AdminController extends Controller
         $admin->assignRole($request->input('roles_name'));
 
 
+        if ($request->file('image')) {
+            $path = $this->uploadFile('uploads/admins/', $request->file('image'));
+             $admin->update(['image'=> $path ]);
+        }
+
+
 
         return back()->with('status', 'Added successfully.');
     }
@@ -120,9 +126,17 @@ class AdminController extends Controller
             // $input = array_except($input,array('password'));
         }
 
+
+
         $user = Admin::find($id);
 
         $user->update($input);
+
+        if ($request->file('image')) {
+            $path = $this->uploadFile('uploads/admins/', $request->file('image'));
+             $user->update(['image'=> $path ]);
+        }
+
 
 
 

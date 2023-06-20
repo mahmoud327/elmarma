@@ -124,6 +124,18 @@
                     name="email" type="text" placeholder="" value="{{ $admin->email }}">
             </div>
 
+            <div class="col-md-5 mg-t-20 mg-md-t-0" id="lnWrapper">
+
+                <label class="form-label">  الصوره</label>
+                <div class="col-md-9">
+                    <input type="file" class="form-control " name="image">
+                </div>
+                <br>
+            </div>
+
+
+
+
 
             <br>
 
