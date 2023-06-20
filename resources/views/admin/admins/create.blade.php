@@ -83,13 +83,13 @@ Add admin
                             <div class="col-md-5" id="fnWrapper">
                                 <label>@lang('lang.name') : <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
-                                    data-parsley-class-handler="#lnWrapper" name="name" value="{{old('name')}}" type="text" placeholder="Name">
+                                    data-parsley-class-handler="#lnWrapper" name="name" value="{{old('name')}}" type="text" placeholder="">
                             </div>
 
                             <div class="col-md-5" id="fnWrapper">
                                 <label>@lang('lang.password') : <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
-                                    data-parsley-class-handler="#lnWrapper" name="password" type="password" placeholder="password">
+                                    data-parsley-class-handler="#lnWrapper" name="password" type="password" placeholder="">
                             </div>
 
 
@@ -97,13 +97,13 @@ Add admin
                             <div class="col-md-5" id="fnWrapper">
                                 <label>@lang('lang.password_confirmation ') : <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
-                                    data-parsley-class-handler="#lnWrapper" value=""  name="password_confirmation" type="password" placeholder=@lang('lang.password_confirmation ')>
+                                    data-parsley-class-handler="#lnWrapper" value=""  name="password_confirmation" type="password" placeholder="">
                             </div>
 
                             <div class="col-md-5" id="fnWrapper">
                                 <label>@lang('lang.email') : <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
-                                    data-parsley-class-handler="#lnWrapper" name="email" value="{{old('email')}}" type="text" placeholder="email">
+                                    data-parsley-class-handler="#lnWrapper" name="email" value="{{old('email')}}" type="text" placeholder="">
                             </div>
 
 

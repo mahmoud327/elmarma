@@ -113,7 +113,7 @@
 
 
             <div class="col-md-5" id="fnWrapper">
-                <label>@lang('lang.password_confirmation ') : <span class="tx-danger">*</span></label>
+                <label>@lang('lang.password_confirmation') : <span class="tx-danger">*</span></label>
                 <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
                     value="" name="password_confirmation" type="password" placeholder=@lang('lang.password_confirmation')>
             </div>

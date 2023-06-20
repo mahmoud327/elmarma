@@ -8,7 +8,7 @@ return [
     'name' => 'الاسم',
     'email' => 'الايميل',
     'password' => 'باسورد',
-    'password_confirmation ' => 'تاكيد كلمة المرو',
+    'password_confirmation ' => 'تاكيد كلمة المرور',
     'user roles' => 'صلاحية المستخدم',
     'save' => 'حفظ',
     'back' => 'رجوع',
