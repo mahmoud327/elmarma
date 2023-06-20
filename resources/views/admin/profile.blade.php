@@ -69,8 +69,8 @@
                                     <label class="form-label"> تاكيد كلمة السر</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="password" name="تاكيد كلمة السر" class="form-control"
-                                        placeholder=" password_confirmation">
+                                    <input type="password" name="password_confirmation" class="form-control"
+                                        placeholder=" تاكيد كلمة السر">
                                 </div>
                             </div>
                         </div>
