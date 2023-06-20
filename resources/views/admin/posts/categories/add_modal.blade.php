@@ -2,7 +2,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-content-demo  mr-5" style="width:100%">
             <div class="modal-header">
-                <h6 class="modal-title">Add New catgory</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                <h6 class="modal-title">@lang('lang.add category')</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -12,10 +12,10 @@
                     <div class="row">
                           <div class="col-sm-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="en[title]"  value="{{old('title')}}"  placeholder=" title english ">
+                                    <input type="text" class="form-control" name="en[title]"  value="{{old('title')}}"  placeholder=@lang('lang.title English')>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="ar[title]"  value="{{old('title')}}"  placeholder=" title arabic ">
+                                    <input type="text" class="form-control" name="ar[title]"  value="{{old('title')}}"  placeholder=@lang('lang.title arabic')>
                                 </div>
 
 
