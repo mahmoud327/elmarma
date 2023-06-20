@@ -56,4 +56,9 @@ class Admin extends Authenticatable
 
     ];
 
+    public function getImagePathAttribute()
+    {
+        return $this->image ? asset('uploads/admins/' . $this->image) : asset('uploads/user.png');
+    }
+
 }

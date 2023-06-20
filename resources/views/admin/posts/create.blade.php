@@ -105,32 +105,32 @@
                         <h3>post data</h3>
                         <section>
                             <div class="control-group form-group">
-                                <label class="form-label">title arabic</label>
-                                <input type="text" class="form-control required" name="ar[title]" placeholder="Name">
+                                <label class="form-label">@lang('lang.title arabic')</label>
+                                <input type="text" class="form-control required" name="ar[title]" placeholder=@lang('lang.title')>
                             </div>
                             <div class="control-group form-group">
-                                <label class="form-label">title English</label>
-                                <input type="text" class="form-control required" name="en[title]"placeholder="text ">
+                                <label class="form-label">@lang('lang.title English')</label>
+                                <input type="text" class="form-control required" name="en[title]"placeholder=@lang('lang.title English')>
                             </div>
                             <div class="control-group form-group">
-                                <label class="form-label">select type post</label>
+                                <label class="form-label">اختار نوع الخبر</label>
                                 <select class="form-control" name="type" required>
                                     <option value="normal">
-                                        normal-post
+                                        الخبر العادى
                                     </option>
                                     <option value="parent-post">
-                                        parent-post
+                                        الخبر الرئيسى
                                     </option>
 
                                     <option value="child-post">
-                                        child-post
+                                        الخبر الفرعى
                                     </option>
 
 
                                 </select>
                             </div>
                             <div class="control-group form-group">
-                                <label class="form-label">select category</label>
+                                <label class="form-label">@lang('lang.select category')</label>
                                 <select class="form-control" name="category_id" required>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">
@@ -143,13 +143,13 @@
                             </div>
 
                             <div class="control-group form-group mb-0">
-                                <label class="form-label">desc english</label>
-                                <textarea type="text" class="form-control required" name="en[desc]" placeholder="desc" required>
+                                <label class="form-label">@lang('lang.desc english')</label>
+                                <textarea type="text" class="form-control required" name="en[desc]" placeholder=@lang('lang.desc english') required>
                                             </textarea>
                             </div>
                             <div class="control-group form-group mb-0">
-                                <label class="form-label">desc arabic</label>
-                                <textarea type="text" class="form-control required" name="ar[desc]"placeholder="desc" required>
+                                <label class="form-label">@lang('lang.desc arabic')</label>
+                                <textarea type="text" class="form-control required" name="ar[desc]"placeholder=@lang('lang.desc arabic') required>
                                   </textarea>
                             </div>
                             <div class="control-group form-group mb-0">

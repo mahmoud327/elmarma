@@ -81,13 +81,13 @@ Add admin
 
 
                             <div class="col-md-5" id="fnWrapper">
-                                <label>name : <span class="tx-danger">*</span></label>
+                                <label>@lang('lang.name') : <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
                                     data-parsley-class-handler="#lnWrapper" name="name" value="{{old('name')}}" type="text" placeholder="Name">
                             </div>
 
                             <div class="col-md-5" id="fnWrapper">
-                                <label>password : <span class="tx-danger">*</span></label>
+                                <label>@lang('lang.password') : <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
                                     data-parsley-class-handler="#lnWrapper" name="password" type="password" placeholder="password">
                             </div>
@@ -95,18 +95,18 @@ Add admin
 
 
                             <div class="col-md-5" id="fnWrapper">
-                                <label>password_confirmation : <span class="tx-danger">*</span></label>
+                                <label>@lang('lang.password_confirmation ') : <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
-                                    data-parsley-class-handler="#lnWrapper" value=""  name="password_confirmation" type="password" placeholder="password_confirmation">
+                                    data-parsley-class-handler="#lnWrapper" value=""  name="password_confirmation" type="password" placeholder=@lang('lang.password_confirmation ')>
                             </div>
 
                             <div class="col-md-5" id="fnWrapper">
-                                <label>email : <span class="tx-danger">*</span></label>
+                                <label>@lang('lang.email') : <span class="tx-danger">*</span></label>
                                 <input class="form-control form-control-sm mg-b-20"
                                     data-parsley-class-handler="#lnWrapper" name="email" value="{{old('email')}}" type="text" placeholder="email">
                             </div>
 
-                          
+
 
                             <div class="col-md-5 mg-t-20 mg-md-t-0" id="lnWrapper">
 
@@ -120,8 +120,19 @@ Add admin
                                     @endforeach
                                 </select>
                                 <br>
-
                             </div>
+
+                            <div class="col-md-5 mg-t-20 mg-md-t-0" id="lnWrapper">
+
+                                <label class="form-label">  الصوره</label>
+                                <div class="col-md-9">
+                                    <input type="file" class="form-control " name="image">
+                                </div>
+                                <br>
+                            </div>
+
+
+
 
 
 

@@ -276,7 +276,7 @@
                         <div class="main-header-profile bg-primary p-3">
                             <div class="d-flex wd-100p">
                                 <div class="main-img-user"><img alt=""
-                                        src="{{ URL::asset('assets/img/faces/6.jpg') }}" class=""></div>
+                                        src="{{  auth()->user()->image_path }}" class=""></div>
                                 <div class="mr-3 my-auto">
                                     <h6></h6><span>{{ auth()->user()->name }}</span>
                                 </div>
@@ -287,8 +287,11 @@
                         <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
                         <a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
                         <a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a> --}}
+                        <a class="dropdown-item" href="{{ route('admin.profile') }}">
+                           عرض البروفايل
+                             </a>
                         <a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="bx bx-log-out"></i>
-                            Sign Out</a>
+                             تسجيل الخروج</a>
                     </div>
                 </div>
                 {{-- <div class="dropdown main-header-message right-toggle">

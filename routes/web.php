@@ -46,6 +46,12 @@ Route::group([
             //route-for-services
             Route::resource('roles', RoleController::class);
 
+            //route-for-services
+            Route::get('profile', 'AuthController@profile')->name('admin.profile');
+            //route-for-services
+            Route::post('save-profile', 'AuthController@updateProfile')->name('admin.update.profile');
+
+
 
             //route-for-services
             Route::resource('admins', AdminController::class);
