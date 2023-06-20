@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content" style="width:130%">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit banner</h5>
+                <h5 class="modal-title" id="exampleModalLabel">تعديل الاعلان</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -36,14 +36,14 @@
                                 <label class="form-label">select type post</label>
                                 <select class="form-control" name="type" required>
                                     <option value="normal">
-                                        normal-post
+                                        اعلان عادى
                                     </option>
                                     <option value="parent-post">
-                                        parent-post
+                                        اعلان رئيسى
                                     </option>
 
                                     <option value="child-post">
-                                        child-post
+                                        اعلان فرعى
                                     </option>
 
 
