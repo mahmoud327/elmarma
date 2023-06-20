@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MarketerCode;
 use App\Models\Admin;
+use App\Traits\ImageTrait;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -15,6 +16,7 @@ use DB;
 
 class AdminController extends Controller
 {
+    use ImageTrait;
     // public function __construct()
     // {
     //     $this->middleware('permission:admins', ['only' => ['index']]);
