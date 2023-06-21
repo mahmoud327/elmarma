@@ -78,8 +78,7 @@
                             data-page-length='50'style="text-align: center">
                             <thead>
                                 <tr>
-                                    <th><input name="select_all" id="delete_all" type="checkbox"
-                                            onclick="CheckAll('box1', this)" /></th>
+                              
                                     <th class="border-bottom-0">#</th>
                                     <th class="border-bottom-0">@lang('lang.name') </th>
 
@@ -96,8 +95,7 @@
                                         $i++;
                                     @endphp
                                     <tr>
-                                        <td><input id="cat-box" type="checkbox" name="categories"
-                                                value="{{ $role->id }}" class="box1"></td>
+
                                         <td>{{ $i }}</td>
                                         <td>{{ $role->name }} </td>
                                         <td>

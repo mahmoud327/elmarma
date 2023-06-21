@@ -107,6 +107,8 @@
                 </li>
             @endcan
 
+            @can('الاعلانات')
+
             <li class="slide">
                 <a class="side-menu__item" href="{{ route('banners.index') }}"><svg
                         xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -117,6 +119,7 @@
                     </svg><span class="side-menu__label">@lang('lang.banners')</span><span
                         class="badge badge-success side-badge">1</span></a>
             </li>
+            @endcan
 
             @can('الرياضة النسائيه')
 

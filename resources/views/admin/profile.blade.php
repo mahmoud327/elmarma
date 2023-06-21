@@ -88,17 +88,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group ">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="form-label">رقم التليفون</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" placeholder="رقم التليفون"
-                                        value="{{ auth()->user()->phone }}">
-                                </div>
-                            </div>
-                        </div>
+           
                         <div class="form-group ">
                             <div class="row">
                                 <div class="col-md-3">
