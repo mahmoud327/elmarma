@@ -45,10 +45,12 @@
     <div class="row">
         <!--div-->
 
+
+
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    @can('role-create')
+                    @can('اضافة صلاحية')
                         <a href="{{ route('roles.create') }}" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
                                 class="fas fa-plus"></i>&nbsp;@lang('lang.add role')</a>
                     @endcan
@@ -99,17 +101,17 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $role->name }} </td>
                                         <td>
-                                            @can('role-show')
+                                            @can('عرض صلاحية')
                                                 <a class="btn btn-success btn-sm"
                                                     href="{{ route('roles.show', $role->id) }}">عرض</a>
                                             @endcan
 
-                                            @can('role-update')
+                                            @can('تعديل صلاحية')
                                                 <a class="btn btn-primary btn-sm"
                                                     href="{{ route('roles.edit', $role->id) }}">تعديل</a>
                                             @endcan
 
-                                            @can('role-delete')
+                                            @can('حذف صلاحية')
                                                 <a class="modal-effect btn btn-sm btn-danger"
                                                     data-role_id="{{ $role->id }}" data-effect="effect-scale"
                                                     data-toggle="modal" href="#modaldemo9{{ $role->id }}" title="delete"><i

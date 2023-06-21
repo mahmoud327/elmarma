@@ -39,7 +39,7 @@
                         class="badge badge-success side-badge">1</span></a>
             </li> --}}
 
-            @can('role-list')
+            @can('الصلاحيات')
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('roles.index') }}"><svg xmlns="http://www.w3.org/2000/svg"
                             class="side-menu__icon" viewBox="0 0 24 24">
@@ -51,7 +51,7 @@
                             class="badge badge-success side-badge">1</span></a>
                 </li>
             @endcan
-            @can('admin-list')
+            @can('المشرفين')
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('admins.index') }}"><svg xmlns="http://www.w3.org/2000/svg"
                             class="side-menu__icon" viewBox="0 0 24 24">
@@ -64,7 +64,7 @@
                 </li>
             @endcan
 
-            @can('posts-list')
+            @can('الاخبار')
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('posts.index') }}"><svg xmlns="http://www.w3.org/2000/svg"
                             class="side-menu__icon" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@
 
 
 
-            @can('news-list')
+            @can('الاخبار الرئيسية')
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('news.index') }}"><svg xmlns="http://www.w3.org/2000/svg"
                             class="side-menu__icon" viewBox="0 0 24 24">
@@ -94,7 +94,7 @@
             @endcan
 
 
-            @can('tournament-news-list')
+            @can('الاخبار البطولة')
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('tournament-news.index') }}"><svg
                             xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@
                         class="badge badge-success side-badge">1</span></a>
             </li>
 
-            {{-- @can('tournament-news-list') --}}
+            @can('الرياضة النسائيه')
 
 
             <li class="slide">
@@ -131,11 +131,11 @@
                     </svg><span class="side-menu__label">@lang('lang.sports-woman')</span><span
                         class="badge badge-success side-badge">1</span></a>
             </li>
-            {{-- @endcan --}}
+            @endcan
             {{-- <li class="side-item side-item-category">General</li> --}}
 
 
-            @can('categories-list')
+            @can('الاقسام')
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('categories.index') }}"><svg
                             xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">

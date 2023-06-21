@@ -121,7 +121,7 @@
             <div class="card-header pb-0">
 
                 <div class="">
-                    @can('admin-create')
+                    @can('انشاء مشرف')
                         <a class="btn btn-outline-primary"
                         href="{{route('admins.create')}}">@lang('lang.add admin') </a>
                     @endcan
@@ -155,13 +155,13 @@
                                     <td>
 
 
-                                        @can('admin-edit')
+                                        @can('تعديل مشرف')
 
                                             <a class="btn btn-sm btn-info"
                                                 href="{{route('admins.edit',$admin->id)}}" title="edit"><i class="las la-pen"></i></a>
                                         @endcan
 
-                                        @can('admin-delete')
+                                        @can('حذف مشرف')
 
 
                                          <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
