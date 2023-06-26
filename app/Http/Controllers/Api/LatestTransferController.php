@@ -50,9 +50,6 @@ class LatestTransferController extends Controller
 
                 // });
 
-
-
-
             });
 
             $node->filter('div.item.var.fromTeam')->each(function ($node) use (&$leagues, &$index) {

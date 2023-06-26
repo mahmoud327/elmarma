@@ -175,17 +175,30 @@ class MatchVideoController extends Controller
             });
             $node->filter('.ArticleDetails p:first-of-type')->each(function ($node) use (&$videos, &$index) {
 
-
-
                 $videos[$index]['content'] = $node->text();
+            });
+            $node->filter('.ArticleDetails p:nth-of-type(2)')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['content2'] = $node->text();
+            });
+            $node->filter('.ArticleDetails p:nth-of-type(3)')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['content3'] = $node->text();
+            });
+            $node->filter('.ArticleDetails p:nth-of-type(4)')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['content4'] = $node->text();
+            });
+            $node->filter('.ArticleDetails p:nth-of-type(5)')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['content5'] = $node->text();
             });
 
             $node->filter('.imageCntnr img')->each(function ($node) use (&$videos, &$index) {
 
-
-
                 $videos[$index]['image'] = $node->attr('src');
             });
+
             // $node->filter('.link .desc p')->each(function ($node) use (&$videos, &$index) {
 
             //     $videos[$index]['desc'] = $node->text();
