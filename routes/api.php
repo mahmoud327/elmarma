@@ -46,7 +46,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['lang']], function () {
     Route::get('statistics-match/{slug}/{slug1}/{slug2}/{slug3}/{slug4}', [MatchController::class, 'statisticsMatch']);
 
 
-    Route::get('all-matches', [MatchControllaler::class, 'allMatch']);
+    Route::get('all-matches', [MatchController::class, 'allMatch']);
 
     Route::get('all-matches-en', [MatchEnController::class, 'index']);
 
@@ -103,7 +103,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['lang']], function () {
     Route::get('important-latest-transfers/{id}', [LatestTransferController::class, 'importantTransfer']);
 
     Route::get('latest-transfers-all-leagues', [LatestTransferController::class, 'allLeague']);
-    
+
 
     Route::get('latest-transfers/{id}', [LatestTransferController::class, 'index']);
     Route::group(['prefix' => 'latest-transfer'], function () {
