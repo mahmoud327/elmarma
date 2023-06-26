@@ -193,6 +193,10 @@ class MatchVideoController extends Controller
 
                 $videos[$index]['content5'] = $node->text();
             });
+            $node->filter('.ArticleDetails p:nth-of-type(6)')->each(function ($node) use (&$videos, &$index) {
+
+                $videos[$index]['content6'] = $node->text();
+            });
 
             $node->filter('.imageCntnr img')->each(function ($node) use (&$videos, &$index) {
 
