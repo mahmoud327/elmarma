@@ -127,8 +127,10 @@ display: none;
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
+                @can('اضافة خبر')
+                  <a class="btn btn-outline-primary" href="{{route('news.create')}}">@lang('lang.add new ')</a>
+                @endcan
 
-                    <a class="btn btn-outline-primary" href="{{route('news.create')}}">@lang('lang.add new ')</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -153,12 +155,18 @@ display: none;
                                     <td>{{ $new->title }}</td>
                                     <td>{{ optional($new->category)->title }}</td>
                                      <td>
-                                        <a href="{{route('news.edit',$new->id)}}"class="btn btn-sm btn-info"  title="edit">
-                                            <i class="las la-pen"></i>
-                                        </a>
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$new->id}} " title="delete">
-                                            @lang('lang.delete')
-                                        </a>
+                                        @can('تعديل خبر')
+                                            <a href="{{route('news.edit',$new->id)}}"class="btn btn-sm btn-info"  title="edit">
+                                                <i class="las la-pen"></i>
+                                            </a>
+
+                                        @endcan
+                                        @can('حذف خبر')
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$new->id}} " title="delete">
+                                                @lang('lang.delete')
+                                            </a>
+
+                                        @endcan
                                     </td>
                                 </tr>
                                 @include('admin.news.delete_modal' ,['new'=>$new])

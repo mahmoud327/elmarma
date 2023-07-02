@@ -127,8 +127,11 @@ display: none;
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
-
+                @can('اضافة خبر بطولى')
                     <a class="btn btn-outline-primary" href="{{route('tournament-news.create')}}">@lang('lang.tournament-news')</a>
+
+                @endcan
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -153,12 +156,17 @@ display: none;
                                     <td>{{ $new->title }}</td>
                                     <td>{{ optional($new->category)->title }}</td>
                                      <td>
-                                        <a href="{{route('tournament-news.edit',$new->id)}}"class="btn btn-sm btn-info"  title="edit">
-                                            <i class="las la-pen"></i>
-                                        </a>
+                                        @can('تعديل خبر بطولى')
+                                            <a href="{{route('tournament-news.edit',$new->id)}}"class="btn btn-sm btn-info"  title="edit">
+                                                <i class="las la-pen"></i>
+                                            </a>
+                                        @endcan
+                                        @can(' حذف خبر بطولى')
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$new->id}} " title="delete">
                                             @lang('lang.delete')
                                         </a>
+                                        @endcan
+
                                     </td>
                                 </tr>
                                 @include('admin.news.delete_modal' ,['new'=>$new])

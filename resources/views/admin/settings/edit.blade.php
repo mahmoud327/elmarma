@@ -20,7 +20,7 @@ Edit Setting
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">{{ trans('lang.edit')}} </h4><span class="text-muted mt-1 tx-13 mr-2 mb-0"> / {{ trans('lang.products')}}
+            <h4 class="content-title mb-0 my-auto">@lang('lang.setting')</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">
                 </span>
         </div>
     </div>
@@ -65,52 +65,52 @@ Edit Setting
                {{ method_field('PUT') }}
 
                     <div class="parsley-input col-md-6" id="fnWrapper">
-                        <label>phone</label>
+                        <label>@lang('lang.phone')</label>
 
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="phone" type="text" placeholder="phone"
+                        data-parsley-class-handler="#lnWrapper" name="phone" type="text" placeholder=@lang('lang.phone')
                         value="{{$setting->phone}}">
                     </div>
                     <div class="parsley-input col-md-6" id="fnWrapper">
-                        <label>address</label>
+                        <label>@lang('lang.address')</label>
 
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="address" type="text" placeholder="address"
+                        data-parsley-class-handler="#lnWrapper" name="address" type="text" placeholder=@lang('lang.address')
                         value="{{$setting->address}}">
                     </div>
                     <div class="parsley-input col-md-6" id="fnWrapper">
-                        <label>Tw_link</label>
+                        <label>@lang('lang.twiter link')</label>
 
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="tw_link" type="text" placeholder="tw_link"
+                        data-parsley-class-handler="#lnWrapper" name="tw_link" type="text" placeholder=@lang('lang.twiter link')
                         value="{{$setting->tw_link}}">
                     </div>
                     <br>
 
                     <div class="parsley-input col-md-6" id="fnWrapper">
-                        <label>skype_link</label>
+                        <label>@lang('lang.skype link')</label>
 
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="skype_link" type="text" placeholder="skype_link"
+                        data-parsley-class-handler="#lnWrapper" name="skype_link" type="text" placeholder=@lang('lang.skype link')
                         value="{{$setting->skype_link}}">
                     </div>
                     <br>
 
                     <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
 
-                    <label>Fb_link</label>
+                    <label>@lang('lang.facebook link')</label>
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="fb_link" type="text" placeholder="Fb_link"
+                        data-parsley-class-handler="#lnWrapper" name="fb_link" type="text" placeholder=@lang('lang.facebook link')<
                         value="{{$setting->fb_link}}">
                     </div>
 
                     <br>
 
                     <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
-                        <label>whatsapp_link</label>
+                        <label>@lang('lang.whatsapp link')</label>
 
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="whatsapp_link" type="text" placeholder="whatsapp"
+                        data-parsley-class-handler="#lnWrapper" name="whatsapp_link" type="text" placeholder=@lang('lang.whatsapp link')
                         value="{{$setting->whatsapp_link}}">
 
                     </div>
@@ -118,19 +118,19 @@ Edit Setting
 
 
                     <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
-                        <label>Inst_link</label>
+                        <label>@lang('lang.instgram link')</label>
 
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="inst_link" type="text" placeholder="inst_link"
+                        data-parsley-class-handler="#lnWrapper" name="inst_link" type="text" placeholder=@lang('lang.instgram link')
                         value="{{$setting->inst_link}}">
                     </div>
                     <br>
 
                     <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
-                        <label>linkedin_link</label>
+                        <label>@lang('lang.linkedin link')</label>
 
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="linkedin_link" type="text" placeholder="inst_link"
+                        data-parsley-class-handler="#lnWrapper" name="linkedin_link" type="text" placeholder=@lang('lang.linkedin link')
                         value="{{$setting->linkedin_link}}">
                     </div>
                     <br>
@@ -139,9 +139,9 @@ Edit Setting
 
 
                     <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
-                        <label>About us</label>
+                        <label>@lang('lang.about us')</label>
                         <textarea  rows="8" cols="60" class="form-control" data-parsley-class-handler="#lnWrapper"
-                        name="about_us"  placeholder="About Us" >{{$setting->about_us}}</textarea>
+                        name="about_us"  placeholder=@lang('lang.about us') >{{$setting->about_us}}</textarea>
 
                     </div>
                     <br>

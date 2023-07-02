@@ -66,4 +66,15 @@ return [
     'add post' => 'add post',
 
 
+    'setting'=>'setting',
+    'phone'=>'phone',
+    'address'=>'address',
+    'twiter link'=>'twiter link',
+    'skype link'=>'skype link',
+    'facebook link'=>'facebook link',
+    'whatsapp link'=>'whatsapp link',
+    'instgram link'=>'instgram link',
+    'linkedin link'=>'linkedin link',
+    'about us'=>'about us',
+
 ];

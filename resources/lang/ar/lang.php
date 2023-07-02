@@ -66,5 +66,16 @@ return [
     'posts' => 'الاخبار الرئيسيه',
     'add post' => 'اضافة خبر',
 
+    'setting'=>'الاعددات',
+    'phone'=>'رقم التليفون',
+    'address'=>'العنوان',
+    'twiter link'=>'تويتر لينك',
+    'skype link'=>'سكاى بى لينك' ,
+    'facebook link'=>'فيسبوك لينك',
+    'whatsapp link'=>'واتس اب لينك',
+    'instgram link'=>'انستجرام لينك',
+    'linkedin link'=>'لينكد ان لينك',
+    'about us'=>'من نحن',
+
 
 ];

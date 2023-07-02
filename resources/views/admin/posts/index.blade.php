@@ -126,8 +126,10 @@
     <div class="col-xl-12">
         <div class="card mg-b-20">
             <div class="card-header pb-0">
+                   @can('اضافة خبر رئيسى')
+                        <a class="btn btn-outline-primary" href="{{route('posts.create')}}">@lang('lang.add post')</a>
+                    @endcan
 
-                    <a class="btn btn-outline-primary" href="{{route('posts.create')}}">@lang('lang.add post')</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -154,12 +156,18 @@
                                     <td>{{ $post->type }}</td>
                                     <td>{{optional( $post->category)->title }}</td>
                                      <td>
+                                        @can('تعديل خبر رئيسى')
+
                                         <a href="{{route('posts.edit',$post->id)}}"class="btn btn-sm btn-info"  title="edit">
                                             <i class="las la-pen"></i>
                                         </a>
+                                        @endcan
+
+                                        @can('حذف خبر رئيسى')
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$post->id}} " title="delete">
                                             @lang('lang.delete')
                                         </a>
+                                        @endcan
 
                                     </td>
                                 </tr>

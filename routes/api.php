@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TournamentNewController;
 use  App\Http\Controllers\Api\GroupsController;
 use App\Http\Controllers\Api\TeamNewController;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -101,6 +102,10 @@ Route::group(['prefix' => 'v1', 'middleware' => ['lang']], function () {
 
 
     Route::get('important-latest-transfers/{id}', [LatestTransferController::class, 'importantTransfer']);
+
+    Route::get('setting', function () {
+        return sendJsonResponse(Setting::find(1));
+    });
 
     Route::get('latest-transfers-all-leagues', [LatestTransferController::class, 'allLeague']);
 

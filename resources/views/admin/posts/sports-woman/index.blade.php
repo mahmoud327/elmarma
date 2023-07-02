@@ -127,7 +127,10 @@
         <div class="card mg-b-20">
             <div class="card-header pb-0">
 
-                    <a class="btn btn-outline-primary" href="{{route('sports-woman.create')}}">@lang('lang.add new sports-woman')</a>
+                @can('اضافة خبر نسائى')
+
+                  <a class="btn btn-outline-primary" href="{{route('sports-woman.create')}}">@lang('lang.add new sports-woman')</a>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -154,12 +157,18 @@
                                     <td>{{ $post->type }}</td>
                                     <td>{{optional( $post->category)->title }}</td>
                                      <td>
-                                        <a href="{{route('sports-woman.edit',$post->id)}}"class="btn btn-sm btn-info"  title="edit">
-                                            <i class="las la-pen"></i>
-                                        </a>
-                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$post->id}} " title="delete">
-                                            @lang('lang.delete')
-                                        </a>
+                                        @can('تعديل خبر نسائى')
+                                            <a href="{{route('sports-woman.edit',$post->id)}}"class="btn btn-sm btn-info"  title="edit">
+                                                <i class="las la-pen"></i>
+                                            </a>
+
+                                        @endcan
+                                        @can('حذف خبر نسائى')
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-toggle="modal" href="#modaldemo9{{$post->id}} " title="delete">
+                                                @lang('lang.delete')
+                                            </a>
+
+                                        @endcan
 
                                     </td>
                                 </tr>

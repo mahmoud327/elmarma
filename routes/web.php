@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SportPostController;
 use App\Http\Controllers\Admin\TournamentNewController;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +46,8 @@ Route::group([
 
             //route-for-services
             Route::resource('roles', RoleController::class);
+
+            Route::resource('setting', SettingController::class);
 
             //route-for-services
             Route::get('profile', 'AuthController@profile')->name('admin.profile');
