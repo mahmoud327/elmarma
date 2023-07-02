@@ -128,8 +128,11 @@
          <div class="card mg-b-20">
              <div class="card-header pb-0">
 
-                 <a class="modal-effect btn btn-outline-primary" data-effect="effect-scale" data-toggle="modal"
-                     href="#modaldemo8">@lang('lang.add banner')</a>
+                @can('اضافة اعلان')
+
+                    <a class="modal-effect btn btn-outline-primary" data-effect="effect-scale" data-toggle="modal"
+                    href="#modaldemo8">@lang('lang.add banner')</a>
+                @endcan
              </div>
              <div class="card-body">
                  <div class="table-responsive">
