@@ -65,6 +65,13 @@ return [
     'posts' => 'posts',
     'add post' => 'add post',
 
+    'caontact us'=>'caontact us',
+    'message'=>'message',
+    'last name'=>'last name',
+    'first name'=>'first name',
+
+
+    'term'=>'term',
 
     'setting'=>'setting',
     'phone'=>'phone',

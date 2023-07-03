@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SportPostController;
+use App\Http\Controllers\Admin\TermController;
 use App\Http\Controllers\Admin\TournamentNewController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +51,8 @@ Route::group([
 
             Route::resource('setting', SettingController::class);
 
+            Route::resource('terms', TermController::class);
+
             //route-for-services
             Route::get('profile', 'AuthController@profile')->name('admin.profile');
             //route-for-services
@@ -73,6 +77,8 @@ Route::group([
             Route::post('news-image', [NewController::class,'uploadNewImage'])->name('news.images.store');
 
             Route::resource('categories', CategoryController::class);
+
+            Route::resource('contact-us', ContactUsController::class);
         });
     });
 });

@@ -32,5 +32,7 @@
 <script src="{{URL::asset('assets/js/custom.js')}}"></script><!-- Left-menu js-->
 <script src="{{URL::asset('assets/plugins/side-menu/sidemenu.js')}}"></script>
 <script src="{{asset('assets/assets/admin/js/dropzone.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote.min.js" integrity="sha512-6rE6Bx6fCBpRXG/FWpQmvguMWDLWMQjPycXMr35Zx/HRD9nwySZswkkLksgyQcvrpYMx0FELLJVBvWFtubZhDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 @stack('script')
 

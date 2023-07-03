@@ -18,7 +18,9 @@ use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\TournamentNewController;
 use  App\Http\Controllers\Api\GroupsController;
 use App\Http\Controllers\Api\TeamNewController;
+use App\Models\ContactUs;
 use App\Models\Setting;
+use App\Models\Term;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -105,6 +107,15 @@ Route::group(['prefix' => 'v1', 'middleware' => ['lang']], function () {
 
     Route::get('setting', function () {
         return sendJsonResponse(Setting::find(1));
+    });
+    Route::get('term', function () {
+        return sendJsonResponse(Term::find(1));
+    });
+    Route::post('contact-us', function (Request $request) {
+
+        ContactUs::create($request->all());
+        return sendJsonResponse([],'added contact us sucessfully');
+
     });
 
     Route::get('latest-transfers-all-leagues', [LatestTransferController::class, 'allLeague']);

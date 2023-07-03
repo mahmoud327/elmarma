@@ -57,6 +57,13 @@ return [
     'sports-woman' => 'الرياضه النسائيه',
     'add new sports-woman' => 'اضافة خبر للرياضه النسائيه',
 
+    'caontact us'=>'تواصل معنا',
+    'message'=>'الرساله',
+    'last name'=>'الاسم الاول',
+    'first name'=>'الاسم الاخير',
+    'term'=>'السياسة والخصوصيه',
+
+
 
     'categories' => 'الاقسام',
     'add category' => 'اضافة قسم',
