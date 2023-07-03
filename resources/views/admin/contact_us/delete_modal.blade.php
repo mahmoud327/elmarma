@@ -6,7 +6,7 @@
                 <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
                     type="button"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form action="{{route('admin.contact-us.destroy',$contact)}}" method="post">
+            <form action="{{route('contact-us.destroy',$contact)}}" method="post">
                 {{ method_field('delete') }}
                 {{ csrf_field() }}
                 <div class="modal-body">
