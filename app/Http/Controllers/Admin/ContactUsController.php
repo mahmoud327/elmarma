@@ -18,4 +18,10 @@ class ContactUsController extends Controller
         $contacts = ContactUs::orderby('id', 'desc')->get();
         return view('admin.contact_us.index', compact('contacts'));
     }
+    public function destroy($id)
+    {
+        $contact= ContactUs::find($id);
+        $contact->delete();
+        return back();
+    }
 }
