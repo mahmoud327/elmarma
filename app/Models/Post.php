@@ -56,12 +56,18 @@ class Post extends Model
     {
         return  $this->belongsTo('App\Models\Category', 'category_id');
     }
-    public function scopeSearch($q, $search)
+    public function scopeTitle($q, $search)
     {
 
         return $q->whereHas('category', function ($q) use ($search) {
             $q->whereTranslationLike('title', '%' . $search . '%');
         });
+    }
+    public function scopeSearch($q, $search)
+    {
+
+        return  $q->whereTranslationLike('title', '%' . $search . '%')
+            ->orwhereTranslationLike('desc', '%' . $search . '%');
     }
 
     public function medias()

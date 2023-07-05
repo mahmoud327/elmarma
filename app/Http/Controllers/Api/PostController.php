@@ -38,12 +38,13 @@ class PostController extends Controller
             ->when(request()->category_id, function ($q) {
                 $q->whereCategoryId(request()->category_id);
             })
-
             ->when(request()->title, function ($q) {
-                $q->search(request()->title);
+                $q->title(request()->title);
+            })
+            ->when(request()->search, function ($q) {
+                $q->search(request()->search);
             })
 
-            
             ->when(request()->type, function ($q) {
                 $q->whereType(request()->type);
             })

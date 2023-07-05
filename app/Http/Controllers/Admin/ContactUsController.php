@@ -22,6 +22,6 @@ class ContactUsController extends Controller
     {
         $contact= ContactUs::find($id);
         $contact->delete();
-        return back();
+        return back(); 
     }
 }
