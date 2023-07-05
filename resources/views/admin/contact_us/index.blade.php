@@ -153,7 +153,7 @@
                                         <td>{{ $contact->last_name }}</td>
                                         <td>{{ $contact->email }}</td>
                                         <td>{{ $contact->phone }}</td>
-                                        <td width="150px">{{ $contact->message }}</td>
+                                        <td>{{ $contact->message }}</td>
 
 
                                         <td>
