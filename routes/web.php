@@ -42,7 +42,7 @@ Route::group([
         Route::get('login-page', 'AuthController@loginPage')->name('admin.login.page');
         Route::post('login', 'AuthController@login')->name('admin.login');
         Route::get('logout', 'AuthController@logout')->name('admin.logout');
-
+        
         Route::group(['middleware' => ['auth:admins']], function () {
             Route::get('home', 'HomeController@index')->name('admin.home');
 
