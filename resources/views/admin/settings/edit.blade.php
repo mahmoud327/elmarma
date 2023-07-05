@@ -88,10 +88,10 @@ Edit Setting
                     <br>
 
                     <div class="parsley-input col-md-6" id="fnWrapper">
-                        <label>@lang('lang.skype link')</label>
+                        <label>يوتيوب</label>
 
                         <input class="form-control"
-                        data-parsley-class-handler="#lnWrapper" name="skype_link" type="text" placeholder=@lang('lang.skype link')
+                        data-parsley-class-handler="#lnWrapper" name="skype_link" type="text" placeholder=يوتيوب
                         value="{{$setting->skype_link}}">
                     </div>
                     <br>
