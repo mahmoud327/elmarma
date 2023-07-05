@@ -139,7 +139,6 @@
                                     <th  style="width:95.65px;" class="border-bottom-0">@lang('lang.first name')</th>
                                     <th class="border-bottom-0">@lang('lang.last name')</th>
                                     <th class="border-bottom-0">@lang('lang.email')</th>
-                                    <th class="border-bottom-0">@lang('lang.message')</th>
                                     <th  style="width:100.65px;"class="border-bottom-0">@lang('lang.phone')</th>
                                     <th class="border-bottom-0">@lang('lang.message')</th>
                                     <th class="border-bottom-0">@lang('lang.action')</th>
@@ -153,9 +152,8 @@
                                         <td>{{ $contact->first_name }}</td>
                                         <td>{{ $contact->last_name }}</td>
                                         <td>{{ $contact->email }}</td>
-                                        <td>{{ $contact->subject }}</td>
                                         <td>{{ $contact->phone }}</td>
-                                        <td>{{ $contact->message }}</td>
+                                        <td width="150px">{{ $contact->message }}</td>
 
 
                                         <td>
