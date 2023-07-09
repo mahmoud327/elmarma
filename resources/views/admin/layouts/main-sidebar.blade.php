@@ -181,7 +181,7 @@
                 </li>
             @endcan
 
-            @can('الاحصائيات')
+            {{-- @can('الاحصائيات')
                 <li class="slide">
                     <a class="side-menu__item" href="{{ route('admin.home') }}"><svg
                             xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
@@ -192,7 +192,7 @@
                         </svg><span class="side-menu__label">الاحصائيات</span><span
                             class="badge badge-success side-badge">1</span></a>
                 </li>
-            @endcan
+            @endcan --}}
         </ul>
     </div>
 </aside>

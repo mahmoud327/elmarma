@@ -39,7 +39,11 @@ class AuthController extends Controller
             return redirect()->route('admin.login.page')
                 ->withErrors(['errors' => 'The password is incorrect.']);
         }
-        return redirect()->route('categories.index');
+        if (Auth::guard('admins')->user()->hasRole('admin')) {
+            return redirect()->route('admin.home');
+        } else {
+            return redirect()->route('categories.index');
+        }
     }
 
     public function logout()
@@ -47,26 +51,25 @@ class AuthController extends Controller
 
         auth()->guard('admins')->logout();
         return redirect()->route('admin.login.page');
-
     }
 
     public function updateProfile(Request $request)
     {
 
         $rules = [
-        'name' => 'required',
-        'email' => 'required|email|unique:users,email,'.auth()->user()->id,
-        'password' =>'confirmed',
-        'image'   =>'image|mimes:jpeg,png,jpg,gif,svg'
-      ];
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . auth()->user()->id,
+            'password' => 'confirmed',
+            'image'   => 'image|mimes:jpeg,png,jpg,gif,svg'
+        ];
 
         $messages = [
-        'name.required'        => 'ادخل الاسم',
+            'name.required'        => 'ادخل الاسم',
 
-        'email.required'        => 'ادخل البريد الالكتروني',
-        'email.unique'          => ' هذا البريد يستخدمه شخص اخر',
-        'password.confirmed'         => 'كلمة المرور غير متطابقة',
-      ];
+            'email.required'        => 'ادخل البريد الالكتروني',
+            'email.unique'          => ' هذا البريد يستخدمه شخص اخر',
+            'password.confirmed'         => 'كلمة المرور غير متطابقة',
+        ];
 
         $this->validate($request, $rules, $messages);
 
@@ -85,7 +88,7 @@ class AuthController extends Controller
 
         if ($request->file('image')) {
             $path = $this->uploadFile('uploads/admins/', $request->file('image'));
-             auth()->guard('admins')->user()->update(['image'=> $path ]);
+            auth()->guard('admins')->user()->update(['image' => $path]);
         }
 
 
