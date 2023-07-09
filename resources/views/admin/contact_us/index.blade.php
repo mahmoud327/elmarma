@@ -142,7 +142,6 @@
                                     <th  style="width:100.65px;"class="border-bottom-0">@lang('lang.phone')</th>
                                     <th class="border-bottom-0">@lang('lang.message')</th>
                                     <th class="border-bottom-0">@lang('lang.action')</th>
-
                                 </tr>
                             </thead>
                             <tbody>

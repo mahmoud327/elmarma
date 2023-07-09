@@ -114,8 +114,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['lang']], function () {
     Route::post('contact-us', function (Request $request) {
 
         ContactUs::create($request->all());
-        return sendJsonResponse([],'added contact us sucessfully');
-
+        return sendJsonResponse([], 'added contact us sucessfully');
     });
 
     Route::get('latest-transfers-all-leagues', [LatestTransferController::class, 'allLeague']);
