@@ -32,6 +32,9 @@ class NewController extends Controller
 
 
         $news = Post::query()
+        ->when(request()->search, function ($q) {
+            $q->search(request()->search);
+        })
             ->with(['category', 'medias'])
 
             ->latest()
