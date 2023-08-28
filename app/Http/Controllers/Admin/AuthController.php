@@ -74,15 +74,11 @@ class AuthController extends Controller
         $this->validate($request, $rules, $messages);
 
         $input = $request->all();
-
-        $input = $request->all();
         if (!empty($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         } else {
             $input = $request->except(['password']);
-            // $input = array_except($input,array('password'));
         }
-
 
         auth()->guard('admins')->user()->update($input);
 
