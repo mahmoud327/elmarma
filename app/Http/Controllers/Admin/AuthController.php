@@ -24,7 +24,7 @@ class AuthController extends Controller
     {
         $attr = $request->validate([
             'email' => 'required|exists:admins|string|email',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string',
         ], [
             'email.required' => 'The email faild is required.',
             'email.string' => 'The email faild must be string.',
@@ -32,7 +32,6 @@ class AuthController extends Controller
             'email.exists' => 'The your email is incorrect.',
             'password.required' => 'The password faild is required.',
             'password.string' => 'The password faild must be string.',
-            'password.min' => 'The password faild must be at leates 6 letter.',
         ]);
 
         if (!Auth::guard('admins')->attempt($attr)) {
